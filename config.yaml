@@ -5,7 +5,7 @@ github:
   token: ""  # Not needed for static deployment
 
 paths:
-  frontend_dir: "../src"      # For root deployment
+  frontend_dir: "."      # For root deployment
   upload_dir: "../uploads"
 
 content:
