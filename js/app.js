@@ -105,7 +105,43 @@ class App {
         this.renderLatestBooks();
         this.renderRecentReviews();
     }
+        static populateCategoryFilter() {
+        const categoryFilter = document.getElementById('category-filter');
+        if (!categoryFilter) return;
 
+        // Clear existing options except the first one
+        while (categoryFilter.children.length > 1) {
+            categoryFilter.removeChild(categoryFilter.lastChild);
+        }
+
+        // Add dynamic categories
+        const categories = this.getArticleCategories();
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.toLowerCase();
+            option.textContent = category;
+            categoryFilter.appendChild(option);
+        });
+    }
+
+    static populateGenreFilter() {
+        const genreFilter = document.getElementById('genre-filter');
+        if (!genreFilter) return;
+
+        // Clear existing options except the first one
+        while (genreFilter.children.length > 1) {
+            genreFilter.removeChild(genreFilter.lastChild);
+        }
+
+        // Add dynamic genres
+        const genres = this.getBookGenres();
+        genres.forEach(genre => {
+            const option = document.createElement('option');
+            option.value = genre.toLowerCase();
+            option.textContent = genre;
+            genreFilter.appendChild(option);
+        });
+    }
     static renderFeaturedArticles() {
         const container = document.getElementById('featured-articles');
         if (!container) return;
@@ -161,6 +197,9 @@ class App {
         const container = document.getElementById('all-books');
         if (!container) return;
 
+        // Populate genre filter first
+        this.populateGenreFilter();
+
         const filteredBooks = this.filterBooks();
         const paginatedBooks = this.paginateData(filteredBooks);
         
@@ -171,19 +210,23 @@ class App {
         this.renderPagination(filteredBooks.length, 'books');
     }
 
-    static renderReviewsPage() {
-        const container = document.getElementById('all-reviews');
+    static renderArticlesPage() {
+        const container = document.getElementById('all-articles');
         if (!container) return;
 
-        const allReviews = this.data.reviews;
-        const paginatedReviews = this.paginateData(allReviews);
+        // Populate category filter first
+        this.populateCategoryFilter();
+
+        const filteredArticles = this.filterArticles();
+        const paginatedArticles = this.paginateData(filteredArticles);
         
-        container.innerHTML = paginatedReviews
-            .map(review => Components.renderReviewCard(review))
+        container.innerHTML = paginatedArticles
+            .map(article => Components.renderArticleCard(article))
             .join('');
         
-        this.renderPagination(allReviews.length, 'reviews');
+        this.renderPagination(filteredArticles.length, 'articles');
     }
+
 
     static filterArticles() {
         const categoryFilter = document.getElementById('category-filter');
