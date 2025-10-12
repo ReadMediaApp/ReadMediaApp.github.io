@@ -206,14 +206,7 @@ class Components {
                     </ul>
                 </div>
                 
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <ul class="footer-links">
-                        <li>📧 contact@readmedia.com</li>
-                        <li>📞 +1 (555) 123-4567</li>
-                        <li>📍 123 Book Street, Library City</li>
-                    </ul>
-                </div>
+                
             </div>
             
             <div class="footer-bottom">
@@ -344,7 +337,7 @@ class Components {
     }
 }
 
-// Share functionality
+
 // Share functionality
 class Share {
     static shareArticle(articleId) {

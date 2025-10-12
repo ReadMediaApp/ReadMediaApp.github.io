@@ -43,7 +43,7 @@ class DonatePage {
         }
 
         // Redirect to payment with custom amount
-        const donateUrl = `https://wpayments.io/donation/readmedia?amount=${amount}`;
+        const donateUrl = `https://nowpayments.io/donation/readmedia?amount=${amount}`;
         window.open(donateUrl, '_blank');
     }
 

@@ -129,10 +129,10 @@ class FooterManager {
                             <span>LinkedIn</span>
                         </a>
                     </div>
-                    <div class="contact-info">
-                        <p>📧 contact@readmedia.com</p>
-                        <p>🌐 www.readmedia.com</p>
-                    </div>
+                    // <div class="contact-info">
+                    //     <p>📧 contact@readmedia.com</p>
+                    //     <p>🌐 www.readmedia.com</p>
+                    // </div>
                 </div>
             </div>
             <div class="footer-bottom">
