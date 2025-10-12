@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - ReadMedia</title>
+    <meta name="description" content="Read the full article on ReadMedia">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5JKFKBFFST');
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="index.html" style="text-decoration: none; color: inherit;">ReadMedia</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="donate.html" class="donate-btn">Donate</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span class="material-icons">menu</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <!-- Content loaded by JavaScript -->
+        </aside>
+
+        <div class="content">
+            <article class="article-full" id="article-content">
+                <!-- Article content loaded by JavaScript -->
+                <div class="loading" style="text-align: center; padding: 3rem;">
+                    <p>Loading article...</p>
+                </div>
+            </article>
+
+            <!-- Share Section -->
+            <section class="share-section" id="share-section" style="display: none;">
+                <div class="card">
+                    <h3>Share this article</h3>
+                    <div class="share-buttons-large">
+                        <button class="share-btn-large" onclick="Share.shareOnTwitter()" title="Share on Twitter">
+                            <span class="material-icons">twitter</span>
+                            Twitter
+                        </button>
+                        <button class="share-btn-large" onclick="Share.shareOnFacebook()" title="Share on Facebook">
+                            <span class="material-icons">facebook</span>
+                            Facebook
+                        </button>
+                        <button class="share-btn-large" onclick="Share.copyLink()" title="Copy link">
+                            <span class="material-icons">link</span>
+                            Copy Link
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related Articles -->
+            <section class="related-articles" id="related-articles" style="display: none;">
+                <h3>Related Articles</h3>
+                <div class="articles-grid" id="related-articles-grid">
+                    <!-- Related articles loaded by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer" id="footer">
+        <!-- Footer loaded by JavaScript -->
+    </footer>
+
+    <script src="js/security.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/article.js"></script>
+    <script src="js/footer-manager.js"></script>
+</body>
+</html>

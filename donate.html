@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support ReadMedia - Donate</title>
+    <meta name="description" content="Support ReadMedia through donations and help us continue providing quality content">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5JKFKBFFST');
+    </script>
+    <style>
+        /* Center all content */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 200px);
+        }
+
+        .content-full {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        /* Enhanced Donate Page Styling */
+        .donate-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .donate-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .impact-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .impact-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Support Reasons */
+        .support-reasons {
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .reason-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+        }
+
+        .reason-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .reason-icon .material-icons {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .reason-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .reason-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Donation Cards - Centered and simplified */
+        .donation-options {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .donation-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .donation-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 280px;
+            max-width: 320px;
+        }
+
+        .donation-card.featured {
+            border-color: #667eea;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .card-header h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4a6ee0;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .benefits-list li {
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            color: #555;
+        }
+
+        .benefits-list .material-icons {
+            color: #4CAF50;
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .btn-donate {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-donate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Custom Donation */
+        .custom-donation {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 3rem auto;
+            max-width: 600px;
+        }
+
+        .custom-amount-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .amount-btn {
+            padding: 1rem 2rem;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .amount-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .custom-input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .currency-symbol {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        #custom-amount {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            width: 150px;
+            text-align: center;
+        }
+
+        #custom-amount:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Security Trust */
+        .security-trust {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .trust-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .trust-icon .material-icons {
+            font-size: 4rem;
+            color: #4CAF50;
+        }
+
+        .trust-text h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .trust-text p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+        }
+
+        /* Alternative Support */
+        .alternative-support {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .alternative-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .alternative-option {
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .alternative-option h4 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .alternative-option p {
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="index.html" style="text-decoration: none; color: inherit;">ReadMedia</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="donate.html" class="active donate-btn">Support Us</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span class="material-icons">menu</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="content-full">
+            <!-- Hero Section -->
+            <section class="donate-hero">
+                <div class="donate-hero-content">
+                    <h1>Support ReadMedia</h1>
+                    <p class="hero-subtitle">Your contribution helps us continue providing quality content and free resources for readers worldwide</p>
+                    <div class="impact-stats">
+                        <div class="impact-stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Free Articles</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">Books Available</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="stat-number">50K+</span>
+                            <span class="stat-label">Readers Monthly</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Support Section -->
+            <section class="support-reasons">
+                <div class="section-header">
+                    <h2>Why Your Support Matters</h2>
+                    <p>Your donation directly impacts our ability to create and maintain valuable content</p>
+                </div>
+                <div class="reasons-grid">
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <span class="material-icons">create</span>
+                        </div>
+                        <h3>Quality Content Creation</h3>
+                        <p>Support our writers in creating well-researched, engaging articles and book reviews that educate and inspire our community.</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <span class="material-icons">cloud_download</span>
+                        </div>
+                        <h3>Free Book Library</h3>
+                        <p>Help us maintain and expand our collection of free books available in multiple formats for readers everywhere.</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <span class="material-icons">code</span>
+                        </div>
+                        <h3>Platform Maintenance</h3>
+                        <p>Keep our website fast, secure, and accessible to everyone with regular updates and improvements.</p>
+                    </div>
+                    <div class="reason-card">
+                        <div class="reason-icon">
+                            <span class="material-icons">groups</span>
+                        </div>
+                        <h3>Community Growth</h3>
+                        <p>Enable us to reach more readers, support new authors, and build a vibrant literary community.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Donation Options - PURELY DONATION (No Subscriptions) -->
+            <section class="donation-options">
+                <div class="section-header">
+                    <h2>Make a Donation</h2>
+                    <p>Choose an amount that works for you. Every contribution makes a difference.</p>
+                </div>
+                <div class="donation-cards">
+                    <div class="donation-card">
+                        <div class="card-header">
+                            <h3>Reader Supporter</h3>
+                            <div class="price">$5</div>
+                        </div>
+                        <div class="card-content">
+                            <ul class="benefits-list">
+                                <li><span class="material-icons">check_circle</span> One-time donation</li>
+                                <li><span class="material-icons">check_circle</span> Support our mission</li>
+                                <li><span class="material-icons">check_circle</span> Thank you email</li>
+                            </ul>
+                            <a href="https://nowpayments.io/donation/readmedia?amount=5" class="btn btn-donate" target="_blank" rel="noopener">
+                                <span class="material-icons">favorite</span>
+                                Donate $5
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="donation-card featured">
+                        <div class="featured-badge">Most Popular</div>
+                        <div class="card-header">
+                            <h3>Book Lover</h3>
+                            <div class="price">$25</div>
+                        </div>
+                        <div class="card-content">
+                            <ul class="benefits-list">
+                                <li><span class="material-icons">check_circle</span> One-time donation</li>
+                                <li><span class="material-icons">check_circle</span> Support our book library</li>
+                                <li><span class="material-icons">check_circle</span> Special thank you message</li>
+                                <li><span class="material-icons">check_circle</span> Supporter recognition</li>
+                            </ul>
+                            <a href="https://nowpayments.io/donation/readmedia?amount=25" class="btn btn-donate" target="_blank" rel="noopener">
+                                <span class="material-icons">auto_stories</span>
+                                Donate $25
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="donation-card">
+                        <div class="card-header">
+                            <h3>Literary Patron</h3>
+                            <div class="price">$50</div>
+                        </div>
+                        <div class="card-content">
+                            <ul class="benefits-list">
+                                <li><span class="material-icons">check_circle</span> One-time donation</li>
+                                <li><span class="material-icons">check_circle</span> Major impact on our work</li>
+                                <li><span class="material-icons">check_circle</span> Name in supporters list</li>
+                                <li><span class="material-icons">check_circle</span> Personal thank you</li>
+                            </ul>
+                            <a href="https://nowpayments.io/donation/readmedia?amount=50" class="btn btn-donate" target="_blank" rel="noopener">
+                                <span class="material-icons">star</span>
+                                Donate $50
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Amount -->
+                <div class="custom-donation">
+                    <h3>Custom Amount</h3>
+                    <p>Want to give a different amount? Choose your own donation value.</p>
+                    <div class="custom-amount-options">
+                        <button class="amount-btn" data-amount="10">$10</button>
+                        <button class="amount-btn" data-amount="20">$20</button>
+                        <button class="amount-btn" data-amount="75">$75</button>
+                        <button class="amount-btn" data-amount="100">$100</button>
+                    </div>
+                    <div class="custom-input-group">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="custom-amount" placeholder="Enter custom amount" min="1" max="1000">
+                        <button id="custom-donate-btn" class="btn btn-donate">
+                            <span class="material-icons">attach_money</span>
+                            Donate Custom Amount
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security & Trust -->
+            <section class="security-trust">
+                <div class="trust-content">
+                    <div class="trust-icon">
+                        <span class="material-icons">security</span>
+                    </div>
+                    <div class="trust-text">
+                        <h3>Secure & Trusted Donations</h3>
+                        <p>All donations are processed securely through wpayments.io. Your financial information is protected with industry-standard encryption. We never store your payment details on our servers.</p>
+                        <div class="trust-badges">
+                            <span class="trust-badge">🔒 SSL Secure</span>
+                            <span class="trust-badge">💳 PCI Compliant</span>
+                            <span class="trust-badge">🛡️ Fraud Protection</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alternative Support -->
+            <section class="alternative-support">
+                <h2>Other Ways to Support</h2>
+                <div class="alternative-options">
+                    <div class="alternative-option">
+                        <h4>Share Our Content</h4>
+                        <p>Help us reach more readers by sharing articles and books you enjoy on social media.</p>
+                    </div>
+                    <div class="alternative-option">
+                        <h4>Write for Us</h4>
+                        <p>Contribute articles or book reviews to help grow our content library.</p>
+                    </div>
+                    <div class="alternative-option">
+                        <h4>Provide Feedback</h4>
+                        <p>Your suggestions help us improve and create better content for everyone.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer" id="footer">
+        <!-- Footer loaded by JavaScript -->
+    </footer>
+
+    <script src="js/security.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/donate.js"></script>
+    <script src="js/footer-manager.js"></script>
+    <script>
+        // Custom donation amount functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Amount buttons
+            document.querySelectorAll('.amount-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const amount = this.getAttribute('data-amount');
+                    document.getElementById('custom-amount').value = amount;
+                });
+            });
+
+            // Custom donate button
+            document.getElementById('custom-donate-btn').addEventListener('click', function() {
+                const amount = document.getElementById('custom-amount').value;
+                if (amount && amount > 0) {
+                    window.open(`https://nowpayments.io/donation/readmedia?amount=${amount}`, '_blank', 'noopener');
+                } else {
+                    alert('Please enter a valid donation amount.');
+                }
+            });
+
+            // Enter key support for custom amount
+            document.getElementById('custom-amount').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('custom-donate-btn').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reviews - ReadMedia</title>
+    <meta name="description" content="Read professional book reviews and recommendations">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-5JKFKBFFST');
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>ReadMedia</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="reviews.html" class="active">Reviews</a></li>
+                <li><a href="donate.html" class="donate-btn">Donate</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span class="material-icons">menu</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <!-- Content loaded by JavaScript -->
+        </aside>
+
+        <div class="content">
+            <div class="page-header">
+                <h2>Book Reviews</h2>
+                <p>Professional reviews and recommendations from our team</p>
+            </div>
+
+            <div class="reviews-container" id="all-reviews">
+                <!-- All reviews loaded by JavaScript -->
+            </div>
+
+            <div class="pagination" id="pagination">
+                <!-- Pagination loaded by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" id="footer">
+        <!-- Footer loaded by JavaScript -->
+    </footer>
+
+    <script src="js/security.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/footer-manager.js"></script>
+</body>
+</html>
