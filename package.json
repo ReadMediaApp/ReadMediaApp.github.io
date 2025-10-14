@@ -7,10 +7,23 @@
     "scrape": "node bestsellers-scraper.js"
   },
   "dependencies": {
-    "puppeteer": "^24.24.1",
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.1.2",
+    "puppeteer": "^24.24.1"
   },
-  "keywords": ["amazon", "bestsellers", "scraper", "github-actions"],
-  "author": "Your Name",
-  "license": "MIT"
+  "keywords": [
+    "amazon",
+    "bestsellers",
+    "scraper",
+    "github-actions"
+  ],
+  "author": "Read Media",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ReadMediaApp/ReadMediaApp.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ReadMediaApp/ReadMediaApp.github.io/issues"
+  },
+  "homepage": "https://github.com/ReadMediaApp/ReadMediaApp.github.io#readme"
 }
