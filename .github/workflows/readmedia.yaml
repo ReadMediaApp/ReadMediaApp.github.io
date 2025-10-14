@@ -23,14 +23,14 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '24'
         cache: 'npm'
         
     - name: Install dependencies
       run: |
         npm install puppeteer cheerio
         
-    - name: Create comprehensive bestsellers scraper
+    - name: Create focused bestsellers scraper
       run: |
         cat > bestsellers-scraper.js << 'EOF'
         const puppeteer = require('puppeteer');
@@ -42,80 +42,19 @@ jobs:
         const DATA_DIR = 'data';
         const OUTPUT_FILE = path.join(DATA_DIR, 'amazon-recommendations.json');
 
-        // Comprehensive bestseller categories
+        // Focused bestseller categories with clean URLs
         const BESTSELLER_CATEGORIES = {
           // Fiction Categories
-          'fiction_literary': 'https://www.amazon.com/Best-Sellers-Books-Literary/zgbs/books/17/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'fiction_mystery_thriller': 'https://www.amazon.com/Best-Sellers-Books-Mystery-Thriller-Suspense/zgbs/books/18/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'fiction_science_fiction': 'https://www.amazon.com/Best-Sellers-Books-Science-Fiction-Fantasy/zgbs/books/25/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'fiction_romance': 'https://www.amazon.com/Best-Sellers-Books-Romance/zgbs/books/23/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'fiction_horror': 'https://www.amazon.com/Best-Sellers-Books-Horror/zgbs/books/22/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'fiction_historical': 'https://www.amazon.com/Best-Sellers-Books-Historical/zgbs/books/21/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'fiction_literary': 'https://www.amazon.com/Best-Sellers-Books-Literary-Fiction/zgbs/books/17',
           
           // Non-Fiction Categories
-          'nonfiction_biographies': 'https://www.amazon.com/Best-Sellers-Books-Biographies-Memoirs/zgbs/books/2/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'nonfiction_history': 'https://www.amazon.com/Best-Sellers-Books-History/zgbs/books/9/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'nonfiction_travel': 'https://www.amazon.com/Best-Sellers-Books-Travel/zgbs/books/28/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'nonfiction_cooking': 'https://www.amazon.com/Best-Sellers-Books-Cookbooks-Food-Wine/zgbs/books/6/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'nonfiction_arts_photography': 'https://www.amazon.com/Best-Sellers-Books-Arts-Photography/zgbs/books/1/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
-          // Professional & Technical
-          'business_management': 'https://www.amazon.com/Best-Sellers-Books-Business-Management/zgbs/books/2675/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'business_entrepreneurship': 'https://www.amazon.com/Best-Sellers-Books-Entrepreneurship/zgbs/books/10841807011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'business_marketing': 'https://www.amazon.com/Best-Sellers-Books-Business-Marketing/zgbs/books/2687/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'business_finance': 'https://www.amazon.com/Best-Sellers-Books-Business-Finance/zgbs/books/2680/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'business_careers': 'https://www.amazon.com/Best-Sellers-Books-Business-Careers/zgbs/books/2676/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
-          // Technology
-          'technology_computers': 'https://www.amazon.com/Best-Sellers-Books-Computer-Technology/zgbs/books/5/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'technology_programming': 'https://www.amazon.com/Best-Sellers-Books-Computer-Programming/zgbs/books/3952/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'technology_web_development': 'https://www.amazon.com/Best-Sellers-Books-Web-Development/zgbs/books/3756/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'technology_data_science': 'https://www.amazon.com/Best-Sellers-Books-Data-Modeling-Design/zgbs/books/123440011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'technology_ai_machine_learning': 'https://www.amazon.com/Best-Sellers-Books-Artificial-Intelligence/zgbs/books/10842523011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
-          // Science & Math
-          'science_biology': 'https://www.amazon.com/Best-Sellers-Books-Biological-Sciences/zgbs/books/75/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'science_physics': 'https://www.amazon.com/Best-Sellers-Books-Physics/zgbs/books/14545/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'science_chemistry': 'https://www.amazon.com/Best-Sellers-Books-Chemistry/zgbs/books/1605/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'science_astronomy': 'https://www.amazon.com/Best-Sellers-Books-Astronomy-Space-Science/zgbs/books/14563/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'science_earth_sciences': 'https://www.amazon.com/Best-Sellers-Books-Earth-Sciences/zgbs/books/173514/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
-          // Health & Wellness
-          'health_fitness': 'https://www.amazon.com/Best-Sellers-Books-Exercise-Fitness/zgbs/books/284081/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'health_nutrition': 'https://www.amazon.com/Best-Sellers-Books-Nutrition/zgbs/books/282919/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'health_mental_health': 'https://www.amazon.com/Best-Sellers-Books-Mental-Health/zgbs/books/4737/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'health_medicine': 'https://www.amazon.com/Best-Sellers-Books-Medical-Books/zgbs/books/173514/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'health_alternative_medicine': 'https://www.amazon.com/Best-Sellers-Books-Alternative-Medicine/zgbs/books/4682/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'nonfiction_biographies': 'https://www.amazon.com/Best-Sellers-Books-Biographies-Memoirs/zgbs/books/2',
           
           // Self-Improvement
-          'self_improvement_personal_growth': 'https://www.amazon.com/Best-Sellers-Books-Personal-Growth/zgbs/books/4743/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'self_improvement_motivational': 'https://www.amazon.com/Best-Sellers-Books-Motivational/zgbs/books/4745/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'self_improvement_success': 'https://www.amazon.com/Best-Sellers-Books-Success/zgbs/books/4746/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'self_improvement_relationships': 'https://www.amazon.com/Best-Sellers-Books-Interpersonal-Relations/zgbs/books/4738/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'self_improvement_time_management': 'https://www.amazon.com/Best-Sellers-Books-Time-Management/zgbs/books/4747/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
-          // Education & Reference
-          'education_study_guides': 'https://www.amazon.com/Best-Sellers-Books-Education-Study-Guides/zgbs/books/11673/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'education_test_preparation': 'https://www.amazon.com/Best-Sellers-Books-Test-Preparation/zgbs/books/11676/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'reference_dictionaries': 'https://www.amazon.com/Best-Sellers-Books-Dictionaries-Thesauruses/zgbs/books/72/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'reference_writing': 'https://www.amazon.com/Best-Sellers-Books-Writing-Research/zgbs/books/11670/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
-          // Children's Books
-          'childrens_picture_books': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Picture-Books/zgbs/books/4/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'childrens_chapter_books': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Chapter-Books/zgbs/books/12864/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'childrens_educational': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Education-Reference/zgbs/books/6960520011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'childrens_science_nature': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Science-Nature/zgbs/books/3176/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
-          // Comics & Graphic Novels
-          'comics_graphic_novels': 'https://www.amazon.com/Best-Sellers-Books-Comics-Graphic-Novels/zgbs/books/4366/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'comics_manga': 'https://www.amazon.com/Best-Sellers-Books-Manga/zgbs/books/4367/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'comics_superheroes': 'https://www.amazon.com/Best-Sellers-Books-Comics-Graphic-Novels-Superheroes/zgbs/books/12944216011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'self_improvement_personal_growth': 'https://www.amazon.com/Best-Sellers-Books-Personal-Development/zgbs/books/4736',
           
           // Religion & Spirituality
-          'religion_christianity': 'https://www.amazon.com/Best-Sellers-Books-Christian-Books-Bibles/zgbs/books/12290/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'religion_buddhism': 'https://www.amazon.com/Best-Sellers-Books-Buddhism/zgbs/books/12333/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'religion_spirituality': 'https://www.amazon.com/Best-Sellers-Books-Religion-Spirituality/zgbs/books/22/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
+          'religion_christianity': 'https://www.amazon.com/Best-Sellers-Books-Christian-Books/zgbs/books/12290'
         };
 
         // Utility function for delays
@@ -164,7 +103,13 @@ jobs:
               '--no-sandbox',
               '--disable-setuid-sandbox',
               '--disable-blink-features=AutomationControlled',
-              '--window-size=1920,1080'
+              '--disable-dev-shm-usage',
+              '--disable-accelerated-2d-canvas',
+              '--no-first-run',
+              '--no-zygote',
+              '--disable-gpu',
+              '--window-size=1920,1080',
+              '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
             ]
           });
           
@@ -175,11 +120,12 @@ jobs:
             await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
             await page.setViewport({ width: 1920, height: 1080 });
             
-            // Additional headers
+            // Additional headers to appear more human
             await page.setExtraHTTPHeaders({
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
               'Accept-Language': 'en-US,en;q=0.9',
-              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
               'Accept-Encoding': 'gzip, deflate, br',
+              'Cache-Control': 'no-cache',
               'Connection': 'keep-alive',
             });
 
@@ -188,104 +134,161 @@ jobs:
               Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
               Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
               Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
-              window.chrome = { runtime: {} };
             });
 
-            console.log(`📦 Navigating to ${categoryUrl}...`);
-            await page.goto(categoryUrl, { 
-              waitUntil: 'domcontentloaded', 
-              timeout: 60000 
-            });
-
-            // Wait for content to load
-            await delay(3000);
+            console.log(`📦 Navigating to: ${categoryUrl}`);
             
-            // Try to wait for specific selector
             try {
-              await page.waitForSelector('div[data-component-type="s-search-result"], .zg-item-immersion, div.a-section.a-spacing-small', { timeout: 10000 });
-            } catch (e) {
-              console.log('⚠️  Selector wait timeout, proceeding anyway...');
+              await page.goto(categoryUrl, { 
+                waitUntil: 'networkidle2',
+                timeout: 60000 
+              });
+            } catch (error) {
+              console.log(`⚠️  Navigation timeout, trying domcontentloaded...`);
+              await page.goto(categoryUrl, { 
+                waitUntil: 'domcontentloaded',
+                timeout: 60000 
+              });
             }
 
-            // Take screenshot for debugging (optional)
-            // await page.screenshot({ path: `debug-${category}.png` });
+            // Wait for page to settle
+            await delay(4000);
+
+            // Check if we got blocked
+            const currentUrl = page.url();
+            const pageTitle = await page.title();
+            
+            console.log(`📄 Current URL: ${currentUrl}`);
+            console.log(`📖 Page title: ${pageTitle}`);
+
+            if (currentUrl.includes('robot') || currentUrl.includes('captcha') || pageTitle.includes('Robot Check')) {
+              console.log('❌ BLOCKED: Amazon is showing CAPTCHA/robot check');
+              await browser.close();
+              return [];
+            }
+
+            // Take screenshot for debugging
+            try {
+              await page.screenshot({ path: `/tmp/debug-${category}.png` });
+              console.log(`📸 Debug screenshot saved`);
+            } catch (e) {
+              console.log('⚠️  Could not take screenshot');
+            }
+
+            // Try multiple waiting strategies for content
+            let booksFound = false;
+            const selectorsToTry = [
+              'div[data-component-type="s-search-result"]',
+              '.s-result-item',
+              '.zg-item-immersion',
+              '.a-section.a-spacing-small'
+            ];
+
+            for (const selector of selectorsToTry) {
+              try {
+                await page.waitForSelector(selector, { timeout: 8000 });
+                console.log(`✅ Found elements with selector: ${selector}`);
+                booksFound = true;
+                break;
+              } catch (e) {
+                console.log(`❌ No elements with selector: ${selector}`);
+              }
+            }
+
+            if (!booksFound) {
+              console.log('⚠️  No book elements found with any selector, trying to extract anyway...');
+            }
 
             const books = await page.evaluate((category, affiliateId, currentYear) => {
-              console.log(`🔍 Extracting books from ${category} page...`);
+              console.log('🔍 Starting book extraction...');
 
-              // Try multiple selector strategies
-              let bookElements = document.querySelectorAll('.zg-item-immersion');
-              
-              if (bookElements.length === 0) {
-                bookElements = document.querySelectorAll('div[data-component-type="s-search-result"]');
-              }
-              
-              if (bookElements.length === 0) {
-                bookElements = document.querySelectorAll('div.a-section.a-spacing-small');
+              // Comprehensive selector strategy
+              const selectors = [
+                'div[data-component-type="s-search-result"]',
+                '.s-result-item',
+                '.zg-item-immersion',
+                '.a-section.a-spacing-small'
+              ];
+
+              let allElements = [];
+              for (const selector of selectors) {
+                const elements = document.querySelectorAll(selector);
+                if (elements.length > 0) {
+                  console.log(`Found ${elements.length} elements with: ${selector}`);
+                  allElements = Array.from(elements);
+                  break;
+                }
               }
 
-              console.log(`Found ${bookElements.length} potential book elements`);
+              if (allElements.length === 0) {
+                // Last resort: get any div that might contain books
+                allElements = Array.from(document.querySelectorAll('div')).filter(div => 
+                  div.textContent && div.textContent.length > 100
+                );
+                console.log(`Trying all divs: ${allElements.length} potential elements`);
+              }
+
               const books = [];
+              const processedTitles = new Set();
 
-              bookElements.forEach((element, index) => {
-                if (index >= 10) return; // Limit to top 10 per category
+              allElements.forEach((element, index) => {
+                if (index >= 15) return; // Limit to top 15
 
                 try {
-                  // Try multiple title selectors
+                  // Multiple title extraction strategies
                   let title = '';
                   const titleSelectors = [
-                    '.p13n-sc-truncate',
                     'h2 a span',
                     '.a-size-medium.a-color-base.a-text-normal',
-                    'h2.a-size-mini span'
+                    '.a-text-normal',
+                    'h2',
+                    '.a-link-normal span'
                   ];
-                  
+
                   for (const selector of titleSelectors) {
                     const titleEl = element.querySelector(selector);
-                    if (titleEl?.textContent) {
+                    if (titleEl && titleEl.textContent && titleEl.textContent.trim().length > 5) {
                       title = titleEl.textContent.trim();
                       break;
                     }
                   }
 
-                  if (!title) return;
+                  if (!title || title.length < 5 || processedTitles.has(title)) {
+                    return;
+                  }
+                  processedTitles.add(title);
 
                   // Author extraction
                   let author = 'Unknown Author';
                   const authorSelectors = [
-                    '.a-row.a-size-small',
+                    '.a-row.a-size-base',
                     '.a-size-base',
-                    'div.a-row.a-size-small span.a-size-small'
+                    '.a-color-secondary',
+                    '.a-text-normal'
                   ];
-                  
+
                   for (const selector of authorSelectors) {
                     const authorEl = element.querySelector(selector);
-                    if (authorEl?.textContent) {
-                      author = authorEl.textContent.replace(/^by\s*/i, '').trim();
-                      if (author) break;
+                    if (authorEl && authorEl.textContent) {
+                      const authorText = authorEl.textContent.replace(/^by\s*/i, '').trim();
+                      if (authorText && authorText.length > 2 && !authorText.includes('$')) {
+                        author = authorText;
+                        break;
+                      }
                     }
                   }
 
                   // Price extraction
                   let price = 'Price not available';
-                  const priceSelectors = [
-                    '.p13n-sc-price',
-                    '.a-price .a-offscreen',
-                    'span.a-price span.a-offscreen'
-                  ];
-                  
-                  for (const selector of priceSelectors) {
-                    const priceEl = element.querySelector(selector);
-                    if (priceEl?.textContent) {
-                      price = priceEl.textContent.trim();
-                      break;
-                    }
+                  const priceEl = element.querySelector('.a-price .a-offscreen, .a-price-range .a-offscreen');
+                  if (priceEl && priceEl.textContent) {
+                    price = priceEl.textContent.trim();
                   }
 
                   // Rating extraction
                   let rating = 4.0;
-                  const ratingEl = element.querySelector('.a-icon-alt, i.a-icon-star span');
-                  if (ratingEl?.textContent) {
+                  const ratingEl = element.querySelector('.a-icon-alt, .a-icon-star');
+                  if (ratingEl && ratingEl.textContent) {
                     const match = ratingEl.textContent.match(/(\d+\.?\d*)/);
                     rating = match ? parseFloat(match[1]) : 4.0;
                   }
@@ -294,63 +297,70 @@ jobs:
                   let imageUrl = '';
                   const imgEl = element.querySelector('img');
                   if (imgEl) {
-                    imageUrl = imgEl.src || imgEl.dataset.src || '';
+                    imageUrl = imgEl.src || imgEl.getAttribute('data-src') || '';
                   }
 
-                  // ASIN extraction
+                  // ASIN extraction from URL
                   let asin = '';
-                  const linkEl = element.querySelector('a[href*="/dp/"], a[href*="/product/"]');
-                  if (linkEl?.href) {
-                    const asinMatch = linkEl.href.match(/\/(?:dp|product)\/([A-Z0-9]{10})/);
-                    asin = asinMatch ? asinMatch[1] : '';
-                  }
-                  
-                  if (!asin) {
-                    asin = `unknown_${Date.now()}_${index}`;
+                  const linkEl = element.querySelector('a[href*="/dp/"]');
+                  if (linkEl && linkEl.href) {
+                    const asinMatch = linkEl.href.match(/\/dp\/([A-Z0-9]{10})/);
+                    asin = asinMatch ? asinMatch[1] : `book_${Date.now()}_${index}`;
+                  } else {
+                    asin = `book_${Date.now()}_${index}`;
                   }
 
-                  if (title && title !== 'Unknown Title') {
-                    books.push({
-                      id: `book_${asin}_${Date.now()}`,
-                      title: title,
-                      author: author,
-                      asin: asin,
-                      price: price,
-                      rating: rating,
-                      imageUrl: imageUrl,
-                      productUrl: `https://www.amazon.com/dp/${asin}?tag=${affiliateId}`,
-                      category: category,
-                      affiliateId: affiliateId,
-                      scrapedAt: new Date().toISOString(),
-                      bestsellerRank: index + 1,
-                      year: currentYear,
-                      categoryGroup: category.split('_')[0]
-                    });
-                  }
+                  books.push({
+                    id: `book_${asin}_${Date.now()}`,
+                    title: title,
+                    author: author,
+                    asin: asin,
+                    price: price,
+                    rating: rating,
+                    imageUrl: imageUrl,
+                    productUrl: `https://www.amazon.com/dp/${asin}?tag=${affiliateId}`,
+                    category: category,
+                    affiliateId: affiliateId,
+                    scrapedAt: new Date().toISOString(),
+                    bestsellerRank: index + 1,
+                    year: currentYear,
+                    categoryGroup: category.split('_')[0]
+                  });
+
                 } catch (error) {
                   console.log('Error parsing book element:', error.message);
                 }
               });
 
+              console.log(`✅ Extracted ${books.length} books`);
               return books;
+
             }, category, AFFILIATE_ID, currentYear);
 
             await browser.close();
-            console.log(`✅ Found ${books.length} books in ${category}`);
+            
+            if (books.length === 0) {
+              console.log(`❌ No books extracted from ${category}`);
+            } else {
+              console.log(`✅ Successfully extracted ${books.length} books from ${category}`);
+            }
+            
             return books;
 
           } catch (error) {
             console.log(`💥 Error scraping ${category}:`, error.message);
             try {
               await browser.close();
-            } catch (e) {}
+            } catch (e) {
+              console.log('Browser already closed');
+            }
             return [];
           }
         }
 
         // Main function
         async function main() {
-          console.log('🚀 Starting Comprehensive Amazon Bestsellers Scraper');
+          console.log('🚀 Starting Focused Amazon Bestsellers Scraper');
           console.log('===================================================');
           console.log(`📅 Scraping ${currentYear} Bestsellers`);
           console.log(`📚 Categories: ${Object.keys(BESTSELLER_CATEGORIES).length}`);
@@ -387,7 +397,7 @@ jobs:
               if (!existingBook) {
                 categories[category].push(book);
                 totalNewBooks++;
-                console.log(`➕ New: ${book.title.substring(0, 40)}...`);
+                console.log(`➕ New: ${book.title.substring(0, 50)}...`);
               } else {
                 // Update existing book's bestseller rank and date
                 existingBook.bestsellerRank = book.bestsellerRank;
@@ -402,7 +412,7 @@ jobs:
 
             // Add delay between categories to be respectful
             if (i < categoryEntries.length - 1) {
-              const delayTime = 3000 + Math.random() * 2000; // 3-5 seconds
+              const delayTime = 5000 + Math.random() * 3000; // 5-8 seconds
               console.log(`⏳ Waiting ${Math.round(delayTime/1000)} seconds before next category...`);
               await delay(delayTime);
             }
@@ -418,7 +428,7 @@ jobs:
               totalBooks: totalBooks,
               categoriesCount: Object.keys(categories).length,
               affiliateId: AFFILIATE_ID,
-              source: 'GitHub Actions Comprehensive Bestsellers Scraper',
+              source: 'GitHub Actions Focused Bestsellers Scraper',
               scrapeYear: currentYear,
               exportDate: new Date().toISOString(),
               newBooksAdded: totalNewBooks,
@@ -433,27 +443,20 @@ jobs:
           fs.writeFileSync(OUTPUT_FILE, JSON.stringify(outputData, null, 2));
 
           console.log('\n==========================================');
-          console.log('🎉 COMPREHENSIVE SCRAPING COMPLETE!');
+          console.log('🎉 FOCUSED SCRAPING COMPLETE!');
           console.log('==========================================');
           console.log(`✅ Categories processed: ${categoriesProcessed}`);
-          console.log(`📚 Books scraped: ${totalBooksScraped}`);
+          console.log(`📚 Total books scraped this run: ${totalBooksScraped}`);
           console.log(`🆕 New books added: ${totalNewBooks}`);
           console.log(`📊 Total books in collection: ${totalBooks}`);
           console.log(`📅 Year: ${currentYear}`);
           console.log(`💾 Data saved to: ${OUTPUT_FILE}`);
           console.log('==========================================\n');
 
-          // Show summary by category group
-          console.log('📖 BOOKS BY CATEGORY GROUP:');
-          const categoryGroups = {};
+          // Show summary by category
+          console.log('📖 BOOKS BY CATEGORY:');
           for (const [category, books] of Object.entries(categories)) {
-            const group = category.split('_')[0];
-            if (!categoryGroups[group]) categoryGroups[group] = 0;
-            categoryGroups[group] += books.length;
-          }
-          
-          for (const [group, count] of Object.entries(categoryGroups)) {
-            console.log(`   ${group}: ${count} books`);
+            console.log(`   ${category}: ${books.length} books`);
           }
         }
 
@@ -464,7 +467,7 @@ jobs:
         });
         EOF
         
-    - name: Run comprehensive bestsellers scraper
+    - name: Run focused bestsellers scraper
       env:
         AFFILIATE_ID: ${{ secrets.AMAZON_AFFILIATE_ID }}
       run: node bestsellers-scraper.js
