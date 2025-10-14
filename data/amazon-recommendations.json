@@ -1,6 +1,62 @@
 {
-  "lastUpdated": "2025-10-14T14:25:21.975Z",
+  "lastUpdated": "2025-10-14T14:39:17.322Z",
   "categories": {
+    "mystery_thriller": [
+      {
+        "affiliateId": "readmediaapp-20",
+        "asin": "0385336675",
+        "author": "Lee Child",
+        "category": "mystery_thriller",
+        "id": "book_0385336675_1760452755150",
+        "imageUrl": "https://m.media-amazon.com/images/I/71NAjXE6q6S.jpg",
+        "price": "$24.48",
+        "productUrl": "https://www.amazon.com/dp/0385336675?tag=readmediaapp-20",
+        "rating": "4.5",
+        "scrapedAt": "2025-10-14T14:39:15.150Z",
+        "title": "The Enemy (Jack Reacher, No. 8)"
+      }
+    ],
+    "novel": [
+      {
+        "affiliateId": "readmediaapp-20",
+        "asin": "0385546890",
+        "author": "Dan Brown",
+        "category": "novel",
+        "id": "book_0385546890_1760452287478",
+        "imageUrl": "https://m.media-amazon.com/images/I/71KSpVjctXL.jpg",
+        "price": "$24.48",
+        "productUrl": "https://www.amazon.com/dp/0385546890?tag=readmediaapp-20",
+        "rating": "4.4",
+        "scrapedAt": "2025-10-14T14:31:27.478Z",
+        "title": "The Secret of Secrets: A Novel (Robert Langdon)"
+      },
+      {
+        "affiliateId": "readmediaapp-20",
+        "asin": "0385537859",
+        "author": "Dan Brown",
+        "category": "novel",
+        "id": "book_0385537859_1760452356352",
+        "imageUrl": "https://m.media-amazon.com/images/I/915Qc30l2aL.jpg",
+        "price": "$24.48",
+        "productUrl": "https://www.amazon.com/dp/0385537859?tag=readmediaapp-20",
+        "rating": "4.2",
+        "scrapedAt": "2025-10-14T14:32:36.352Z",
+        "title": "Inferno: A Novel"
+      },
+      {
+        "affiliateId": "readmediaapp-20",
+        "asin": "0593802721",
+        "author": "Chimamanda Ngozi Adichie",
+        "category": "novel",
+        "id": "book_0593802721_1760452630082",
+        "imageUrl": "https://m.media-amazon.com/images/I/81Nk5UprrxL.jpg",
+        "price": "$24.48",
+        "productUrl": "https://www.amazon.com/dp/0593802721?tag=readmediaapp-20",
+        "rating": "4.3",
+        "scrapedAt": "2025-10-14T14:37:10.082Z",
+        "title": "Dream Count: A Novel"
+      }
+    ],
     "teen_young_adult_dystopian": [
       {
         "affiliateId": "readmediaapp-20",
@@ -18,10 +74,10 @@
     ]
   },
   "metadata": {
-    "totalBooks": 1,
-    "categoriesCount": 1,
+    "totalBooks": 5,
+    "categoriesCount": 3,
     "affiliateId": "readmediaapp-20",
     "source": "ReadMedia",
-    "exportDate": "2025-10-14T14:25:21.976Z"
+    "exportDate": "2025-10-14T14:39:17.323Z"
   }
 }
