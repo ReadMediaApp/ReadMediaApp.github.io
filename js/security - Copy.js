@@ -134,14 +134,33 @@ class Security {
             this.redirectToSocialHub();
         }
 
-        // REMOVED scrolling detection as it blocks normal user behavior
+        // Monitor rapid scrolling
+        let scrollCount = 0;
+        let lastScrollTime = Date.now();
+        
+        window.addEventListener('scroll', () => {
+            const now = Date.now();
+            if (now - lastScrollTime < 100) {
+                scrollCount++;
+                if (scrollCount > 20) {
+                    this.redirectToSocialHub();
+                }
+            } else {
+                scrollCount = 0;
+            }
+            lastScrollTime = now;
+        });
     }
 
     // Page protection for content
     static initPageProtection() {
-        // REMOVED text selection prevention - allows normal text selection
-        
-        // Prevent drag/drop of images (less intrusive)
+        // Prevent text selection
+        document.addEventListener('selectstart', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent drag/drop of images
         document.addEventListener('dragstart', (e) => {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
@@ -149,7 +168,7 @@ class Security {
             }
         });
 
-        // Disable right-click on images only
+        // Disable right-click on images
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
