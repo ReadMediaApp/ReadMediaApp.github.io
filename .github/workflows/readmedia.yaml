@@ -100,11 +100,6 @@ jobs:
           'childrens_educational': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Education-Reference/zgbs/books/6960520011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
           'childrens_science_nature': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Science-Nature/zgbs/books/3176/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
           
-          // Young Adult
-          'young_adult_fiction': 'https://www.amazon.com/Best-Sellers-Books-Teen-Young-Adult/zgbs/books/28/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'young_adult_fantasy': 'https://www.amazon.com/Best-Sellers-Books-Teen-Young-Adult-Fantasy/zgbs/books/1927/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          'young_adult_romance': 'https://www.amazon.com/Best-Sellers-Books-Teen-Young-Adult-Romance/zgbs/books/1928/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
-          
           // Comics & Graphic Novels
           'comics_graphic_novels': 'https://www.amazon.com/Best-Sellers-Books-Comics-Graphic-Novels/zgbs/books/4366/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
           'comics_manga': 'https://www.amazon.com/Best-Sellers-Books-Manga/zgbs/books/4367/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
@@ -123,6 +118,11 @@ jobs:
           'sports_outdoors': 'https://www.amazon.com/Best-Sellers-Books-Sports-Outdoors/zgbs/books/26/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
           'sports_biographies': 'https://www.amazon.com/Best-Sellers-Books-Sports-Biographies/zgbs/books/2446/ref=zg_bs_pg_1?_encoding=UTF8&pg=1'
         };
+
+        // Utility function for delays
+        function delay(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
         // Ensure data directory exists
         if (!fs.existsSync(DATA_DIR)) {
@@ -180,8 +180,8 @@ jobs:
               timeout: 60000 
             });
 
-            // Wait for page to load
-            await page.waitForTimeout(5000);
+            // Wait for page to load using standard setTimeout
+            await delay(5000);
 
             const books = await page.evaluate((category, affiliateId, currentYear) => {
               console.log(`🔍 Extracting books from ${category} page...`);
@@ -308,9 +308,9 @@ jobs:
 
             // Add delay between categories to be respectful
             if (i < categoryEntries.length - 1) {
-              const delay = 3000 + Math.random() * 2000; // 3-5 seconds
-              console.log(`⏳ Waiting ${Math.round(delay/1000)} seconds before next category...`);
-              await new Promise(resolve => setTimeout(resolve, delay));
+              const delayTime = 3000 + Math.random() * 2000; // 3-5 seconds
+              console.log(`⏳ Waiting ${Math.round(delayTime/1000)} seconds before next category...`);
+              await delay(delayTime);
             }
           }
 
@@ -380,7 +380,4 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add data/amazon-recommendations.json
-        git diff --staged --quiet || (git commit -m "📚 Update ${currentYear} Amazon bestsellers - ${categoriesCount} categories [skip ci]" && git push)
-      env:
-        currentYear: $(date +%Y)
-        categoriesCount: $(node -e "console.log(Object.keys(require('./bestsellers-scraper.js').BESTSELLER_CATEGORIES).length)")
+        git diff --staged --quiet || (git commit -m "📚 Update Amazon bestsellers [skip ci]" && git push)
