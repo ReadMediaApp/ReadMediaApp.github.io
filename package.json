@@ -1,0 +1,16 @@
+{
+  "name": "amazon-bestsellers-scraper",
+  "version": "1.0.0",
+  "description": "Automated Amazon bestsellers scraper for GitHub Actions",
+  "main": "bestsellers-scraper.js",
+  "scripts": {
+    "scrape": "node bestsellers-scraper.js"
+  },
+  "dependencies": {
+    "puppeteer": "^24.24.1",
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "keywords": ["amazon", "bestsellers", "scraper", "github-actions"],
+  "author": "Your Name",
+  "license": "MIT"
+}
