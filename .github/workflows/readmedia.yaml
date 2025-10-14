@@ -1,0 +1,386 @@
+name: Amazon Bestsellers Scraper
+
+on:
+  workflow_dispatch:  # Manual trigger
+  schedule:
+    # Run every Wednesday at 9 AM UTC
+    - cron: '0 9 * * 3'
+
+jobs:
+  scrape-bestsellers:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        npm install puppeteer cheerio
+        
+    - name: Create comprehensive bestsellers scraper
+      run: |
+        cat > bestsellers-scraper.js << 'EOF'
+        const puppeteer = require('puppeteer');
+        const fs = require('fs');
+        const path = require('path');
+
+        const currentYear = new Date().getFullYear();
+        const AFFILIATE_ID = process.env.AFFILIATE_ID || 'readmediaapp-20';
+        const DATA_DIR = 'data';
+        const OUTPUT_FILE = path.join(DATA_DIR, 'amazon-recommendations.json');
+
+        // Comprehensive bestseller categories
+        const BESTSELLER_CATEGORIES = {
+          // Fiction Categories
+          'fiction_literary': 'https://www.amazon.com/Best-Sellers-Books-Literary/zgbs/books/17/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'fiction_mystery_thriller': 'https://www.amazon.com/Best-Sellers-Books-Mystery-Thriller-Suspense/zgbs/books/18/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'fiction_science_fiction': 'https://www.amazon.com/Best-Sellers-Books-Science-Fiction-Fantasy/zgbs/books/25/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'fiction_romance': 'https://www.amazon.com/Best-Sellers-Books-Romance/zgbs/books/23/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'fiction_horror': 'https://www.amazon.com/Best-Sellers-Books-Horror/zgbs/books/22/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'fiction_historical': 'https://www.amazon.com/Best-Sellers-Books-Historical/zgbs/books/21/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Non-Fiction Categories
+          'nonfiction_biographies': 'https://www.amazon.com/Best-Sellers-Books-Biographies-Memoirs/zgbs/books/2/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'nonfiction_history': 'https://www.amazon.com/Best-Sellers-Books-History/zgbs/books/9/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'nonfiction_travel': 'https://www.amazon.com/Best-Sellers-Books-Travel/zgbs/books/28/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'nonfiction_cooking': 'https://www.amazon.com/Best-Sellers-Books-Cookbooks-Food-Wine/zgbs/books/6/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'nonfiction_arts_photography': 'https://www.amazon.com/Best-Sellers-Books-Arts-Photography/zgbs/books/1/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Professional & Technical
+          'business_management': 'https://www.amazon.com/Best-Sellers-Books-Business-Management/zgbs/books/2675/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'business_entrepreneurship': 'https://www.amazon.com/Best-Sellers-Books-Entrepreneurship/zgbs/books/10841807011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'business_marketing': 'https://www.amazon.com/Best-Sellers-Books-Business-Marketing/zgbs/books/2687/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'business_finance': 'https://www.amazon.com/Best-Sellers-Books-Business-Finance/zgbs/books/2680/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'business_careers': 'https://www.amazon.com/Best-Sellers-Books-Business-Careers/zgbs/books/2676/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Technology
+          'technology_computers': 'https://www.amazon.com/Best-Sellers-Books-Computer-Technology/zgbs/books/5/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'technology_programming': 'https://www.amazon.com/Best-Sellers-Books-Computer-Programming/zgbs/books/3952/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'technology_web_development': 'https://www.amazon.com/Best-Sellers-Books-Web-Development/zgbs/books/3756/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'technology_data_science': 'https://www.amazon.com/Best-Sellers-Books-Data-Modeling-Design/zgbs/books/123440011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'technology_ai_machine_learning': 'https://www.amazon.com/Best-Sellers-Books-Artificial-Intelligence/zgbs/books/10842523011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Science & Math
+          'science_biology': 'https://www.amazon.com/Best-Sellers-Books-Biological-Sciences/zgbs/books/75/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'science_physics': 'https://www.amazon.com/Best-Sellers-Books-Physics/zgbs/books/14545/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'science_chemistry': 'https://www.amazon.com/Best-Sellers-Books-Chemistry/zgbs/books/1605/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'science_astronomy': 'https://www.amazon.com/Best-Sellers-Books-Astronomy-Space-Science/zgbs/books/14563/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'science_earth_sciences': 'https://www.amazon.com/Best-Sellers-Books-Earth-Sciences/zgbs/books/173514/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Health & Wellness
+          'health_fitness': 'https://www.amazon.com/Best-Sellers-Books-Exercise-Fitness/zgbs/books/284081/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'health_nutrition': 'https://www.amazon.com/Best-Sellers-Books-Nutrition/zgbs/books/282919/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'health_mental_health': 'https://www.amazon.com/Best-Sellers-Books-Mental-Health/zgbs/books/4737/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'health_medicine': 'https://www.amazon.com/Best-Sellers-Books-Medical-Books/zgbs/books/173514/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'health_alternative_medicine': 'https://www.amazon.com/Best-Sellers-Books-Alternative-Medicine/zgbs/books/4682/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Self-Improvement
+          'self_improvement_personal_growth': 'https://www.amazon.com/Best-Sellers-Books-Personal-Growth/zgbs/books/4743/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'self_improvement_motivational': 'https://www.amazon.com/Best-Sellers-Books-Motivational/zgbs/books/4745/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'self_improvement_success': 'https://www.amazon.com/Best-Sellers-Books-Success/zgbs/books/4746/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'self_improvement_relationships': 'https://www.amazon.com/Best-Sellers-Books-Interpersonal-Relations/zgbs/books/4738/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'self_improvement_time_management': 'https://www.amazon.com/Best-Sellers-Books-Time-Management/zgbs/books/4747/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Education & Reference
+          'education_study_guides': 'https://www.amazon.com/Best-Sellers-Books-Education-Study-Guides/zgbs/books/11673/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'education_test_preparation': 'https://www.amazon.com/Best-Sellers-Books-Test-Preparation/zgbs/books/11676/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'reference_dictionaries': 'https://www.amazon.com/Best-Sellers-Books-Dictionaries-Thesauruses/zgbs/books/72/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'reference_writing': 'https://www.amazon.com/Best-Sellers-Books-Writing-Research/zgbs/books/11670/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Children's Books
+          'childrens_picture_books': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Picture-Books/zgbs/books/4/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'childrens_chapter_books': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Chapter-Books/zgbs/books/12864/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'childrens_educational': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Education-Reference/zgbs/books/6960520011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'childrens_science_nature': 'https://www.amazon.com/Best-Sellers-Books-Childrens-Science-Nature/zgbs/books/3176/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Young Adult
+          'young_adult_fiction': 'https://www.amazon.com/Best-Sellers-Books-Teen-Young-Adult/zgbs/books/28/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'young_adult_fantasy': 'https://www.amazon.com/Best-Sellers-Books-Teen-Young-Adult-Fantasy/zgbs/books/1927/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'young_adult_romance': 'https://www.amazon.com/Best-Sellers-Books-Teen-Young-Adult-Romance/zgbs/books/1928/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Comics & Graphic Novels
+          'comics_graphic_novels': 'https://www.amazon.com/Best-Sellers-Books-Comics-Graphic-Novels/zgbs/books/4366/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'comics_manga': 'https://www.amazon.com/Best-Sellers-Books-Manga/zgbs/books/4367/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'comics_superheroes': 'https://www.amazon.com/Best-Sellers-Books-Comics-Graphic-Novels-Superheroes/zgbs/books/12944216011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Religion & Spirituality
+          'religion_christianity': 'https://www.amazon.com/Best-Sellers-Books-Christian-Books-Bibles/zgbs/books/12290/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'religion_buddhism': 'https://www.amazon.com/Best-Sellers-Books-Buddhism/zgbs/books/12333/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'religion_spirituality': 'https://www.amazon.com/Best-Sellers-Books-Religion-Spirituality/zgbs/books/22/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Crafts & Hobbies
+          'crafts_hobbies': 'https://www.amazon.com/Best-Sellers-Books-Crafts-Hobbies-Home/zgbs/books/542676/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'crafts_games': 'https://www.amazon.com/Best-Sellers-Books-Games/zgbs/books/166341011/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          
+          // Sports & Outdoors
+          'sports_outdoors': 'https://www.amazon.com/Best-Sellers-Books-Sports-Outdoors/zgbs/books/26/ref=zg_bs_pg_1?_encoding=UTF8&pg=1',
+          'sports_biographies': 'https://www.amazon.com/Best-Sellers-Books-Sports-Biographies/zgbs/books/2446/ref=zg_bs_pg_1?_encoding=UTF8&pg=1'
+        };
+
+        // Ensure data directory exists
+        if (!fs.existsSync(DATA_DIR)) {
+          fs.mkdirSync(DATA_DIR, { recursive: true });
+        }
+
+        // Load existing data
+        function loadExistingData() {
+          try {
+            if (fs.existsSync(OUTPUT_FILE)) {
+              const data = JSON.parse(fs.readFileSync(OUTPUT_FILE, 'utf8'));
+              console.log(`📊 Found existing data: ${data.metadata.totalBooks} books across ${data.metadata.categoriesCount} categories`);
+              return data;
+            }
+          } catch (error) {
+            console.log('No existing data found, starting fresh...');
+          }
+          
+          return {
+            lastUpdated: new Date().toISOString(),
+            categories: {},
+            metadata: {
+              totalBooks: 0,
+              categoriesCount: 0,
+              affiliateId: AFFILIATE_ID,
+              source: 'GitHub Actions Bestsellers Scraper',
+              scrapeYear: currentYear,
+              exportDate: new Date().toISOString()
+            }
+          };
+        }
+
+        // Scrape bestsellers from a category page
+        async function scrapeBestsellersPage(category, categoryUrl) {
+          console.log(`\n🌐 Scraping ${category} bestsellers...`);
+          
+          const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--window-size=1920,1080']
+          });
+          
+          try {
+            const page = await browser.newPage();
+            await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+            await page.setViewport({ width: 1920, height: 1080 });
+
+            // Bypass automation detection
+            await page.evaluateOnNewDocument(() => {
+              Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+            });
+
+            console.log(`📦 Navigating to ${categoryUrl}...`);
+            await page.goto(categoryUrl, { 
+              waitUntil: 'networkidle2', 
+              timeout: 60000 
+            });
+
+            // Wait for page to load
+            await page.waitForTimeout(5000);
+
+            const books = await page.evaluate((category, affiliateId, currentYear) => {
+              console.log(`🔍 Extracting books from ${category} page...`);
+
+              const bookElements = document.querySelectorAll('.zg-item-immersion');
+              const books = [];
+
+              bookElements.forEach((element, index) => {
+                if (index >= 8) return; // Limit to top 8 per category to manage total size
+
+                try {
+                  const titleElement = element.querySelector('.p13n-sc-truncate');
+                  const title = titleElement?.textContent?.trim() || 'Unknown Title';
+
+                  const authorElement = element.querySelector('.a-row.a-size-small');
+                  const author = authorElement?.textContent?.replace('by', '').trim() || 'Unknown Author';
+
+                  const priceElement = element.querySelector('.p13n-sc-price');
+                  const price = priceElement?.textContent?.trim() || 'Price not available';
+
+                  const ratingElement = element.querySelector('.a-icon-alt');
+                  let rating = 4.0;
+                  if (ratingElement?.textContent) {
+                    const match = ratingElement.textContent.match(/(\d+\.\d+)/);
+                    rating = match ? parseFloat(match[1]) : 4.0;
+                  }
+
+                  const imageElement = element.querySelector('img');
+                  const imageUrl = imageElement?.src || '';
+
+                  const linkElement = element.querySelector('a.a-link-normal');
+                  const productPath = linkElement?.href || '';
+                  const asinMatch = productPath.match(/\/dp\/([A-Z0-9]{10})/);
+                  const asin = asinMatch ? asinMatch[1] : `unknown_${Date.now()}_${index}`;
+
+                  if (title !== 'Unknown Title' && asin) {
+                    books.push({
+                      id: `book_${asin}_${Date.now()}`,
+                      title: title,
+                      author: author,
+                      asin: asin,
+                      price: price,
+                      rating: rating,
+                      imageUrl: imageUrl,
+                      productUrl: `https://www.amazon.com/dp/${asin}?tag=${affiliateId}`,
+                      category: category,
+                      affiliateId: affiliateId,
+                      scrapedAt: new Date().toISOString(),
+                      bestsellerRank: index + 1,
+                      year: currentYear,
+                      categoryGroup: category.split('_')[0] // fiction, business, etc.
+                    });
+                  }
+                } catch (error) {
+                  console.log('Error parsing book element:', error);
+                }
+              });
+
+              return books;
+            }, category, AFFILIATE_ID, currentYear);
+
+            await browser.close();
+            console.log(`✅ Found ${books.length} books in ${category}`);
+            return books;
+
+          } catch (error) {
+            console.log(`💥 Error scraping ${category}:`, error.message);
+            await browser.close();
+            return [];
+          }
+        }
+
+        // Main function
+        async function main() {
+          console.log('🚀 Starting Comprehensive Amazon Bestsellers Scraper');
+          console.log('===================================================');
+          console.log(`📅 Scraping ${currentYear} Bestsellers`);
+          console.log(`📚 Categories: ${Object.keys(BESTSELLER_CATEGORIES).length}`);
+          console.log(`🏷️  Affiliate ID: ${AFFILIATE_ID}`);
+          console.log('===================================================\n');
+
+          const existingData = loadExistingData();
+          let categories = existingData.categories || {};
+          const currentDate = new Date().toISOString().split('T')[0];
+
+          let totalNewBooks = 0;
+          let totalBooksScraped = 0;
+          let categoriesProcessed = 0;
+
+          const categoryEntries = Object.entries(BESTSELLER_CATEGORIES);
+          
+          for (let i = 0; i < categoryEntries.length; i++) {
+            const [category, categoryUrl] = categoryEntries[i];
+            categoriesProcessed++;
+            
+            console.log(`\n📚 Processing ${category} (${i + 1}/${categoryEntries.length})...`);
+
+            const scrapedBooks = await scrapeBestsellersPage(category, categoryUrl);
+            totalBooksScraped += scrapedBooks.length;
+
+            if (!categories[category]) {
+              categories[category] = [];
+            }
+
+            // Add only new books (check by ASIN)
+            for (const book of scrapedBooks) {
+              const existingBook = categories[category].find(b => b.asin === book.asin);
+              
+              if (!existingBook) {
+                categories[category].push(book);
+                totalNewBooks++;
+                console.log(`➕ New: ${book.title.substring(0, 40)}...`);
+              } else {
+                // Update existing book's bestseller rank and date
+                existingBook.bestsellerRank = book.bestsellerRank;
+                existingBook.lastUpdated = currentDate;
+                existingBook.previousRanks = existingBook.previousRanks || [];
+                existingBook.previousRanks.push({
+                  rank: book.bestsellerRank,
+                  date: currentDate
+                });
+              }
+            }
+
+            // Add delay between categories to be respectful
+            if (i < categoryEntries.length - 1) {
+              const delay = 3000 + Math.random() * 2000; // 3-5 seconds
+              console.log(`⏳ Waiting ${Math.round(delay/1000)} seconds before next category...`);
+              await new Promise(resolve => setTimeout(resolve, delay));
+            }
+          }
+
+          // Update metadata
+          const totalBooks = Object.values(categories).reduce((sum, cat) => sum + cat.length, 0);
+
+          const outputData = {
+            lastUpdated: new Date().toISOString(),
+            categories: categories,
+            metadata: {
+              totalBooks: totalBooks,
+              categoriesCount: Object.keys(categories).length,
+              affiliateId: AFFILIATE_ID,
+              source: 'GitHub Actions Comprehensive Bestsellers Scraper',
+              scrapeYear: currentYear,
+              exportDate: new Date().toISOString(),
+              newBooksAdded: totalNewBooks,
+              totalBooksScraped: totalBooksScraped,
+              categoriesProcessed: categoriesProcessed,
+              weeklyUpdate: true,
+              totalCategoriesAvailable: Object.keys(BESTSELLER_CATEGORIES).length
+            }
+          };
+
+          // Save to file
+          fs.writeFileSync(OUTPUT_FILE, JSON.stringify(outputData, null, 2));
+
+          console.log('\n==========================================');
+          console.log('🎉 COMPREHENSIVE SCRAPING COMPLETE!');
+          console.log('==========================================');
+          console.log(`✅ Categories processed: ${categoriesProcessed}`);
+          console.log(`📚 Books scraped: ${totalBooksScraped}`);
+          console.log(`🆕 New books added: ${totalNewBooks}`);
+          console.log(`📊 Total books in collection: ${totalBooks}`);
+          console.log(`📅 Year: ${currentYear}`);
+          console.log(`💾 Data saved to: ${OUTPUT_FILE}`);
+          console.log('==========================================\n');
+
+          // Show summary by category group
+          console.log('📖 BOOKS BY CATEGORY GROUP:');
+          const categoryGroups = {};
+          for (const [category, books] of Object.entries(categories)) {
+            const group = category.split('_')[0];
+            if (!categoryGroups[group]) categoryGroups[group] = 0;
+            categoryGroups[group] += books.length;
+          }
+          
+          for (const [group, count] of Object.entries(categoryGroups)) {
+            console.log(`   ${group}: ${count} books`);
+          }
+        }
+
+        // Run the scraper
+        main().catch(error => {
+          console.error('💥 Fatal error:', error);
+          process.exit(1);
+        });
+        EOF
+        
+    - name: Run comprehensive bestsellers scraper
+      env:
+        AFFILIATE_ID: ${{ secrets.AMAZON_AFFILIATE_ID }}
+      run: node bestsellers-scraper.js
+      
+    - name: Commit and push if changed
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add data/amazon-recommendations.json
+        git diff --staged --quiet || (git commit -m "📚 Update ${currentYear} Amazon bestsellers - ${categoriesCount} categories [skip ci]" && git push)
+      env:
+        currentYear: $(date +%Y)
+        categoriesCount: $(node -e "console.log(Object.keys(require('./bestsellers-scraper.js').BESTSELLER_CATEGORIES).length)")

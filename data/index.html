@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oops! You Found Our Secret... Nothing!</title>
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            border: 6px dashed #ff6b6b;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '🤫';
+            font-size: 120px;
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .emoji {
+            font-size: 5em;
+            margin-bottom: 25px;
+            animation: bounce 2s infinite;
+            display: block;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-25px); }
+            60% { transform: translateY(-12px); }
+        }
+
+        h1 {
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-size: 2.8em;
+            text-shadow: 3px 3px 0px #fd79a8;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: #636e72;
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .message {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border-left: 6px solid #fdcb6e;
+            box-shadow: 0 8px 20px rgba(253, 203, 110, 0.3);
+        }
+
+        .countdown {
+            font-size: 1.8em;
+            color: #e17055;
+            margin: 25px 0;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .fun-facts {
+            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            font-style: italic;
+            border: 2px solid #a0a0a0;
+        }
+
+        .secret-reveal {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .secret-reveal:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(108, 92, 231, 0.4);
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .nav-btn {
+            padding: 18px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .redirect-info {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(116, 185, 255, 0.3);
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #fd79a8;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 20px); }
+            100% { transform: translate(0, -0px); }
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #636e72;
+            font-style: italic;
+        }
+
+        /* Remove all scrolling */
+        .no-scroll {
+            overflow: hidden !important;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                max-height: 95vh;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
+            
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-btn {
+                padding: 15px;
+                font-size: 1em;
+            }
+            
+            .emoji {
+                font-size: 4em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .countdown {
+                font-size: 1.5em;
+            }
+            
+            .container {
+                padding: 25px 15px;
+            }
+        }
+    </style>
+</head>
+<body class="no-scroll">
+    <div class="container floating">
+        <div class="content">
+            <div class="emoji">🕵️‍♂️</div>
+            
+            <h1>Congratulations, Internet Explorer!</h1>
+            
+            <p class="subtitle">
+                You've discovered our top-secret, highly classified,<br>
+                super-duper secret directory of... absolutely nothing! 🎉
+            </p>
+
+            <div class="message">
+                <strong>🏆 Achievement Unlocked:</strong><br>
+                "I Have Too Much Free Time"<br>
+                <small>+10 points for curiosity</small>
+            </div>
+
+            <div class="fun-facts">
+                <strong>📊 Fun Facts While You Wait:</strong><br>
+                • This page is more exciting than the data you were looking for<br>
+                • 99% of visitors don't find this page (you're special!)<br>
+                • The other 1% are probably lost<br>
+            </div>
+
+            <button class="secret-reveal" onclick="revealSecret()">
+                <strong>👀 Click for a Secret Message</strong>
+            </button>
+
+            <div class="countdown">
+                ⏰ Redirecting in <span id="timer">8</span> seconds...
+            </div>
+
+            <div class="spinner"></div>
+
+            <div class="button-group">
+                <a href="../index.html" class="nav-btn btn-primary">
+                    <span>🏠</span>
+                    Main Site
+                </a>
+                
+                <a href="../recommendations.html" class="nav-btn btn-secondary">
+                    <span>📚</span>
+                    Recommendations
+                </a>
+            </div>
+
+            <div class="redirect-info">
+                <strong>🚀 Where we're going, we don't need data folders!</strong><br>
+                Prepare for social media awesomeness...
+            </div>
+
+            <div class="footer-note">
+                <em>P.S. Our lawyers made us say: "Nothing to see here, folks!" 👨‍⚖️</em>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Prevent scrolling completely
+        document.addEventListener('wheel', preventScroll, { passive: false });
+        document.addEventListener('touchmove', preventScroll, { passive: false });
+        document.addEventListener('keydown', preventScrollKeys);
+        
+        function preventScroll(e) {
+            e.preventDefault();
+            return false;
+        }
+        
+        function preventScrollKeys(e) {
+            if ([32, 33, 34, 35, 36, 37, 38, 39, 40].includes(e.keyCode)) {
+                e.preventDefault();
+                return false;
+            }
+        }
+
+        let timeLeft = 8;
+        const timerElement = document.getElementById('timer');
+        
+        function startCountdown() {
+            const countdown = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                
+                // Change emoji based on time left
+                const emoji = document.querySelector('.emoji');
+                if (timeLeft === 6) emoji.textContent = '🔍';
+                if (timeLeft === 5) emoji.textContent = '⏰';
+                if (timeLeft === 3) emoji.textContent = '🚀';
+                if (timeLeft === 1) emoji.textContent = '🎯';
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    redirectToSocial();
+                }
+            }, 1000);
+        }
+        
+        function redirectToSocial() {
+            window.location.href = '../social.html';
+        }
+        
+        function revealSecret() {
+            const secretDiv = document.querySelector('.secret-reveal');
+            secretDiv.innerHTML = `
+                <strong>🤫 The Secret:</strong><br>
+                You're being redirected to our awesome social media!<br>
+                <small>Was it worth the click? 😄</small>
+            `;
+            secretDiv.style.background = 'linear-gradient(135deg, #00b894, #00a085)';
+            secretDiv.style.transform = 'scale(1.02)';
+            
+            // Add confetti effect
+            createConfetti();
+        }
+        
+        // Confetti effect
+        function createConfetti() {
+            const confettiColors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8'];
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.innerHTML = ['🎉', '🎊', '✨', '🌟', '💫', '🎈'][Math.floor(Math.random() * 6)];
+                confetti.style.cssText = `
+                    position: absolute;
+                    font-size: 1.5em;
+                    z-index: 1000;
+                    left: ${Math.random() * 100}%;
+                    top: -50px;
+                    animation: confetti-fall ${2 + Math.random() * 2}s linear forwards;
+                    pointer-events: none;
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes confetti-fall {
+                        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+                        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                container.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+        
+        // Add floating emojis in background
+        function addFloatingEmojis() {
+            const emojis = ['🎭', '🔍', '📁', '🚫', '😂', '🎪', '🃏', '🔒', '🎨', '💻'];
+            const body = document.body;
+            
+            for (let i = 0; i < 8; i++) {
+                const emoji = document.createElement('div');
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.cssText = `
+                    position: fixed;
+                    font-size: 2.5em;
+                    z-index: -1;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation: float-emoji ${8 + Math.random() * 10}s ease-in-out infinite;
+                    opacity: 0.15;
+                    pointer-events: none;
+                `;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes float-emoji {
+                        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                        25% { transform: translate(20px, 20px) rotate(90deg); }
+                        50% { transform: translate(0, 40px) rotate(180deg); }
+                        75% { transform: translate(-20px, 20px) rotate(270deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                body.appendChild(emoji);
+            }
+        }
+        
+        // Start everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startCountdown();
+            addFloatingEmojis();
+            
+            // Random funny title changes
+            const titles = [
+                "Oops! You Found Our Secret... Nothing!",
+                "The Void Called - It Wants Its Directory Back",
+                "404: Imagination Not Found",
+                "This Page Is Purposely Pointless",
+                "You've Reached The End of The Internet",
+                "Nothing to See Here... Literally!",
+                "The Secret Society of Nothingness",
+                "Welcome to Digital Nowhere"
+            ];
+            
+            let titleIndex = 0;
+            setInterval(() => {
+                document.title = titles[titleIndex];
+                titleIndex = (titleIndex + 1) % titles.length;
+            }, 2000);
+        });
+        
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konamiSequence = [
+            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+            'KeyB', 'KeyA'
+        ];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                document.body.style.background = 'linear-gradient(135deg, #ff0000, #00ff00, #0000ff, #ffff00, #ff00ff)';
+                document.body.style.animation = 'none';
+                alert('🎮 Konami Code Activated! You win... nothing! 😂');
+            }
+        });
+    </script>
+</body>
+</html>

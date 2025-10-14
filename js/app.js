@@ -18,6 +18,7 @@ class App {
             this.renderSidebar();
             this.renderFooter();
             this.setupEventListeners();
+            this.checkSpeechSupport();
             
             // Page-specific initialization
             this.initPage();
@@ -30,7 +31,12 @@ class App {
             this.showError('Failed to load content. Please refresh the page.');
         }
     }
-
+    static checkSpeechSupport() {
+        if (!('speechSynthesis' in window)) {
+            console.warn('Speech synthesis not supported');
+            // You could show a message to the user
+        }
+    }
     static refreshFooterWithData() {
         // Re-render footer with actual data after everything is loaded
         setTimeout(() => {
@@ -77,6 +83,9 @@ class App {
         const path = window.location.pathname;
         const page = path.split('/').pop() || 'index.html';
         
+        // Render breadcrumb
+        this.renderBreadcrumb();
+        
         switch(page) {
             case 'index.html':
             case '':
@@ -89,17 +98,56 @@ class App {
                 this.renderBooksPage();
                 break;
             case 'reviews.html':
-                this.renderReviewsPage();
+                this.renderReviewsPage(); 
                 break;
             case 'donate.html':
                 // Donate page doesn't need special initialization
+                break;
+            case 'recommendations.html':
+                // Recommendations page handles its own initialization
                 break;
             default:
                 // Legal pages or others
                 break;
         }
     }
-
+    static renderBreadcrumb() {
+        const breadcrumb = document.querySelector('.breadcrumb');
+        const currentPageElement = document.getElementById('current-page');
+        
+        if (!breadcrumb || !currentPageElement) return;
+        
+        const path = window.location.pathname;
+        const page = path.split('/').pop() || 'index.html';
+        
+        let pageTitle = 'Home';
+        
+        switch(page) {
+            case 'index.html':
+            case '':
+                pageTitle = 'Home';
+                break;
+            case 'articles.html':
+                pageTitle = 'Articles';
+                break;
+            case 'books.html':
+                pageTitle = 'Books';
+                break;
+            case 'reviews.html':
+                pageTitle = 'Reviews';
+                break;
+            case 'donate.html':
+                pageTitle = 'Donate';
+                break;
+            case 'article.html':
+                pageTitle = 'Article';
+                break;
+            default:
+                pageTitle = document.title.replace('ReadMedia - ', '');
+        }
+        
+        currentPageElement.textContent = pageTitle;
+    }
     static renderHomepage() {
         this.renderFeaturedArticles();
         this.renderLatestBooks();
@@ -208,6 +256,18 @@ class App {
             .join('');
         
         this.renderPagination(filteredBooks.length, 'books');
+    }
+    static renderReviewsPage() {
+        const container = document.getElementById('all-reviews');
+        if (!container) return;
+
+        const paginatedReviews = this.paginateData(this.data.reviews);
+        
+        container.innerHTML = paginatedReviews
+            .map(review => Components.renderReviewCard(review))
+            .join('');
+        
+        this.renderPagination(this.data.reviews.length, 'reviews');
     }
 
     static renderArticlesPage() {
@@ -418,15 +478,9 @@ class App {
     }
 
     static showArticle(articleId) {
-        // For a static site, you might want to create individual article pages
-        // or show articles in a modal. This is a placeholder implementation.
         const article = this.data.articles.find(a => a.id === articleId);
         if (article) {
             alert(`Showing article: ${article.title}\n\nThis would open in a full article view.`);
-            // In a real implementation, you might:
-            // 1. Navigate to article.html?id=articleId
-            // 2. Show a modal with the full article
-            // 3. Use a SPA approach with history API
         }
     }
 

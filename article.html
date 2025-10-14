@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="js/security.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
     <script>
@@ -29,6 +30,7 @@
                 <li><a href="articles.html">Articles</a></li>
                 <li><a href="books.html">Books</a></li>
                 <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="recommendations.html" class="active">Recommendations</a></li>
                 <li><a href="donate.html" class="donate-btn">Donate</a></li>
             </ul>
             <div class="nav-toggle">
@@ -36,6 +38,66 @@
             </div>
         </nav>
     </header>
+    <!-- Reading Assistant Controls -->
+    <section class="reading-assistant" id="reading-assistant" style="display: none;">
+        <div class="reading-controls">
+            <button class="control-btn" id="listen-btn" title="Listen to article">
+                <span class="material-icons">play_arrow</span>
+                Listen
+            </button>
+            <button class="control-btn" id="pause-btn" title="Pause" style="display: none;">
+                <span class="material-icons">pause</span>
+                Pause
+            </button>
+            <button class="control-btn" id="stop-btn" title="Stop">
+                <span class="material-icons">stop</span>
+                Stop
+            </button>
+            
+            <!-- Voice Selection Dropdown -->
+            <div class="voice-selection">
+                <label for="voice-select">Voice:</label>
+                <select id="voice-select" class="voice-select">
+                    <option value="">Loading voices...</option>
+                </select>
+            </div>
+
+            <!-- Speech Settings -->
+            <div class="speech-settings">
+                <label for="rate-select">Speed:</label>
+                <select id="rate-select" class="rate-select">
+                    <option value="0.5">0.5x</option>
+                    <option value="0.75">0.75x</option>
+                    <option value="1.0" selected>1.0x</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="2.0">2.0x</option>
+                </select>
+            </div>
+            
+            <div class="reading-stats">
+                <span class="reading-time" id="reading-time">
+                    <span class="material-icons">schedule</span>
+                    <span id="time-estimate">Calculating...</span>
+                </span>
+                <span class="word-count" id="word-count">
+                    <span class="material-icons">text_fields</span>
+                    <span id="word-count-number">0 words</span>
+                </span>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <div class="breadcrumb-item">
+                <a href="index.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-current" id="current-page">Page Title</span>
+            </div>
+        </div>
+    </nav>
 
     <main class="main-container">
         <aside class="sidebar" id="sidebar">
@@ -85,10 +147,9 @@
         <!-- Footer loaded by JavaScript -->
     </footer>
 
-    <script src="js/security.js"></script>
     <script src="js/components.js"></script>
     <script src="js/app.js"></script>
     <script src="js/article.js"></script>
-    <script src="js/footer-manager.js"></script>
+    <script src="js/reading-assistant.js"></script>
 </body>
 </html>

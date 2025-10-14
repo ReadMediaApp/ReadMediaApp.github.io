@@ -44,8 +44,19 @@ class ArticleViewer {
 
     static displayArticle(article) {
         const articleContent = document.getElementById('article-content');
-        const safeArticle = Security.preventXSS(article);
         
+        // Simple security sanitization
+        const safeArticle = {
+            id: this.escapeHTML(article.id),
+            title: this.escapeHTML(article.title),
+            author: this.escapeHTML(article.author),
+            date: article.date,
+            content: article.content,
+            tags: Array.isArray(article.tags) ? article.tags.map(tag => this.escapeHTML(tag)) : [],
+            image: this.isValidURL(article.image) ? article.image : '',
+            excerpt: this.escapeHTML(article.excerpt || '')
+        };
+
         const date = new Date(safeArticle.date).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -62,7 +73,7 @@ class ArticleViewer {
             ? `<img src="${safeArticle.image}" alt="${safeArticle.title}" class="article-featured-image" loading="lazy">`
             : '';
 
-        // Convert markdown-like content to HTML (simple conversion)
+        // Convert markdown-like content to HTML with security
         const contentHTML = this.formatContent(safeArticle.content);
 
         articleContent.innerHTML = `
@@ -99,41 +110,55 @@ class ArticleViewer {
                 </div>
             </div>
         `;
+
+        // Initialize reading assistant after content is loaded
+        setTimeout(() => {
+            if (typeof ReadingAssistant !== 'undefined') {
+                ReadingAssistant.init();
+            }
+        }, 100);
     }
 
     static formatContent(content) {
         if (!content) return '<p>No content available.</p>';
         
-        // Simple markdown to HTML conversion
-        let formattedContent = content
-            // Headers
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        // Very simple formatting - just handle paragraphs with security
+        const paragraphs = content.split('\n\n');
+        
+        const formattedParagraphs = paragraphs.map(para => {
+            const trimmed = this.escapeHTML(para.trim());
+            if (!trimmed) return '';
             
-            // Bold and Italic
-            .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+            // Replace single line breaks with <br> within paragraphs
+            const withBreaks = trimmed.replace(/\n/g, '<br>');
             
-            // Links
-            .replace(/\[([^\[]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-            
-            // Code blocks (simple)
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            
-            // Line breaks
-            .replace(/\n/g, '<br>');
+            return `<p>${withBreaks}</p>`;
+        }).filter(para => para !== '');
+        
+        return formattedParagraphs.join('\n');
+    }
 
-        // Handle paragraphs - split by double line breaks
-        const paragraphs = formattedContent.split('<br><br>');
-        formattedContent = paragraphs.map(para => {
-            if (para.trim() && !para.startsWith('<h') && !para.startsWith('<ul>') && !para.startsWith('<ol>') && !para.startsWith('<li>')) {
-                return `<p>${para}</p>`;
-            }
-            return para;
-        }).join('');
+    // Security helper methods
+    static escapeHTML(unsafe) {
+        if (unsafe === null || unsafe === undefined) {
+            return '';
+        }
+        return unsafe.toString()
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 
-        return formattedContent;
+    static isValidURL(string) {
+        if (!string) return false;
+        try {
+            const url = new URL(string);
+            return url.protocol === 'http:' || url.protocol === 'https:';
+        } catch (_) {
+            return false;
+        }
     }
 
     static showShareSection() {

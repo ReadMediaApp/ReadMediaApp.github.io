@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations - ReadMedia</title>
+    <meta name="description" content="Personalized book recommendations based on your reading preferences">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/recommendations.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="js/security.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5JKFKBFFST');
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1><a href="index.html" style="text-decoration: none; color: inherit;">ReadMedia</a></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="books.html">Books</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="recommendations.html" class="active">Recommendations</a></li>
+                <li><a href="donate.html" class="donate-btn">Donate</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span class="material-icons">menu</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb">
+        <div class="breadcrumb-nav">
+            <div class="breadcrumb-item">
+                <a href="index.html" class="breadcrumb-link">Home</a>
+            </div>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-current">Book Recommendations</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <!-- Content loaded by JavaScript -->
+        </aside>
+
+        <div class="content">
+            <!-- Page Header -->
+            <section class="recommendations-header">
+                <div class="header-content">
+                    <h1>Book Recommendations</h1>
+                    <p class="subtitle">Personalized suggestions based on your reading preferences</p>
+                    
+                    <!-- User Preferences Card -->
+                    <div class="preferences-card">
+                        <div class="preferences-header">
+                            <span class="material-icons">tune</span>
+                            <h3>Your Reading Profile</h3>
+                        </div>
+                        <div class="preferences-content">
+                            <div class="preference-item">
+                                <span class="preference-label">Preferred Genres:</span>
+                                <span class="preference-value" id="preferred-genres">Loading...</span>
+                            </div>
+                            <div class="preference-item">
+                                <span class="preference-label">Favorite Authors:</span>
+                                <span class="preference-value" id="favorite-authors">Loading...</span>
+                            </div>
+                            <div class="preference-item">
+                                <span class="preference-label">Reading Level:</span>
+                                <span class="preference-value" id="reading-level">Intermediate</span>
+                            </div>
+                        </div>
+                        <button class="edit-preferences-btn" id="edit-preferences">
+                            <span class="material-icons">edit</span>
+                            Edit Preferences
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations Filter -->
+            <section class="recommendations-filter">
+                <div class="filter-container">
+                    <div class="filter-group">
+                        <label for="category-filter">Filter by Category:</label>
+                        <select id="category-filter" class="filter-select">
+                            <option value="all">All Categories</option>
+                            <option value="programming">Programming</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="business">Business</option>
+                            <option value="self_improvement">Self Improvement</option>
+                            <option value="science_tech">Science & Tech</option>
+                            <option value="mystery_thriller">Mystery & Thriller</option>
+                            <option value="biography">Biography</option>
+                            <option value="design">Design</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="sort-filter">Sort by:</label>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="relevance">Relevance</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="price_low">Price: Low to High</option>
+                            <option value="price_high">Price: High to Low</option>
+                            <option value="title">Title A-Z</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="refresh-btn" id="refresh-recommendations">
+                            <span class="material-icons">refresh</span>
+                            Refresh
+                        </button>
+                        <button class="shuffle-btn" id="shuffle-recommendations">
+                            <span class="material-icons">shuffle</span>
+                            Shuffle
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div class="loading-state" id="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Finding your perfect book recommendations...</p>
+            </div>
+
+            <!-- Recommendations Grid -->
+            <section class="recommendations-grid-section">
+                <div class="section-header">
+                    <h2>Recommended For You</h2>
+                    <div class="results-info">
+                        <span id="results-count">0 books found</span>
+                        <span class="last-updated" id="last-updated"></span>
+                    </div>
+                </div>
+
+                <div class="recommendations-grid" id="recommendations-grid">
+                    <!-- Recommendations loaded by JavaScript -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <span class="material-icons">search_off</span>
+                    </div>
+                    <h3>No recommendations found</h3>
+                    <p>Try adjusting your preferences or refresh the page.</p>
+                    <button class="cta-btn" id="reset-preferences">
+                        <span class="material-icons">autorenew</span>
+                        Reset Preferences
+                    </button>
+                </div>
+            </section>
+
+            <!-- Categories Section -->
+            <section class="categories-section">
+                <div class="section-header">
+                    <h2>Browse by Category</h2>
+                    <p>Explore books from different genres</p>
+                </div>
+                
+                <div class="categories-grid" id="categories-grid">
+                    <!-- Categories loaded by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Why These Recommendations -->
+            <section class="explanation-section">
+                <div class="explanation-card">
+                    <div class="explanation-header">
+                        <span class="material-icons">psychology</span>
+                        <h3>How These Recommendations Work</h3>
+                    </div>
+                    <div class="explanation-content">
+                        <p>Our AI-powered recommendation engine analyzes your reading behavior, preferences, and interests to suggest books you'll love. Recommendations are updated daily from Amazon's bestsellers.</p>
+                        <ul class="explanation-list">
+                            <li>
+                                <span class="material-icons">trending_up</span>
+                                <span>Based on your reading history and preferences</span>
+                            </li>
+                            <li>
+                                <span class="material-icons">update</span>
+                                <span>Updated every 6 hours with latest books</span>
+                            </li>
+                            <li>
+                                <span class="material-icons">local_offer</span>
+                                <span>Support us through affiliate links at no extra cost to you</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Preferences Modal -->
+    <div class="modal-overlay" id="preferences-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Reading Preferences</h3>
+                <button class="modal-close" id="modal-close">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="preference-form">
+                    <div class="form-group">
+                        <label>Favorite Genres (select up to 5)</label>
+                        <div class="chips-container" id="genres-chips">
+                            <!-- Genre chips will be added here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Favorite Authors</label>
+                        <div class="authors-input">
+                            <input type="text" id="author-input" placeholder="Add favorite authors...">
+                            <button type="button" id="add-author">
+                                <span class="material-icons">add</span>
+                            </button>
+                        </div>
+                        <div class="chips-container" id="authors-chips">
+                            <!-- Author chips will be added here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reading-level-select">Reading Level</label>
+                        <select id="reading-level-select" class="form-select">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate" selected>Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancel-preferences">Cancel</button>
+                <button class="btn-primary" id="save-preferences">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer" id="footer">
+        <!-- Footer loaded by JavaScript -->
+    </footer>
+
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/recommendation-engine.js"></script>
+    <script src="js/recommendations-page.js"></script>
+</body>
+</html>

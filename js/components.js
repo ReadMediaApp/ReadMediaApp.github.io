@@ -171,7 +171,6 @@ class Components {
         `;
     }
 
-    /// Add this method to your Components class in components.js
     static renderFooter() {
         const currentYear = new Date().getFullYear();
         return `
@@ -375,7 +374,6 @@ class Share {
         }
     }
 
-    // Add these new methods for the article page
     static shareOnTwitter() {
         const text = encodeURIComponent(document.title);
         const url = encodeURIComponent(window.location.href);
@@ -451,7 +449,7 @@ class BookManager {
 class Track {
     static affiliateClick(bookId) {
         console.log('Affiliate link clicked:', bookId);
-        // Here you would integrate with your analytics service
+        
     }
     
     static downloadClick(bookId, format) {
