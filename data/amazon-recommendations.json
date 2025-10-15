@@ -1,75 +1,89 @@
 {
-  "lastUpdated": "2025-10-14T14:39:17.322Z",
+  "lastUpdated": "2025-10-15T16:57:27.270Z",
   "categories": {
     "mystery_thriller": [
       {
+        "addedDate": "2025-10-15T16:52:04.192Z",
         "affiliateId": "readmediaapp-20",
         "asin": "0385336675",
         "author": "Lee Child",
         "category": "mystery_thriller",
-        "id": "book_0385336675_1760452755150",
+        "customTags": [],
+        "id": "book_0385336675_1760547124191",
         "imageUrl": "https://m.media-amazon.com/images/I/71NAjXE6q6S.jpg",
-        "price": "$24.48",
+        "price": "$35.51",
         "productUrl": "https://www.amazon.com/dp/0385336675?tag=readmediaapp-20",
         "rating": "4.5",
-        "scrapedAt": "2025-10-14T14:39:15.150Z",
+        "scrapedAt": "2025-10-15T16:52:04.191Z",
         "title": "The Enemy (Jack Reacher, No. 8)"
-      }
-    ],
-    "novel": [
-      {
-        "affiliateId": "readmediaapp-20",
-        "asin": "0385546890",
-        "author": "Dan Brown",
-        "category": "novel",
-        "id": "book_0385546890_1760452287478",
-        "imageUrl": "https://m.media-amazon.com/images/I/71KSpVjctXL.jpg",
-        "price": "$24.48",
-        "productUrl": "https://www.amazon.com/dp/0385546890?tag=readmediaapp-20",
-        "rating": "4.4",
-        "scrapedAt": "2025-10-14T14:31:27.478Z",
-        "title": "The Secret of Secrets: A Novel (Robert Langdon)"
       },
       {
+        "addedDate": "2025-10-15T16:55:47.956Z",
         "affiliateId": "readmediaapp-20",
-        "asin": "0385537859",
-        "author": "Dan Brown",
-        "category": "novel",
-        "id": "book_0385537859_1760452356352",
-        "imageUrl": "https://m.media-amazon.com/images/I/915Qc30l2aL.jpg",
-        "price": "$24.48",
-        "productUrl": "https://www.amazon.com/dp/0385537859?tag=readmediaapp-20",
-        "rating": "4.2",
-        "scrapedAt": "2025-10-14T14:32:36.352Z",
-        "title": "Inferno: A Novel"
-      },
-      {
-        "affiliateId": "readmediaapp-20",
-        "asin": "0593802721",
-        "author": "Chimamanda Ngozi Adichie",
-        "category": "novel",
-        "id": "book_0593802721_1760452630082",
-        "imageUrl": "https://m.media-amazon.com/images/I/81Nk5UprrxL.jpg",
-        "price": "$24.48",
-        "productUrl": "https://www.amazon.com/dp/0593802721?tag=readmediaapp-20",
+        "asin": "1464260915",
+        "author": "Freida McFadden",
+        "category": "mystery_thriller",
+        "customTags": [
+          "Thrillers",
+          "Psychological-Thrillers"
+        ],
+        "id": "book_1464260915_1760547347955",
+        "imageUrl": "https://m.media-amazon.com/images/I/91VISS02GjL.jpg",
+        "price": "Price not available",
+        "productUrl": "https://www.amazon.com/dp/1464260915?tag=readmediaapp-20",
         "rating": "4.3",
-        "scrapedAt": "2025-10-14T14:37:10.082Z",
-        "title": "Dream Count: A Novel"
+        "scrapedAt": "2025-10-15T16:55:47.955Z",
+        "title": "The Intruder"
       }
     ],
-    "teen_young_adult_dystopian": [
+    "science_tech": [
       {
+        "addedAt": "2025-10-14T18:52:47.148Z",
+        "asin": "1465481729",
+        "author": "Part of: Maker Lab (4 books)   | by Jack Challoner  and Smithsonian Institution | Oct 1, 2019",
+        "autoAdded": true,
+        "category": "science_tech",
+        "id": "auto_1760467967148_1",
+        "imageUrl": "https://m.media-amazon.com/images/I/81ctgMU6G1L._AC_UY218_.jpg",
+        "price": "$13.49",
+        "productUrl": "https://www.amazon.com/Tech-Lab-Jack-Challoner/dp/1465481729/ref=sr_1_2?dib=eyJ2IjoiMSJ9.ol7pNGdXOrR7TkP64Reqs2WTDxwGMi6061W5Cr0w96IciUKEONXT8Qq6gKU0mh39e3gYv4QQsz0LKCBA7Uk3bci_wmLDIx5qZAycnDdpv8XFQKDwsus-p_2OUmvytwplPFZZ2oyRsNfZQBdDxuFdmvPFDIBYf61sFkR_JGk2g5dClAVJ72HgOy2yOTYABzVE0Ag1Cvciq9dcHoZPT3Rqofdy-fbqBTWM03P5Yf0eboY.qFJvLa8bT5024ijuGzknT7GmpO5UZHIldEDYa67_yGo&dib_tag=se&keywords=books+science_tech&qid=1760467954&s=books&sr=1-2",
+        "rating": "4.8",
+        "source": "auto_scrape_v2",
+        "title": "Tech Lab: Awesome Builds for Smart Makers (DK Activity Lab)"
+      },
+      {
+        "addedAt": "2025-10-14T18:54:35.150Z",
+        "asin": "1607749769",
+        "author": "Part of: Women in Science (3 books)   | by Rachel Ignotofsky  | Jul 26, 2016",
+        "autoAdded": true,
+        "category": "science_tech",
+        "id": "auto_1760468075150_1",
+        "imageUrl": "https://m.media-amazon.com/images/I/918fCYeEP3L._AC_UY218_.jpg",
+        "price": "$7.27",
+        "productUrl": "https://www.amazon.com/Women-Science-Fearless-Pioneers-Changed/dp/1607749769/ref=sr_1_2?dib=eyJ2IjoiMSJ9.ol7pNGdXOrR7TkP64Reqs2WTDxwGMi6061W5Cr0w96IciUKEONXT8Qq6gKU0mh39e3gYv4QQsz0LKCBA7Uk3bci_wmLDIx5qZAycnDdpv8XFQKDwsus-p_2OUmvytwplPFZZ2oyRsNfZQBdDxuFdmvPFDIBYf61sFkR_JGk2g5dClAVJ72HgOy2yOTYABzVE0Ag1Cvciq9dcHoZPT3Rqofdy-fbqBTWM03P5Yf0eboY.qFJvLa8bT5024ijuGzknT7GmpO5UZHIldEDYa67_yGo&dib_tag=se&keywords=books+science_tech&qid=1760468064&s=books&sr=1-2",
+        "rating": "4.8",
+        "source": "auto_scrape_v2",
+        "title": "Women in Science: 50 Fearless Pioneers Who Changed the World"
+      }
+    ],
+    "self_improvement": [
+      {
+        "addedDate": "2025-10-15T16:57:17.787Z",
         "affiliateId": "readmediaapp-20",
-        "asin": "1546171460",
-        "author": "Suzanne Collins",
-        "category": "teen_young_adult_dystopian",
-        "id": "book_1546171460_1760451919434",
-        "imageUrl": "https://m.media-amazon.com/images/I/61o5Q8IIq4L.jpg",
-        "price": "$24.48",
-        "productUrl": "https://www.amazon.com/dp/1546171460?tag=readmediaapp-20",
-        "rating": "4.7",
-        "scrapedAt": "2025-10-14T14:25:19.434Z",
-        "title": "Sunrise on the Reaping (The Hunger Games)"
+        "asin": "0735211299",
+        "author": "James Clear",
+        "category": "self_improvement",
+        "customTags": [
+          "James Clear",
+          "self-help"
+        ],
+        "id": "book_0735211299_1760547437786",
+        "imageUrl": "https://m.media-amazon.com/images/I/81kg51XRc1L.jpg",
+        "price": "Price not available",
+        "productUrl": "https://www.amazon.com/dp/0735211299?tag=readmediaapp-20",
+        "rating": "4.8",
+        "scrapedAt": "2025-10-15T16:57:17.786Z",
+        "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones"
       }
     ]
   },
@@ -78,6 +92,6 @@
     "categoriesCount": 3,
     "affiliateId": "readmediaapp-20",
     "source": "ReadMedia",
-    "exportDate": "2025-10-14T14:39:17.323Z"
+    "exportDate": "2025-10-15T16:57:27.270Z"
   }
 }
