@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-10-15T16:57:27.270Z",
+  "lastUpdated": "2025-10-15T17:07:26.786Z",
   "categories": {
     "mystery_thriller": [
       {
@@ -85,13 +85,36 @@
         "scrapedAt": "2025-10-15T16:57:17.786Z",
         "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones"
       }
+    ],
+    "teen_young_adult_dystopian": [
+      {
+        "addedDate": "2025-10-15T17:07:22.128Z",
+        "affiliateId": "readmediaapp-20",
+        "asin": "1664300546",
+        "author": "Amelia Hepworth",
+        "category": "teen_young_adult_dystopian",
+        "customTags": [
+          "Children's Books",
+          "Growing Up",
+          "Facts of Life",
+          "Family Life",
+          "Multigenerational"
+        ],
+        "id": "book_1664300546_1760548042127",
+        "imageUrl": "https://m.media-amazon.com/images/I/81y8aCy-20L.jpg",
+        "price": "Price not available",
+        "productUrl": "https://www.amazon.com/dp/1664300546?tag=readmediaapp-20",
+        "rating": "4.9",
+        "scrapedAt": "2025-10-15T17:07:22.127Z",
+        "title": "I Love You to the Moon and Back"
+      }
     ]
   },
   "metadata": {
-    "totalBooks": 5,
-    "categoriesCount": 3,
+    "totalBooks": 6,
+    "categoriesCount": 4,
     "affiliateId": "readmediaapp-20",
     "source": "ReadMedia",
-    "exportDate": "2025-10-15T16:57:27.270Z"
+    "exportDate": "2025-10-15T17:07:26.786Z"
   }
 }
