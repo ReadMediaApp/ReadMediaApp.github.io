@@ -193,7 +193,9 @@ class Security {
                 'goodreads.com', 'bookshop.org', 
                 'nowpayments.io', 'telegram.me', 't.me',
                 'facebook.com', 'youtube.com', 'twitter.com',
-                'x.com', 'instagram.com','cdn.jsdelivr.net' ,'huggingface.co','giscus.app'
+                'x.com', 'instagram.com', 'cdn.jsdelivr.net',
+                'huggingface.co', 'giscus.app', 'googletagmanager.com',
+                'google-analytics.com'
             ];
             
             if (!allowedProtocols.includes(parsed.protocol)) return false;
@@ -237,19 +239,50 @@ class Security {
 // Content Security Policy
 class CSP {
     static createPolicy() {
-            const policies = {
-                'default-src': ["'self'"],
-                'script-src': ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net", "https://huggingface.co", "https://www.googletagmanager.com", "https://giscus.app"],
-                'style-src': ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-                'font-src': ["'self'", "https://fonts.gstatic.com"],
-                'img-src': ["'self'", "data:", "https:"],
-                'connect-src': ["'self'", "https://www.google-analytics.com"],
-                'frame-src': ["'self'", "https://nowpayments.io", "https://giscus.app"],
-                'media-src': ["'self'"],
-                'object-src': ["'none'"],
-                'base-uri': ["'self'"],
-                'form-action': ["'self'"]
-            };
+        const policies = {
+            'default-src': ["'self'"],
+            'script-src': [
+                "'self'", 
+                "'unsafe-inline'", 
+                "https://cdn.jsdelivr.net", 
+                "https://huggingface.co", 
+                "https://www.googletagmanager.com",
+                "https://www.google-analytics.com",
+                "https://giscus.app"
+            ],
+            'style-src': [
+                "'self'", 
+                "'unsafe-inline'", 
+                "https://fonts.googleapis.com",
+                "https://giscus.app"
+            ],
+            'font-src': [
+                "'self'", 
+                "https://fonts.gstatic.com"
+            ],
+            'img-src': [
+                "'self'", 
+                "data:", 
+                "https:",
+                "https://www.googletagmanager.com",
+                "https://www.google-analytics.com"
+            ],
+            'connect-src': [
+                "'self'", 
+                "https://www.google-analytics.com",
+                "https://huggingface.co",
+                "https://cdn.jsdelivr.net"
+            ],
+            'frame-src': [
+                "'self'", 
+                "https://nowpayments.io", 
+                "https://giscus.app"
+            ],
+            'media-src': ["'self'"],
+            'object-src': ["'none'"],
+            'base-uri': ["'self'"],
+            'form-action': ["'self'"]
+        };
         
         return Object.entries(policies)
             .map(([key, values]) => `${key} ${values.join(' ')}`)
