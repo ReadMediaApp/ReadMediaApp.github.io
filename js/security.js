@@ -1,61 +1,61 @@
 // Security measures for content-only static site
 class Security {
     static init() {
-        this.protectDeveloperTools();
+        // this.protectDeveloperTools();
         this.secureExternalLinks();
         this.initPageProtection();
         this.initBotDetection();
     }
 
     // Developer Tools Protection
-    static protectDeveloperTools() {
-        // Detect F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
-        document.addEventListener('keydown', (e) => {
-            if (
-                e.key === 'F12' ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
-                (e.ctrlKey && e.key === 'u')
-            ) {
-                e.preventDefault();
-                this.redirectToSocialHub();
-                return false;
-            }
-        });
+    // static protectDeveloperTools() {
+    //     // Detect F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+    //     document.addEventListener('keydown', (e) => {
+    //         if (
+    //             e.key === 'F12' ||
+    //             (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+    //             (e.ctrlKey && e.key === 'u')
+    //         ) {
+    //             e.preventDefault();
+    //             this.redirectToSocialHub();
+    //             return false;
+    //         }
+    //     });
 
-        // Detect right-click context menu
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            this.redirectToSocialHub();
-            return false;
-        });
+    //     // Detect right-click context menu
+    //     document.addEventListener('contextmenu', (e) => {
+    //         e.preventDefault();
+    //         this.redirectToSocialHub();
+    //         return false;
+    //     });
 
-        // Detect DevTools opening
-        this.detectDevTools();
-    }
+    //     // Detect DevTools opening
+    //     this.detectDevTools();
+    // }
 
-    static detectDevTools() {
-        // Check console size difference
-        const checkConsole = () => {
-            const threshold = 100;
-            if (window.outerWidth - window.innerWidth > threshold ||
-                window.outerHeight - window.innerHeight > threshold) {
-                this.redirectToSocialHub();
-            }
-        };
+    // static detectDevTools() {
+    //     // Check console size difference
+    //     const checkConsole = () => {
+    //         const threshold = 100;
+    //         if (window.outerWidth - window.innerWidth > threshold ||
+    //             window.outerHeight - window.innerHeight > threshold) {
+    //             this.redirectToSocialHub();
+    //         }
+    //     };
 
-        // Check debugger
-        const checkDebugger = () => {
-            const start = Date.now();
-            debugger;
-            if (Date.now() - start > 100) {
-                this.redirectToSocialHub();
-            }
-        };
+    //     // Check debugger
+    //     const checkDebugger = () => {
+    //         const start = Date.now();
+    //         debugger;
+    //         if (Date.now() - start > 100) {
+    //             this.redirectToSocialHub();
+    //         }
+    //     };
 
-        // Run checks
-        setInterval(checkConsole, 1000);
-        setInterval(checkDebugger, 3000);
-    }
+    //     // Run checks
+    //     setInterval(checkConsole, 1000);
+    //     setInterval(checkDebugger, 3000);
+    // }
 
     static redirectToSocialHub() {
         // Show warning then redirect to social hub
