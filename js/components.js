@@ -445,15 +445,54 @@ class BookManager {
     }
 }
 
+
 // Tracking (for analytics)
 class Track {
-    static affiliateClick(bookId) {
-        console.log('Affiliate link clicked:', bookId);
-        
+    static articleView(articleId) {
+        console.log('Article view tracked:', articleId);
+        // Send to analytics service (Google Analytics, etc.)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'article_view', {
+                'article_id': articleId
+            });
+        }
+    }
+
+    static affiliateClick(articleId) {
+        console.log('Affiliate link clicked:', articleId);
+        // Track affiliate conversions
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'affiliate_click', {
+                'article_id': articleId,
+                'event_category': 'affiliate',
+                'event_label': articleId
+            });
+        }
     }
     
     static downloadClick(bookId, format) {
         console.log('Download clicked:', bookId, format);
         // Track downloads
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'book_download', {
+                'book_id': bookId,
+                'format': format,
+                'event_category': 'download',
+                'event_label': `${bookId}_${format}`
+            });
+        }
     }
 }
+
+// // Tracking (for analytics)
+// class Track {
+//     static affiliateClick(bookId) {
+//         console.log('Affiliate link clicked:', bookId);
+        
+//     }
+    
+//     static downloadClick(bookId, format) {
+//         console.log('Download clicked:', bookId, format);
+//         // Track downloads
+//     }
+// }
