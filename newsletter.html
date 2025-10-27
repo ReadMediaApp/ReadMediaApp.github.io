@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter - ReadMedia</title>
+    <meta name="description" content="Subscribe to ReadMedia's newsletter for the latest book reviews, literary insights, and reading recommendations.">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Read Media">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ReadMedia Newsletter - Literary Insights Delivered">
+    <meta property="og:description" content="Join our community of book lovers. Get curated reading recommendations and literary analysis.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ReadMedia">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Mailchimp Styles -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+    
+    <style>
+        .newsletter-hero {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .newsletter-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            color: #1a237e;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .newsletter-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .newsletter-form-container h2 {
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+        }
+
+        /* Custom Mailchimp Form Styling */
+        #mc_embed_signup {
+            background: transparent !important;
+            clear: left;
+            font: 14px 'Inter', Helvetica, Arial, sans-serif;
+            width: 100% !important;
+        }
+
+        #mc_embed_signup .mc-field-group {
+            padding-bottom: 1rem;
+            text-align: left;
+        }
+
+        #mc_embed_signup label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        #mc_embed_signup input[type="email"],
+        #mc_embed_signup input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        #mc_embed_signup input[type="email"]:focus,
+        #mc_embed_signup input[type="text"]:focus {
+            outline: none;
+            border-color: #1a237e;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        #mc_embed_signup .button {
+            background: #1a237e !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.75rem 2rem !important;
+            border-radius: 8px !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
+            font-size: 1.1rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        #mc_embed_signup .button:hover {
+            background: #283593 !important;
+            transform: translateY(-2px) !important;
+        }
+
+        #mc_embed_signup .asterisk {
+            color: #f44336;
+        }
+
+        #mc_embed_signup .indicates-required {
+            text-align: right;
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        #mc_embed_signup h2 {
+            color: #1a237e;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .privacy-note {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .testimonials {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #1a237e;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #1a237e;
+        }
+
+        .faq-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: #1a237e;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .newsletter-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .newsletter-form-container {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem 1rem;
+            }
+
+            #mc_embed_signup {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo" aria-label="ReadMedia Home">
+                    <span class="logo-icon" aria-hidden="true">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
+            </div>
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu">
+                    <span class="hamburger" aria-hidden="true"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link">Recommendations</a></li>
+                    <li><a href="newsletter.html" class="nav-link active" aria-current="page">Newsletter</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <!-- Hero Section -->
+        <section class="newsletter-hero">
+            <div class="container">
+                <h1>Join Our Literary Community</h1>
+                <p>Get curated book recommendations, author interviews, and literary insights delivered directly to your inbox every week.</p>
+                <div style="font-size: 2rem; margin-bottom: 1rem;">📚✨</div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="container">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Curated Recommendations</h3>
+                    <p>Hand-picked book suggestions tailored to your reading preferences and interests.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📖</div>
+                    <h3>Literary Analysis</h3>
+                    <p>Deep dives into classic and contemporary literature with expert commentary.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎁</div>
+                    <h3>Exclusive Content</h3>
+                    <p>Access to author interviews, early reviews, and subscriber-only articles.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏰</div>
+                    <h3>Weekly Delivery</h3>
+                    <p>Fresh content delivered every Friday to kickstart your weekend reading.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup Section -->
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-form-container">
+                    <h2>Subscribe to ReadMedia Weekly</h2>
+                    
+                    <!-- Your Actual Mailchimp Form -->
+                    <div id="mc_embed_shell">
+                        <div id="mc_embed_signup">
+                            <form action="https://github.us11.list-manage.com/subscribe/post?u=917146807891ed14feadbe8ac&amp;id=eef61c5efb&amp;f_id=001f16e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self">
+                                <div id="mc_embed_signup_scroll">
+                                    <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+                                    <div class="mc-field-group">
+                                        <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                                        <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required value="">
+                                    </div>
+                                    <div class="mc-field-group">
+                                        <label for="mce-FNAME">First Name </label>
+                                        <input type="text" name="FNAME" class="text" id="mce-FNAME" value="">
+                                    </div>
+                                    <div class="mc-field-group">
+                                        <label for="mce-LNAME">Last Name </label>
+                                        <input type="text" name="LNAME" class="text" id="mce-LNAME" value="">
+                                    </div>
+                                    <div id="mce-responses" class="clear foot">
+                                        <div class="response" id="mce-error-response" style="display: none;"></div>
+                                        <div class="response" id="mce-success-response" style="display: none;"></div>
+                                    </div>
+                                    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
+                                        <input type="text" name="b_917146807891ed14feadbe8ac_eef61c5efb" tabindex="-1" value="">
+                                    </div>
+                                    <div class="optionalParent">
+                                        <div class="clear foot">
+                                            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <p class="privacy-note">
+                        We respect your privacy. Unsubscribe at any time. Read our <a href="privacy.html" style="color: #1a237e;">Privacy Policy</a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a237e; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">
+                    What Our Readers Say
+                </h2>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 3rem; color: #6c757d;">
+                    Join thousands of book lovers who have transformed their reading habits
+                </p>
+                
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "ReadMedia's newsletter introduced me to books I never would have discovered otherwise. My reading list has never been better!"
+                        </div>
+                        <div class="testimonial-author">- Sarah M., Avid Reader</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The literary analysis is brilliant. I finally understand why certain classics endure and how to appreciate modern literature more deeply."
+                        </div>
+                        <div class="testimonial-author">- Michael T., Literature Student</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "As a busy professional, the curated recommendations save me hours of searching. Every recommendation has been spot-on!"
+                        </div>
+                        <div class="testimonial-author">- Jennifer L., Book Club Leader</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a237e; margin-bottom: 3rem; font-family: 'Playfair Display', serif;">
+                    Frequently Asked Questions
+                </h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            How often will I receive the newsletter?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Our main newsletter is sent weekly every Friday. Occasionally, we send special edition newsletters for major book releases or literary events.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Is the newsletter really free?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! ReadMedia Weekly is completely free. We're passionate about sharing great literature and building a community of readers.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Can I unsubscribe at any time?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Absolutely. Every newsletter includes an unsubscribe link at the bottom. You can also email us directly to be removed from the list.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            What type of content can I expect?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Each issue includes: 2-3 book recommendations with detailed reviews, author interviews or features, literary analysis of classics, reading challenges, and occasional exclusive content from our team.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            Do you share my email with third parties?
+                            <span>+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Never. We take your privacy seriously. Your email is used exclusively for sending ReadMedia newsletters and will never be sold or shared with third parties.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2024.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="newsletter.html">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ReadMedia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mailchimp Scripts -->
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">
+        (function($) {
+            window.fnames = new Array(); 
+            window.ftypes = new Array();
+            fnames[0]='EMAIL';
+            ftypes[0]='email';
+            fnames[1]='FNAME';
+            ftypes[1]='text';
+            fnames[2]='LNAME';
+            ftypes[2]='text';
+            fnames[3]='ADDRESS';
+            ftypes[3]='address';
+            fnames[4]='PHONE';
+            ftypes[4]='phone';
+            fnames[5]='BIRTHDAY';
+            ftypes[5]='birthday';
+            fnames[6]='COMPANY';
+            ftypes[6]='text';
+        }(jQuery));
+        var $mcj = jQuery.noConflict(true);
+    </script>
+
+    <script>
+        // FAQ Toggle Function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-answer').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-question span').forEach(span => {
+                    span.textContent = '+';
+                });
+                
+                // Open current FAQ
+                answer.classList.add('active');
+                icon.textContent = '−';
+            }
+        }
+
+        // Enhanced form submission handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const mailchimpForm = document.getElementById('mc-embedded-subscribe-form');
+            
+            if (mailchimpForm) {
+                mailchimpForm.addEventListener('submit', function(e) {
+                    const submitButton = this.querySelector('#mc-embedded-subscribe');
+                    const originalText = submitButton.value;
+                    
+                    // Show loading state
+                    submitButton.value = 'Subscribing...';
+                    submitButton.disabled = true;
+                    
+                    // Re-enable button after 3 seconds (in case of error)
+                    setTimeout(() => {
+                        submitButton.value = originalText;
+                        submitButton.disabled = false;
+                    }, 3000);
+                });
+            }
+
+            // Navigation toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Smooth scroll for success messages
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('subscribe') === 'success') {
+                const formSection = document.querySelector('.newsletter-section');
+                if (formSection) {
+                    setTimeout(() => {
+                        formSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 500);
+                }
+            }
+        });
+
+        // Real-time form validation
+        document.addEventListener('input', function(e) {
+            if (e.target.id === 'mce-EMAIL') {
+                const email = e.target.value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (email && !emailRegex.test(email)) {
+                    e.target.style.borderColor = '#f44336';
+                } else {
+                    e.target.style.borderColor = '#e9ecef';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

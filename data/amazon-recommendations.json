@@ -1,6 +1,28 @@
 {
-  "lastUpdated": "2025-10-15T17:07:26.786Z",
+  "lastUpdated": "2025-10-26T14:24:29.558Z",
   "categories": {
+    "business": [
+      {
+        "addedDate": "2025-10-26T14:24:16.326Z",
+        "affiliateId": "readmediaapp-20",
+        "asin": "045149721X",
+        "author": "Sean Ellis",
+        "category": "business",
+        "customTags": [
+          "Hacking Growth",
+          "self-help",
+          "Sean Ellis",
+          "Read Media"
+        ],
+        "id": "book_045149721X_1761488656325",
+        "imageUrl": "https://m.media-amazon.com/images/I/71H2H6qp8TL.jpg",
+        "price": "$18.82",
+        "productUrl": "https://www.amazon.com/dp/045149721X?tag=readmediaapp-20",
+        "rating": "4.5",
+        "scrapedAt": "2025-10-26T14:24:16.325Z",
+        "title": "Hacking Growth: How Today's Fastest-Growing Companies Drive Breakout Success"
+      }
+    ],
     "mystery_thriller": [
       {
         "addedDate": "2025-10-15T16:52:04.192Z",
@@ -34,6 +56,42 @@
         "rating": "4.3",
         "scrapedAt": "2025-10-15T16:55:47.955Z",
         "title": "The Intruder"
+      }
+    ],
+    "novel": [
+      {
+        "addedDate": "2025-10-20T16:14:18.167Z",
+        "affiliateId": "readmediaapp-20",
+        "asin": "0593595459",
+        "author": "Han Kang",
+        "category": "novel",
+        "customTags": [
+          "Han Kang",
+          "novel",
+          "fiction"
+        ],
+        "id": "book_0593595459_1760976858166",
+        "imageUrl": "https://m.media-amazon.com/images/I/91PNh3VmNjL.jpg",
+        "price": "Price not available",
+        "productUrl": "https://www.amazon.com/dp/0593595459?tag=readmediaapp-20",
+        "rating": "4",
+        "scrapedAt": "2025-10-20T16:14:18.166Z",
+        "title": "We Do Not Part: A Novel"
+      },
+      {
+        "addedDate": "2025-10-20T16:19:49.467Z",
+        "affiliateId": "readmediaapp-20",
+        "asin": "1250899575",
+        "author": "Alison Espach",
+        "category": "novel",
+        "customTags": [],
+        "id": "book_1250899575_1760977189466",
+        "imageUrl": "https://m.media-amazon.com/images/I/91EReeJwIjL.jpg",
+        "price": "Price not available",
+        "productUrl": "https://www.amazon.com/dp/1250899575?tag=readmediaapp-20",
+        "rating": "4.3",
+        "scrapedAt": "2025-10-20T16:19:49.466Z",
+        "title": "The Wedding People: A Novel"
       }
     ],
     "science_tech": [
@@ -111,10 +169,10 @@
     ]
   },
   "metadata": {
-    "totalBooks": 6,
-    "categoriesCount": 4,
+    "totalBooks": 9,
+    "categoriesCount": 6,
     "affiliateId": "readmediaapp-20",
     "source": "ReadMedia",
-    "exportDate": "2025-10-15T17:07:26.786Z"
+    "exportDate": "2025-10-26T14:24:29.558Z"
   }
 }

@@ -3,104 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books - ReadMedia</title>
-    <meta name="description" content="Browse and download books from ReadMedia">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="js/security.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-5JKFKBFFST');
+    <title>Free eBooks & Digital Library | ReadMedia - Download PDF, EPUB, MOBI</title>
+    <meta name="description" content="Explore 500+ free eBooks and digital books. Download books in PDF, EPUB, MOBI formats or purchase through affiliate links. Fiction, non-fiction, self-help, and more.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/books.css">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a237e">
+    
+    <!-- SEO Meta -->
+    <link rel="canonical" href="https://readmediaapp.github.io/books.html">
+    <meta property="og:title" content="Free eBooks & Digital Library | ReadMedia">
+    <meta property="og:description" content="Explore 500+ free eBooks and digital books. Download in PDF, EPUB, MOBI formats.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://readmediaapp.github.io/books.html">
+    <meta property="og:image" content="https://readmediaapp.github.io/images/books-og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free eBooks & Digital Library | ReadMedia">
+    <meta name="twitter:description" content="Explore 500+ free eBooks and digital books. Download in PDF, EPUB, MOBI formats.">
+    <meta name="twitter:image" content="https://readmediaapp.github.io/images/books-og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Free eBooks & Digital Library | ReadMedia",
+        "description": "Collection of 500+ free eBooks, book recommendations, and literary works available in multiple formats",
+        "url": "https://readmediaapp.github.io/books.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": 500,
+            "itemListOrder": "Descending",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@type": "Book",
+                        "name": "Sample Book Title",
+                        "author": "Sample Author",
+                        "bookFormat": "EBook",
+                        "inLanguage": "English"
+                    }
+                }
+            ]
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "ReadMedia",
+            "url": "https://readmediaapp.github.io"
+        }
+    }
     </script>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
             <div class="nav-brand">
-                <h1>ReadMedia</h1>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="books.html" class="active">Books</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="recommendations.html" class="active">Recommendations</a></li>
-                <li><a href="donate.html" class="donate-btn">Donate</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span class="material-icons">menu</span>
-            </div>
-        </nav>
+            
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="hamburger"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link active" aria-current="page">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link">Recommendations</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <nav class="breadcrumb">
-        <div class="breadcrumb-nav">
-            <div class="breadcrumb-item">
-                <a href="index.html" class="breadcrumb-link">Home</a>
-            </div>
-            <div class="breadcrumb-item">
-                <span class="breadcrumb-current" id="current-page">Page Title</span>
-            </div>
-        </div>
-    </nav>
-    <main class="main-container">
-        <aside class="sidebar" id="sidebar">
-            <!-- Content loaded by JavaScript -->
-        </aside>
 
-        <div class="content">
-            <div class="page-header">
-                <h2>Book Library</h2>
-                <p>Download books in multiple formats or purchase through affiliate links</p>
-            </div>
-
-            <div class="filters">
-                <div class="filter-group">
-                    <label for="genre-filter">Genre:</label>
-                    <select id="genre-filter">
-                        <option value="">All Genres</option>
-                        
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="format-filter">Format:</label>
-                    <select id="format-filter">
-                        <option value="">All Formats</option>
-                        <option value="pdf">PDF</option>
-                        <option value="epub">EPUB</option>
-                        <option value="mobi">MOBI</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="availability-filter">Availability:</label>
-                    <select id="availability-filter">
-                        <option value="">All Books</option>
-                        <option value="free">Free Download</option>
-                        <option value="affiliate">Affiliate Only</option>
-                    </select>
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Page Header -->
+        <section class="page-header" aria-labelledby="page-title">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 id="page-title">Free eBook Library</h1>
+                    <p class="page-subtitle">Discover and download 500+ books in PDF, EPUB, and MOBI formats. Purchase through our affiliate links to support our work.</p>
+                    
+                    <!-- Quick Stats -->
+                    <div class="quick-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="total-books">500+</span>
+                            <span class="stat-label">Books Available</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="free-books">300+</span>
+                            <span class="stat-label">Free Downloads</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="genres-count">15+</span>
+                            <span class="stat-label">Genres</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="books-grid" id="all-books">
-                <!-- All books loaded by JavaScript -->
+        <!-- Books Filters -->
+        <section class="section books-filters" aria-labelledby="filters-title">
+            <div class="container">
+                <h2 id="filters-title" class="sr-only">Book Filters</h2>
+                
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="genre-filter" class="filter-label">Genre:</label>
+                        <select id="genre-filter" class="filter-select">
+                            <option value="all">All Genres</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="non-fiction">Non-Fiction</option>
+                            <option value="self-help">Self-Help</option>
+                            <option value="science-tech">Science & Tech</option>
+                            <option value="mystery">Mystery & Thriller</option>
+                            <option value="romance">Romance</option>
+                            <option value="biography">Biography</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="format-filter" class="filter-label">Format:</label>
+                        <select id="format-filter" class="filter-select">
+                            <option value="all">All Formats</option>
+                            <option value="pdf">PDF</option>
+                            <option value="epub">EPUB</option>
+                            <option value="mobi">MOBI</option>
+                            <option value="affiliate">Purchase Only</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="availability-filter" class="filter-label">Availability:</label>
+                        <select id="availability-filter" class="filter-select">
+                            <option value="all">All Books</option>
+                            <option value="free">Free Download</option>
+                            <option value="affiliate">Affiliate Links</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="sort-filter" class="filter-label">Sort by:</label>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="title">Title A-Z</option>
+                            <option value="author">Author A-Z</option>
+                            <option value="popular">Most Popular</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn btn-secondary" id="reset-filters">Reset Filters</button>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid" aria-label="Grid view">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button class="view-btn" data-view="list" aria-label="List view">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 6H21M8 12H21M8 18H21M3 6H3.01M3 12H3.01M3 18H3.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="pagination" id="pagination">
-                <!-- Pagination loaded by JavaScript -->
+        <!-- Books Grid -->
+        <section class="section books-listing" aria-labelledby="books-grid-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="books-grid-title" class="sr-only">Books Collection</h2>
+                    <div class="results-info">
+                        <span id="books-count">Loading books...</span>
+                        <span class="filter-tags" id="active-filters"></span>
+                    </div>
+                </div>
+
+                <div class="books-grid" id="books-grid">
+                    <!-- Dynamic content loaded from JSON -->
+                    <div class="loading" id="books-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading books...</p>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="pagination" id="pagination" aria-label="Books pagination">
+                    <!-- Dynamic pagination -->
+                </nav>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="books-empty" style="display: none;">
+                    <div class="empty-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>No books found</h3>
+                    <p>Try adjusting your filters or browse all categories.</p>
+                    <button class="btn btn-primary" id="reset-all-filters">Show All Books</button>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section features" aria-labelledby="features-title">
+            <div class="container">
+                <h2 id="features-title" class="section-title">Why Choose ReadMedia Books?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M19.4 15C19.2669 15.3034 19.1331 15.6073 19 15.9111C18.4387 17.1721 17.6961 18.3159 16.828 19.2778C15.2427 21 13.1217 22 12 22C10.8783 22 8.7573 21 7.172 19.2778C6.3039 18.3159 5.5613 17.1721 5 15.9111C4.8669 15.6073 4.7331 15.3034 4.6 15" stroke="currentColor" stroke-width="2"/>
+                                <path d="M19.4 9C19.2669 8.69656 19.1331 8.39272 19 8.08889C18.4387 6.82786 17.6961 5.68406 16.828 4.72222C15.2427 3 13.1217 2 12 2C10.8783 2 8.7573 3 7.172 4.72222C6.3039 5.68406 5.5613 6.82786 5 8.08889C4.8669 8.39272 4.7331 8.69656 4.6 9" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Multiple Formats</h3>
+                        <p>Download books in PDF, EPUB, and MOBI formats for any device or reading preference.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Curated Selection</h3>
+                        <p>Hand-picked books across various genres, ensuring quality content and great reading experiences.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Always Available</h3>
+                        <p>Access your downloaded books anytime, even offline. Perfect for travel and commutes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="footer" id="footer">
-        <!-- Footer loaded by JavaScript -->
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2024.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Support Our Work</a></li>
+                        <li><a href="about.html">About ReadMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ReadMedia. All rights reserved.</p>
+                <p>Some links may be affiliate links that support our work at no extra cost to you.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="js/components.js"></script>
-    <script src="js/app.js"></script>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20L12 4M12 4L5 11M12 4L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="js/books.js" defer></script>
 </body>
 </html>

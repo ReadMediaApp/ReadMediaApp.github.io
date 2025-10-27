@@ -3,120 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReadMedia - Home</title>
-    <meta name="description" content="Discover amazing articles, book reviews, and literary content">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="js/security.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-5JKFKBFFST');
+    <title>ReadMedia - Discover Amazing Books & Articles</title>
+    <meta name="description" content="ReadMedia offers curated book reviews, articles, and literary content. Discover your next favorite read with our expert recommendations.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a237e">
+    
+    <!-- SEO Meta -->
+    <link rel="canonical" href="https://readmediaapp.github.io/">
+    <meta property="og:title" content="ReadMedia - Discover Amazing Books & Articles">
+    <meta property="og:description" content="Curated book reviews, articles, and literary content. Find your next favorite read.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://readmediaapp.github.io/">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ReadMedia",
+        "description": "Curated book reviews, articles, and literary content",
+        "url": "https://readmediaapp.github.io/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://readmediaapp.github.io/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
     </script>
+    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/917146807891ed14feadbe8ac/9adf84b22edb36c30db704dac.js");</script>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <header class="header" role="banner">
+        <div class="container">
             <div class="nav-brand">
-                <h1>ReadMedia</h1>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="books.html">Books</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="recommendations.html" class="active">Recommendations</a></li>
-                <li><a href="donate.html" class="donate-btn">Donate</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span class="material-icons">menu</span>
-            </div>
-        </nav>
+            
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="hamburger"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link">Recommendations</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <nav class="breadcrumb">
-        <div class="breadcrumb-nav">
-            <div class="breadcrumb-item">
-                <a href="index.html" class="breadcrumb-link">Home</a>
-            </div>
-            <div class="breadcrumb-item">
-                <span class="breadcrumb-current" id="current-page">Page Title</span>
-            </div>
-        </div>
-    </nav>
-
-    <main class="main-container">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <!-- Content loaded by JavaScript -->
-        </aside>
-
-        <!-- Main Content -->
-        <div class="content">
-            <!-- Hero Section -->
-            <section class="hero">
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
                 <div class="hero-content">
-                    <h2>Welcome to ReadMedia</h2>
-                    <p>Discover amazing articles, book reviews, and literary content</p>
+                    <h1 id="hero-title" class="hero-title">Discover Your Next Favorite Read</h1>
+                    <p class="hero-subtitle">Curated book reviews, insightful articles, and literary recommendations from passionate readers</p>
+                    
                     <div class="hero-search">
-                        <input type="text" id="search-input" placeholder="Search articles, books, reviews...">
-                        <button class="search-btn">
-                            <span class="material-icons">search</span>
-                        </button>
+                        <form role="search" aria-label="Site search">
+                            <input type="search" id="search-input" placeholder="Search books, articles, reviews..." aria-label="Search content">
+                            <button type="submit" class="search-btn" aria-label="Search">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="books-count">500+</span>
+                            <span class="stat-label">Books Available</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="articles-count">200+</span>
+                            <span class="stat-label">Articles</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="reviews-count">150+</span>
+                            <span class="stat-label">Reviews</span>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Featured Articles -->
-            <section class="section">
+        <!-- Featured Content Sections -->
+        <section class="section featured-articles" aria-labelledby="featured-articles-title">
+            <div class="container">
                 <div class="section-header">
-                    <h3>Featured Articles</h3>
-                    <a href="articles.html" class="view-all">View All</a>
+                    <h2 id="featured-articles-title">Featured Articles</h2>
+                    <a href="articles.html" class="view-all">View All Articles</a>
                 </div>
-                <div class="articles-grid" id="featured-articles">
-                    <!-- Articles loaded by JavaScript -->
+                <div class="articles-grid" id="featured-articles-grid">
+                    <!-- Dynamic content loaded from JSON -->
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Latest Books -->
-            <section class="section">
+        <section class="section latest-books" aria-labelledby="latest-books-title">
+            <div class="container">
                 <div class="section-header">
-                    <h3>Latest Books</h3>
-                    <a href="books.html" class="view-all">View All</a>
+                    <h2 id="latest-books-title">Latest Books</h2>
+                    <a href="books.html" class="view-all">View All Books</a>
                 </div>
-                <div class="books-grid" id="latest-books">
-                    <!-- Books loaded by JavaScript -->
+                <div class="books-grid" id="latest-books-grid">
+                    <!-- Dynamic content loaded from JSON -->
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Recent Reviews -->
-            <section class="section">
+        <section class="section recent-reviews" aria-labelledby="recent-reviews-title">
+            <div class="container">
                 <div class="section-header">
-                    <h3>Recent Reviews</h3>
-                    <a href="reviews.html" class="view-all">View All</a>
+                    <h2 id="recent-reviews-title">Recent Reviews</h2>
+                    <a href="reviews.html" class="view-all">View All Reviews</a>
                 </div>
-                <div class="reviews-grid" id="recent-reviews">
-                    <!-- Reviews loaded by JavaScript -->
+                <div class="reviews-grid" id="recent-reviews-grid">
+                    <!-- Dynamic content loaded from JSON -->
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer" id="footer">
-        <!-- Footer loaded by JavaScript -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2017.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Support Our Work</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ReadMedia. All rights reserved.</p>
+                <p>Some links may be affiliate links that support our work at no extra cost to you.</p>
+            </div>
+        </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20L12 4M12 4L5 11M12 4L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 
-    <script src="js/components.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/search.js"></script>
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
     
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(err => console.log('SW registration failed'));
+            });
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - ReadMedia</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
+            </div>
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="hamburger"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link active">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link">Recommendations</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+                <div class="book-detail" id="book-detail">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading book details...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2024.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ReadMedia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/book.js"></script>
+</body>
+</html>

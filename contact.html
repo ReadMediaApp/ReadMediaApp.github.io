@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact ReadMedia | Get In Touch With Our Team</title>
+    <meta name="description" content="Contact the ReadMedia team for questions, suggestions, partnerships, or support. We're here to help with all your literary needs.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contact.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a237e">
+    
+    <!-- SEO Meta -->
+    <link rel="canonical" href="https://readmediaapp.github.io/contact.html">
+    <meta property="og:title" content="Contact ReadMedia | Get In Touch With Our Team">
+    <meta property="og:description" content="Contact the ReadMedia team for questions, suggestions, partnerships, or support.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://readmediaapp.github.io/contact.html">
+    <meta property="og:image" content="https://readmediaapp.github.io/images/contact-og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact ReadMedia | Get In Touch With Our Team">
+    <meta name="twitter:description" content="Contact the ReadMedia team for questions, suggestions, partnerships, or support.">
+    <meta name="twitter:image" content="https://readmediaapp.github.io/images/contact-og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact ReadMedia",
+        "description": "Contact information and form for ReadMedia",
+        "url": "https://readmediaapp.github.io/contact.html",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "ReadMedia",
+            "email": "contact@readmediaapp.github.io",
+            "url": "https://readmediaapp.github.io"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
+            </div>
+            
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="hamburger"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link">Recommendations</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link active" aria-current="page">Contact</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Page Header -->
+        <section class="page-header contact-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="index.html">Home</a></li>
+                            <li aria-current="page">Contact</li>
+                        </ol>
+                    </nav>
+                    <h1>Get In Touch</h1>
+                    <p class="page-subtitle">We'd love to hear from you! Whether you have questions, suggestions, or want to collaborate, our team is here to help.</p>
+                    
+                    <!-- Quick Contact Options -->
+                    <div class="contact-options">
+                        <div class="contact-option">
+                            <div class="option-icon">💬</div>
+                            <h3>General Inquiries</h3>
+                            <p>Questions about our platform or services</p>
+                            <span class="option-time">Response: Within 24 hours</span>
+                        </div>
+                        <div class="contact-option">
+                            <div class="option-icon">📚</div>
+                            <h3>Book Suggestions</h3>
+                            <p>Recommend books for our library</p>
+                            <span class="option-time">Response: Within 48 hours</span>
+                        </div>
+                        <div class="contact-option">
+                            <div class="option-icon">🤝</div>
+                            <h3>Partnerships</h3>
+                            <p>Collaboration and business inquiries</p>
+                            <span class="option-time">Response: Within 2 business days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form & Info -->
+        <section class="section contact-main">
+            <div class="container">
+                <div class="contact-layout">
+                    <!-- Contact Form -->
+                    <div class="contact-form-section">
+                        <h2>Send Us a Message</h2>
+                        <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                        
+                        <form id="contact-form" class="contact-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" id="name" name="name" class="form-input" required>
+                                    <div class="form-error" id="name-error"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" id="email" name="email" class="form-input" required>
+                                    <div class="form-error" id="email-error"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <select id="subject" name="subject" class="form-select" required>
+                                    <option value="">Please choose a subject</option>
+                                    <option value="General Inquiry">General Inquiry</option>
+                                    <option value="Book Suggestion">Book Suggestion</option>
+                                    <option value="Technical Support">Technical Support</option>
+                                    <option value="Partnership Opportunity">Partnership Opportunity</option>
+                                    <option value="Content Submission">Content Submission</option>
+                                    <option value="Advertising">Advertising</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="form-error" id="subject-error"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Your Message *</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="6" placeholder="Please provide details about your inquiry..." required></textarea>
+                                <div class="form-error" id="message-error"></div>
+                                <div class="char-count">
+                                    <span id="char-counter">0</span> / 1000 characters
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="newsletter" name="newsletter" class="form-checkbox">
+                                    <label for="newsletter" class="checkbox-label">
+                                        Yes, I'd like to receive occasional updates about new books and features (optional)
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">
+                                <span class="btn-text">Send Message</span>
+                                <div class="btn-loading" style="display: none;">
+                                    <div class="loading-spinner"></div>
+                                    <span>Sending...</span>
+                                </div>
+                            </button>
+                            
+                            <div class="form-note">
+                                <p>Fields marked with * are required. We respect your privacy and will never share your information with third parties.</p>
+                            </div>
+                        </form>
+                        
+                        <!-- Success Message -->
+                        <div id="success-message" class="success-message" style="display: none;">
+                            <div class="success-icon">✅</div>
+                            <h3>Message Sent Successfully!</h3>
+                            <p>Thank you for contacting us. We've received your message and will get back to you within 24 hours.</p>
+                            <button class="btn btn-secondary" id="send-another">Send Another Message</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information -->
+                    <div class="contact-info-section">
+                        <div class="contact-info-card">
+                            <h3>Contact Information</h3>
+                            <p>Here's how else you can reach us:</p>
+                            
+                            <div class="contact-methods">
+                                <div class="contact-method">
+                                    <div class="method-icon">📧</div>
+                                    <div class="method-info">
+                                        <h4>Email Us</h4>
+                                        <p>For general inquiries and support</p>
+                                        <a href="mailto:contact@readmediaapp.github.io" class="method-link">contact@readmediaapp.github.io</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="method-icon">🕒</div>
+                                    <div class="method-info">
+                                        <h4>Response Time</h4>
+                                        <p>We typically respond within:</p>
+                                        <ul class="response-times">
+                                            <li>General inquiries: <strong>24 hours</strong></li>
+                                            <li>Technical support: <strong>48 hours</strong></li>
+                                            <li>Partnerships: <strong>2 business days</strong></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-method">
+                                    <div class="method-icon">🌐</div>
+                                    <div class="method-info">
+                                        <h4>Follow Us</h4>
+                                        <p>Stay updated with our latest content</p>
+                                        <div class="social-links">
+                                            <a href="#" class="social-link" aria-label="Twitter">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                                                </svg>
+                                            </a>
+                                            <a href="#" class="social-link" aria-label="Facebook">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                                                </svg>
+                                            </a>
+                                            <a href="#" class="social-link" aria-label="Instagram">
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Preview -->
+                        <div class="faq-preview">
+                            <h3>Common Questions</h3>
+                            <div class="faq-items">
+                                <div class="faq-item">
+                                    <h4>How do I suggest a book?</h4>
+                                    <p>Use the "Book Suggestion" subject in the contact form. Include the book title, author, and why you think it should be in our library.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>Can I write for ReadMedia?</h4>
+                                    <p>Yes! We're always looking for passionate writers. Use the "Content Submission" subject to share your writing samples.</p>
+                                </div>
+                                <div class="faq-item">
+                                    <h4>Are the eBooks really free?</h4>
+                                    <p>Yes, all eBooks in our library are completely free to download. We're committed to making literature accessible to everyone.</p>
+                                </div>
+                            </div>
+                            <a href="help.html" class="btn btn-secondary btn-full">View All FAQs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Section -->
+        <section class="section support-section">
+            <div class="container">
+                <div class="support-grid">
+                    <div class="support-card">
+                        <div class="support-icon">🔧</div>
+                        <div class="support-content">
+                            <h3>Technical Support</h3>
+                            <p>Having issues with the website, downloads, or your account? Our technical team is here to help.</p>
+                            <ul>
+                                <li>Website functionality issues</li>
+                                <li>Download problems</li>
+                                <li>Account access</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="support-card">
+                        <div class="support-icon">📖</div>
+                        <div class="support-content">
+                            <h3>Content & Books</h3>
+                            <p>Questions about our content, book availability, or suggestions for improvement?</p>
+                            <ul>
+                                <li>Book recommendations</li>
+                                <li>Content accuracy</li>
+                                <li>Library suggestions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="support-card">
+                        <div class="support-icon">🤝</div>
+                        <div class="support-content">
+                            <h3>Partnerships</h3>
+                            <p>Interested in collaborating? We work with authors, publishers, and educational institutions.</p>
+                            <ul>
+                                <li>Author partnerships</li>
+                                <li>Publisher collaborations</li>
+                                <li>Educational programs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2024.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Support Our Work</a></li>
+                        <li><a href="about.html">About ReadMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ReadMedia. All rights reserved.</p>
+                <p>Some links may be affiliate links that support our work at no extra cost to you.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20L12 4M12 4L5 11M12 4L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="js/contact.js" defer></script>
+</body>
+</html>

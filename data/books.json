@@ -54,11 +54,7 @@
     ],
     "featured": true,
     "affiliate_link": "https://amzn.to/4mWOdjl",
-    "file_formats": [
-      "pdf",
-      "epub",
-      "mobi"
-    ],
+    "file_formats": [],
     "file_size": {},
     "cover": "/books/covers/wild-dark-shore-e96e47d9.jpg",
     "download_links": {}
@@ -83,6 +79,30 @@
     "file_formats": [],
     "file_size": {},
     "cover": "/books/covers/the-let-them-theory-a-life-changing-tool-that-millions-of-people-cant-stop-talking-about-7c9e7515.jpg",
+    "download_links": {}
+  },
+  {
+    "id": "The Wedding People",
+    "title": "The Wedding People",
+    "author": "Alison Espach",
+    "year": 2024,
+    "description": "It’s a beautiful day in Newport, Rhode Island, when Phoebe Stone arrives at the grand Cornwall Inn wearing a green dress and gold heels, not a bag in sight, alone. She’s immediately mistaken by everyone in the lobby for one of the wedding people, but she’s actually the only guest at the Cornwall who isn’t here for the big event. Phoebe is here because she’s dreamed of coming for years―she hoped to shuck oysters and take sunset sails with her husband, only now she’s here without him, at rock bottom, and determined to have one last decadent splurge on herself. Meanwhile, the bride has accounted for every detail and every possible disaster the weekend might yield except for, well, Phoebe and Phoebe's plan―which makes it that much more surprising when the two women can’t stop confiding in each other.",
+    "genre": "Fiction",
+    "publisher": "Henry Holt and Co.",
+    "isbn": "1250899575",
+    "pages": "384",
+    "tags": [
+      "Alison Espach",
+      "Phoebe Stone",
+      "Novel",
+      "fiction",
+      "Best Books of the Year 2024"
+    ],
+    "featured": true,
+    "affiliate_link": "https://amzn.to/3WfgF5i",
+    "file_formats": [],
+    "file_size": {},
+    "cover": "/books/covers/the-wedding-people-cc8fd7e2.jpg",
     "download_links": {}
   }
 ]

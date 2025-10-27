@@ -3,68 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Reviews - ReadMedia</title>
-    <meta name="description" content="Read professional book reviews and recommendations">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="js/security.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-5JKFKBFFST');
+    <title>Professional Book Reviews | ReadMedia - Expert Literary Analysis & Ratings</title>
+    <meta name="description" content="Read professional book reviews and expert literary analysis. Honest, in-depth reviews of the latest books, bestsellers, and classics with detailed ratings.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    
+    <!-- Mailchimp Styles -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a237e">
+    
+    <!-- SEO Meta -->
+    <link rel="canonical" href="https://readmediaapp.github.io/reviews.html">
+    <meta property="og:title" content="Professional Book Reviews | ReadMedia - Expert Literary Analysis">
+    <meta property="og:description" content="Expert book reviews and literary analysis from our team of professional reviewers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://readmediaapp.github.io/reviews.html">
+    <meta property="og:image" content="https://readmediaapp.github.io/images/reviews-og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Professional Book Reviews | ReadMedia">
+    <meta name="twitter:description" content="Expert book reviews and literary analysis from our team of professional reviewers.">
+    <meta name="twitter:image" content="https://readmediaapp.github.io/images/reviews-og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Professional Book Reviews | ReadMedia",
+        "description": "Collection of professional book reviews, literary analysis, and expert ratings",
+        "url": "https://readmediaapp.github.io/reviews.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "ReadMedia",
+            "url": "https://readmediaapp.github.io"
+        },
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": 150,
+            "itemListOrder": "Descending",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@type": "Review",
+                        "itemReviewed": {
+                            "@type": "Book"
+                        },
+                        "author": {
+                            "@type": "Person",
+                            "name": "Expert Reviewer"
+                        },
+                        "reviewRating": {
+                            "@type": "Rating",
+                            "ratingValue": "4.5"
+                        }
+                    }
+                }
+            ]
+        }
+    }
     </script>
+
+    <style>
+        /* Mailchimp Form Styling for Reviews Page */
+        .newsletter-card .mc_embed_signup {
+            background: transparent !important;
+            clear: left;
+            font: 14px 'Inter', Helvetica, Arial, sans-serif;
+            width: 100% !important;
+        }
+
+        .newsletter-card #mc_embed_signup_scroll {
+            text-align: left;
+        }
+
+        .newsletter-card .mc-field-group {
+            padding-bottom: 1rem;
+            width: 100%;
+        }
+
+        .newsletter-card #mc_embed_signup label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-card #mc_embed_signup input[type="email"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-card #mc_embed_signup input[type="email"]:focus {
+            outline: none;
+            border-color: #1a237e;
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .newsletter-card #mc_embed_signup .button {
+            background: #1a237e !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.75rem 2rem !important;
+            border-radius: 8px !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
+            font-size: 1rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .newsletter-card #mc_embed_signup .button:hover {
+            background: #283593 !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .newsletter-card #mc_embed_signup .asterisk {
+            color: #f44336;
+        }
+
+        .newsletter-card #mc_embed_signup .indicates-required {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-card .privacy-note {
+            font-size: 0.875rem;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Hide the original newsletter form */
+        .newsletter-form {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
             <div class="nav-brand">
-                <h1>ReadMedia</h1>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="books.html">Books</a></li>
-                <li><a href="reviews.html" class="active">Reviews</a></li>
-                <li><a href="recommendations.html" class="active">Recommendations</a></li>
-                <li><a href="donate.html" class="donate-btn">Donate</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span class="material-icons">menu</span>
-            </div>
-        </nav>
+            
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="hamburger"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link active" aria-current="page">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link">Recommendations</a></li>
+                    <li><a href="newsletter.html" class="nav-link">Newsletter</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="main-container">
-        <aside class="sidebar" id="sidebar">
-            <!-- Content loaded by JavaScript -->
-        </aside>
-
-        <div class="content">
-            <div class="page-header">
-                <h2>Book Reviews</h2>
-                <p>Professional reviews and recommendations from our team</p>
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Page Header -->
+        <section class="page-header reviews-header" aria-labelledby="page-title">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 id="page-title">Professional Book Reviews</h1>
+                    <p class="page-subtitle">Expert literary analysis and honest reviews from our team of passionate readers and literary experts.</p>
+                    
+                    <!-- Review Stats -->
+                    <div class="review-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="total-reviews">150+</span>
+                            <span class="stat-label">Reviews Published</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="avg-rating">4.2</span>
+                            <span class="stat-label">Average Rating</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="reviewers-count">12+</span>
+                            <span class="stat-label">Expert Reviewers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="genres-covered">25+</span>
+                            <span class="stat-label">Genres Covered</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="reviews-container" id="all-reviews">
-                <!-- All reviews loaded by JavaScript -->
+        <!-- Search and Filters -->
+        <section class="section reviews-filters" aria-labelledby="filters-title">
+            <div class="container">
+                <h2 id="filters-title" class="sr-only">Review Filters</h2>
+                
+                <div class="filters-container">
+                    <div class="search-container">
+                        <div class="search-group">
+                            <label for="reviews-search" class="sr-only">Search reviews</label>
+                            <input type="text" id="reviews-search" placeholder="Search reviews by title, author, or content..." class="search-input">
+                            <button type="button" id="clear-search" class="clear-search" aria-label="Clear search" style="display: none;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-groups">
+                        <div class="filter-group">
+                            <label for="rating-filter" class="filter-label">Rating:</label>
+                            <select id="rating-filter" class="filter-select">
+                                <option value="all">All Ratings</option>
+                                <option value="5">5 Stars ⭐⭐⭐⭐⭐</option>
+                                <option value="4">4+ Stars ⭐⭐⭐⭐</option>
+                                <option value="3">3+ Stars ⭐⭐⭐</option>
+                                <option value="2">2+ Stars ⭐⭐</option>
+                                <option value="1">1+ Star ⭐</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="genre-filter" class="filter-label">Genre:</label>
+                            <select id="genre-filter" class="filter-select">
+                                <option value="all">All Genres</option>
+                                <option value="fiction">Fiction</option>
+                                <option value="non-fiction">Non-Fiction</option>
+                                <option value="self-help">Self-Help</option>
+                                <option value="mystery">Mystery & Thriller</option>
+                                <option value="science-fiction">Science Fiction</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="biography">Biography</option>
+                                <option value="history">History</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="sort-filter" class="filter-label">Sort by:</label>
+                            <select id="sort-filter" class="filter-select">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="popular">Most Popular</option>
+                                <option value="title">Title A-Z</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button class="btn btn-secondary" id="reset-review-filters">Reset Filters</button>
+                        <div class="results-count">
+                            <span id="active-filters"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="pagination" id="pagination">
-                <!-- Pagination loaded by JavaScript -->
+        <!-- Featured Reviews -->
+        <section class="section featured-reviews" aria-labelledby="featured-reviews-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="featured-reviews-title">Editor's Choice</h2>
+                    <p class="section-subtitle">Our top picks and most insightful literary analyses</p>
+                </div>
+
+                <div class="featured-reviews-grid" id="featured-reviews-grid">
+                    <!-- Dynamic featured reviews -->
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- All Reviews -->
+        <section class="section all-reviews" aria-labelledby="all-reviews-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="all-reviews-title">All Book Reviews</h2>
+                    <div class="section-actions">
+                        <span id="results-count">Loading reviews...</span>
+                    </div>
+                </div>
+
+                <div class="reviews-grid" id="reviews-grid">
+                    <!-- Dynamic content loaded from JSON -->
+                    <div class="loading" id="reviews-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading professional book reviews...</p>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="pagination" id="pagination" aria-label="Reviews pagination">
+                    <!-- Dynamic pagination -->
+                </nav>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="reviews-empty" style="display: none;">
+                    <div class="empty-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M11 11L11 17M11 11L17 17M11 11L17 5M11 11L5 17M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>No reviews found</h3>
+                    <p>Try adjusting your filters or search terms to see more reviews.</p>
+                    <button class="btn btn-primary" id="reset-all-filters">Reset All Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Guidelines -->
+        <section class="section guidelines" aria-labelledby="guidelines-title">
+            <div class="container">
+                <div class="guidelines-card">
+                    <div class="guidelines-header">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h2 id="guidelines-title">Our Review Philosophy</h2>
+                    </div>
+                    <div class="guidelines-content">
+                        <div class="guideline">
+                            <div class="guideline-icon">📖</div>
+                            <div class="guideline-content">
+                                <h3>Honest & Unbiased</h3>
+                                <p>We provide genuine reviews based on our reading experience, not influenced by publishers or authors.</p>
+                            </div>
+                        </div>
+                        <div class="guideline">
+                            <div class="guideline-icon">⭐</div>
+                            <div class="guideline-content">
+                                <h3>Detailed Analysis</h3>
+                                <p>Our reviews cover writing style, character development, plot structure, and overall impact.</p>
+                            </div>
+                        </div>
+                        <div class="guideline">
+                            <div class="guideline-icon">🎯</div>
+                            <div class="guideline-content">
+                                <h3>Reader-Focused</h3>
+                                <p>We consider different reader preferences and help you find books that match your taste.</p>
+                            </div>
+                        </div>
+                        <div class="guideline">
+                            <div class="guideline-icon">💡</div>
+                            <div class="guideline-content">
+                                <h3>Constructive Criticism</h3>
+                                <p>We highlight both strengths and areas for improvement to help authors and readers alike.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section with Mailchimp -->
+        <section class="section newsletter" aria-labelledby="newsletter-title">
+            <div class="container">
+                <div class="newsletter-card">
+                    <div class="newsletter-content">
+                        <h2 id="newsletter-title">Get Weekly Book Reviews</h2>
+                        <p>Stay updated with our latest professional book reviews and literary analysis delivered to your inbox.</p>
+                        
+                        <!-- Mailchimp Form -->
+                        <div id="mc_embed_signup">
+                            <form action="https://github.us11.list-manage.com/subscribe/post?u=917146807891ed14feadbe8ac&amp;id=eef61c5efb&amp;f_id=001f16e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self">
+                                <div id="mc_embed_signup_scroll">
+                                    <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+                                    <div class="mc-field-group">
+                                        <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                                        <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required value="">
+                                    </div>
+                                    <div class="mc-field-group" style="display: none;">
+                                        <label for="mce-FNAME">First Name </label>
+                                        <input type="text" name="FNAME" class="text" id="mce-FNAME" value="" placeholder="First Name (Optional)">
+                                    </div>
+                                    <div id="mce-responses" class="clear foot">
+                                        <div class="response" id="mce-error-response" style="display: none;"></div>
+                                        <div class="response" id="mce-success-response" style="display: none;"></div>
+                                    </div>
+                                    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
+                                        <input type="text" name="b_917146807891ed14feadbe8ac_eef61c5efb" tabindex="-1" value="">
+                                    </div>
+                                    <div class="optionalParent">
+                                        <div class="clear foot">
+                                            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe to Reviews">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <p class="privacy-note">
+                            We respect your privacy. Unsubscribe at any time. Read our <a href="privacy.html" style="color: #1a237e;">Privacy Policy</a>.
+                        </p>
+                    </div>
+                    <div class="newsletter-image">
+                        <svg width="120" height="120" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="footer" id="footer">
-        <!-- Footer loaded by JavaScript -->
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2024.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Support Our Work</a></li>
+                        <li><a href="about.html">About ReadMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ReadMedia. All rights reserved.</p>
+                <p>Some links may be affiliate links that support our work at no extra cost to you.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="js/components.js"></script>
-    <script src="js/app.js"></script>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20L12 4M12 4L5 11M12 4L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="js/reviews.js" defer></script>
+    
+    <!-- Mailchimp Scripts -->
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">
+        (function($) {
+            window.fnames = new Array(); 
+            window.ftypes = new Array();
+            fnames[0]='EMAIL';
+            ftypes[0]='email';
+            fnames[1]='FNAME';
+            ftypes[1]='text';
+            fnames[2]='LNAME';
+            ftypes[2]='text';
+            fnames[3]='ADDRESS';
+            ftypes[3]='address';
+            fnames[4]='PHONE';
+            ftypes[4]='phone';
+            fnames[5]='BIRTHDAY';
+            ftypes[5]='birthday';
+            fnames[6]='COMPANY';
+            ftypes[6]='text';
+        }(jQuery));
+        var $mcj = jQuery.noConflict(true);
+    </script>
+
+    <script>
+        // Mailchimp form enhancement for reviews page
+        document.addEventListener('DOMContentLoaded', function() {
+            const mailchimpForm = document.getElementById('mc-embedded-subscribe-form');
+            
+            if (mailchimpForm) {
+                mailchimpForm.addEventListener('submit', function(e) {
+                    const submitButton = this.querySelector('#mc-embedded-subscribe');
+                    const originalText = submitButton.value;
+                    
+                    // Show loading state
+                    submitButton.value = 'Subscribing...';
+                    submitButton.disabled = true;
+                    
+                    // Re-enable button after 3 seconds (in case of error)
+                    setTimeout(() => {
+                        submitButton.value = originalText;
+                        submitButton.disabled = false;
+                    }, 3000);
+                });
+            }
+
+            // Real-time email validation
+            const emailInput = document.getElementById('mce-EMAIL');
+            if (emailInput) {
+                emailInput.addEventListener('input', function(e) {
+                    const email = e.target.value;
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    
+                    if (email && !emailRegex.test(email)) {
+                        e.target.style.borderColor = '#f44336';
+                    } else {
+                        e.target.style.borderColor = '#e9ecef';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

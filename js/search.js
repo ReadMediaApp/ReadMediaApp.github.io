@@ -1,436 +1,387 @@
-// Enhanced search functionality with affiliate integration
-class EnhancedSearch {
-    static config = {
-        affiliateId: 'readmediaapp-20', // Your affiliate ID
-        amazonSearch: true,
-        fallbackSearch: true
-    };
-
-    static init() {
-        this.setupSearchListeners();
-        this.setupSearchUI();
+// search.js - Complete version with Amazon affiliate links
+class SearchPage {
+    constructor() {
+        this.searchQuery = this.getSearchQuery();
+        this.localResults = [];
+        this.init();
     }
 
-    static setupSearchUI() {
-        // Add search suggestions container
-        const searchContainer = document.querySelector('.hero-search') || document.querySelector('.search-container');
-        if (searchContainer && !document.getElementById('search-suggestions')) {
-            const suggestionsDiv = document.createElement('div');
-            suggestionsDiv.id = 'search-suggestions';
-            suggestionsDiv.className = 'search-suggestions';
-            searchContainer.appendChild(suggestionsDiv);
-        }
+    getSearchQuery() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('q') || '';
     }
 
-    static setupSearchListeners() {
-        const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-            let searchTimeout;
-            
-            searchInput.addEventListener('input', (e) => {
-                clearTimeout(searchTimeout);
-                this.showSearchSuggestions(e.target.value);
-                
-                searchTimeout = setTimeout(() => {
-                    this.performEnhancedSearch(e.target.value);
-                }, 500);
-            });
-            
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    this.performEnhancedSearch(e.target.value);
-                }
-            });
-
-            // Hide suggestions when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.hero-search') && !e.target.closest('.search-container')) {
-                    this.hideSearchSuggestions();
-                }
-            });
-        }
-    }
-
-    static showSearchSuggestions(query) {
-        const suggestionsDiv = document.getElementById('search-suggestions');
-        if (!suggestionsDiv || !query.trim()) {
-            this.hideSearchSuggestions();
+    async init() {
+        if (!this.searchQuery) {
+            this.showNoResults('Please enter a search term');
             return;
         }
 
-        const localResults = this.getQuickSearchSuggestions(query);
+        await this.waitForAppData();
+        this.performLocalSearch();
+        this.renderAmazonSearchSection();
+    }
+
+    async waitForAppData() {
+        return new Promise((resolve) => {
+            const checkData = () => {
+                if (window.readMediaApp && window.readMediaApp.appData) {
+                    resolve();
+                } else {
+                    setTimeout(checkData, 100);
+                }
+            };
+            checkData();
+        });
+    }
+
+    performLocalSearch() {
+        this.localResults = this.searchAllContent(this.searchQuery);
+        this.renderResults();
+    }
+
+    generateAmazonSearchUrl(query) {
+        // Amazon search URL with your affiliate tag
+        const encodedQuery = encodeURIComponent(query);
+        return `https://www.amazon.com/s?k=${encodedQuery}&tag=readmediaapp-20&linkCode=ll2&linkId=shopnow`;
+    }
+
+    renderAmazonSearchSection() {
+        const amazonSearchUrl = this.generateAmazonSearchUrl(this.searchQuery);
         
-        if (localResults.length > 0) {
-            suggestionsDiv.innerHTML = `
-                <div class="suggestions-section">
-                    <h4>Quick Results</h4>
-                    ${localResults.map(item => `
-                        <div class="suggestion-item" onclick="EnhancedSearch.selectSuggestion('${item.term}')">
-                            <span class="material-icons">search</span>
-                            ${this.highlightMatch(item.term, query)}
-                            <span class="suggestion-type">${item.type}</span>
+        const amazonSection = `
+            <div class="amazon-search-section">
+                <h2>Find More on Amazon</h2>
+                <div class="amazon-search-card">
+                    <div class="amazon-icon">📚</div>
+                    <div class="amazon-content">
+                        <h3>Search Amazon for Books</h3>
+                        <p>Find thousands of books related to "${this.escapeHtml(this.searchQuery)}" on Amazon</p>
+                        <div class="amazon-actions">
+                            <a href="${amazonSearchUrl}" 
+                               target="_blank" 
+                               rel="noopener" 
+                               class="btn btn-amazon">
+                                <span class="amazon-logo">amazon</span>
+                                Search Amazon
+                            </a>
+                            <a href="https://www.amazon.com/best-sellers-books-Amazon/zgbs/books/?tag=readmediaapp-20"
+                               target="_blank"
+                               rel="noopener"
+                               class="btn btn-secondary">
+                                Amazon Best Sellers
+                            </a>
                         </div>
-                    `).join('')}
-                </div>
-                <div class="suggestions-section">
-                    <div class="suggestion-item external-search" onclick="EnhancedSearch.searchOnAmazon('${query}')">
-                        <span class="material-icons">shopping_cart</span>
-                        Search for "${query}" on Amazon
-                        <span class="material-icons">open_in_new</span>
                     </div>
                 </div>
-            `;
-            suggestionsDiv.style.display = 'block';
-        } else {
-            suggestionsDiv.innerHTML = `
-                <div class="suggestions-section">
-                    <div class="suggestion-item external-search" onclick="EnhancedSearch.searchOnAmazon('${query}')">
-                        <span class="material-icons">shopping_cart</span>
-                        Search for "${query}" on Amazon
-                        <span class="material-icons">open_in_new</span>
-                    </div>
-                    <div class="suggestion-item external-search" onclick="EnhancedSearch.searchOnGoogleBooks('${query}')">
-                        <span class="material-icons">menu_book</span>
-                        Search for "${query}" on Google Books
-                        <span class="material-icons">open_in_new</span>
-                    </div>
+                <div class="affiliate-disclaimer">
+                    <p>📚 <strong>Disclosure:</strong> As an Amazon Associate, we earn from qualifying purchases. Your support helps us maintain this website.</p>
                 </div>
-            `;
-            suggestionsDiv.style.display = 'block';
-        }
-    }
+            </div>
+        `;
 
-    static hideSearchSuggestions() {
-        const suggestionsDiv = document.getElementById('search-suggestions');
-        if (suggestionsDiv) {
-            suggestionsDiv.style.display = 'none';
-        }
-    }
-
-    static selectSuggestion(term) {
-        const searchInput = document.getElementById('search-input');
-        if (searchInput) {
-            searchInput.value = term;
-            
-            // Track suggestion selection in GA4
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'search_suggestion_click', {
-                    event_category: 'Search',
-                    event_label: term,
-                    search_term: term
-                });
+        const container = document.getElementById('search-results');
+        if (container) {
+            if (this.localResults.length > 0) {
+                // Insert Amazon section after local results
+                const resultsContainer = container.querySelector('.local-results-section');
+                if (resultsContainer) {
+                    resultsContainer.insertAdjacentHTML('afterend', amazonSection);
+                }
+            } else {
+                // If no results, Amazon section is already in no-results template
+                container.insertAdjacentHTML('beforeend', amazonSection);
             }
-            
-            this.performEnhancedSearch(term);
         }
-        this.hideSearchSuggestions();
     }
 
-    static getQuickSearchSuggestions(query) {
-        if (!App.data.articles || !App.data.books) return [];
-        
-        const lowerQuery = query.toLowerCase();
-        const suggestions = [];
-        
-        // Search in articles
-        App.data.articles.slice(0, 5).forEach(article => {
-            if (article.title.toLowerCase().includes(lowerQuery)) {
-                suggestions.push({
-                    term: article.title,
-                    type: 'Article'
-                });
-            }
-        });
-        
-        // Search in books
-        App.data.books.slice(0, 5).forEach(book => {
-            if (book.title.toLowerCase().includes(lowerQuery) || 
-                book.author.toLowerCase().includes(lowerQuery)) {
-                suggestions.push({
-                    term: book.title,
-                    type: 'Book'
-                });
-            }
-        });
-        
-        return suggestions.slice(0, 5); // Limit to 5 suggestions
+    searchAllContent(query) {
+        const appData = window.readMediaApp.appData;
+        const results = [];
+
+        // Search articles
+        if (appData.articles) {
+            appData.articles.forEach(article => {
+                if (this.matchesSearch(article, query)) {
+                    results.push({
+                        type: 'article',
+                        data: article,
+                        relevance: this.calculateRelevance(article, query)
+                    });
+                }
+            });
+        }
+
+        // Search books
+        if (appData.books) {
+            appData.books.forEach(book => {
+                if (this.matchesSearch(book, query)) {
+                    results.push({
+                        type: 'book',
+                        data: book,
+                        relevance: this.calculateRelevance(book, query)
+                    });
+                }
+            });
+        }
+
+        // Search reviews
+        if (appData.reviews) {
+            appData.reviews.forEach(review => {
+                if (this.matchesSearch(review, query)) {
+                    results.push({
+                        type: 'review',
+                        data: review,
+                        relevance: this.calculateRelevance(review, query)
+                    });
+                }
+            });
+        }
+
+        // Sort by relevance
+        return results.sort((a, b) => b.relevance - a.relevance);
     }
 
-    static highlightMatch(text, query) {
-        const lowerText = text.toLowerCase();
-        const lowerQuery = query.toLowerCase();
-        const index = lowerText.indexOf(lowerQuery);
+    matchesSearch(item, query) {
+        const searchTerms = query.toLowerCase().split(' ');
+        const searchableText = this.getSearchableText(item).toLowerCase();
+
+        return searchTerms.some(term => searchableText.includes(term));
+    }
+
+    getSearchableText(item) {
+        let text = '';
         
-        if (index >= 0) {
-            return text.substring(0, index) + 
-                   '<strong>' + text.substring(index, index + query.length) + '</strong>' + 
-                   text.substring(index + query.length);
-        }
+        if (item.title) text += ' ' + item.title;
+        if (item.author) text += ' ' + item.author;
+        if (item.description) text += ' ' + item.description;
+        if (item.excerpt) text += ' ' + item.excerpt;
+        if (item.content) text += ' ' + item.content;
+        if (item.tags) text += ' ' + item.tags.join(' ');
+        if (item.genre) text += ' ' + item.genre;
+
         return text;
     }
 
-    static async performEnhancedSearch(query) {
-        if (!query.trim()) {
-            this.clearSearchResults();
+    calculateRelevance(item, query) {
+        const searchTerms = query.toLowerCase().split(' ');
+        const searchableText = this.getSearchableText(item).toLowerCase();
+        let relevance = 0;
+
+        searchTerms.forEach(term => {
+            // Higher weight for title matches
+            if (item.title && item.title.toLowerCase().includes(term)) {
+                relevance += 3;
+            }
+            // Medium weight for author matches
+            if (item.author && item.author.toLowerCase().includes(term)) {
+                relevance += 2;
+            }
+            // Lower weight for content matches
+            if (searchableText.includes(term)) {
+                relevance += 1;
+            }
+        });
+
+        return relevance;
+    }
+
+    renderResults() {
+        const container = document.getElementById('search-results');
+        if (!container) return;
+
+        if (this.localResults.length === 0) {
+            this.showNoResults(`No results found for "${this.searchQuery}"`);
             return;
         }
 
-        // Track search in GA4
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'search', {
-                event_category: 'Search',
-                event_label: query,
-                search_term: query
-            });
-        }
-
-        const localResults = this.searchLocalContent(query);
-        const hasLocalResults = localResults.articles.length > 0 || localResults.books.length > 0;
-        
-        if (hasLocalResults) {
-            this.displaySearchResults(localResults, query);
-        } else {
-            this.showExternalSearchOptions(query);
-        }
-    }
-
-    static searchLocalContent(query) {
-        const lowerQuery = query.toLowerCase();
-        
-        return {
-            articles: App.data.articles.filter(article =>
-                article.title.toLowerCase().includes(lowerQuery) ||
-                article.content.toLowerCase().includes(lowerQuery) ||
-                (article.tags && article.tags.some(tag => 
-                    tag.toLowerCase().includes(lowerQuery)
-                )) ||
-                article.author.toLowerCase().includes(lowerQuery)
-            ),
-            books: App.data.books.filter(book =>
-                book.title.toLowerCase().includes(lowerQuery) ||
-                book.author.toLowerCase().includes(lowerQuery) ||
-                book.description.toLowerCase().includes(lowerQuery) ||
-                book.genre.toLowerCase().includes(lowerQuery)
-            ),
-            reviews: App.data.reviews.filter(review =>
-                review.title.toLowerCase().includes(lowerQuery) ||
-                review.content.toLowerCase().includes(lowerQuery) ||
-                review.author.toLowerCase().includes(lowerQuery)
-            )
-        };
-    }
-
-    static displaySearchResults(results, query) {
-        let resultsContainer = document.getElementById('search-results');
-        if (!resultsContainer) {
-            resultsContainer = document.createElement('div');
-            resultsContainer.id = 'search-results';
-            resultsContainer.className = 'search-results';
-            document.querySelector('.content').prepend(resultsContainer);
-        }
-
-        const totalResults = results.articles.length + results.books.length + results.reviews.length;
-        
-        resultsContainer.innerHTML = `
-            <div class="search-header">
-                <h3>Search Results for "${query}"</h3>
-                <p>Found ${totalResults} local results</p>
-                <div class="external-search-option">
-                    <p>Not finding what you're looking for?</p>
-                    <button class="btn btn-outline" onclick="EnhancedSearch.searchOnAmazon('${query}')">
-                        <span class="material-icons">search</span>
-                        Search on Amazon
-                    </button>
-                    <button class="btn btn-outline" onclick="EnhancedSearch.searchOnGoogleBooks('${query}')">
-                        <span class="material-icons">menu_book</span>
-                        Search on Google Books
-                    </button>
-                </div>
-            </div>
-            ${this.renderSearchSection('Articles', results.articles, 'articles')}
-            ${this.renderSearchSection('Books', results.books, 'books')}
-            ${this.renderSearchSection('Reviews', results.reviews, 'reviews')}
-        `;
-    }
-
-    static showExternalSearchOptions(query) {
-        let resultsContainer = document.getElementById('search-results');
-        if (!resultsContainer) {
-            resultsContainer = document.createElement('div');
-            resultsContainer.id = 'search-results';
-            resultsContainer.className = 'search-results';
-            document.querySelector('.content').prepend(resultsContainer);
-        }
-
-        resultsContainer.innerHTML = `
-            <div class="search-header">
-                <h3>No Local Results for "${query}"</h3>
-                <p>We couldn't find any local content matching your search.</p>
-            </div>
-            <div class="external-search-options">
-                <div class="external-search-card">
-                    <div class="external-search-icon">
-                        <span class="material-icons">shopping_cart</span>
-                    </div>
-                    <h4>Search on Amazon</h4>
-                    <p>Find books and products on Amazon with our affiliate link</p>
-                    <button class="btn btn-amazon" onclick="EnhancedSearch.searchOnAmazon('${query}')">
-                        Search Amazon
-                    </button>
-                </div>
-                <div class="external-search-card">
-                    <div class="external-search-icon">
-                        <span class="material-icons">menu_book</span>
-                    </div>
-                    <h4>Search on Google Books</h4>
-                    <p>Find books and preview content on Google Books</p>
-                    <button class="btn btn-google" onclick="EnhancedSearch.searchOnGoogleBooks('${query}')">
-                        Search Google Books
-                    </button>
-                </div>
-                <div class="external-search-card">
-                    <div class="external-search-icon">
-                        <span class="material-icons">library_books</span>
-                    </div>
-                    <h4>Search on Goodreads</h4>
-                    <p>Find book reviews and recommendations</p>
-                    <button class="btn btn-goodreads" onclick="EnhancedSearch.searchOnGoodreads('${query}')">
-                        Search Goodreads
-                    </button>
+        container.innerHTML = `
+            <h1>Search Results for "${this.escapeHtml(this.searchQuery)}"</h1>
+            
+            <div class="local-results-section">
+                <h2>Our Content</h2>
+                <p class="results-count">Found ${this.localResults.length} result${this.localResults.length !== 1 ? 's' : ''} in our library</p>
+                <div class="search-results-grid">
+                    ${this.localResults.map(result => this.renderSearchResult(result)).join('')}
                 </div>
             </div>
         `;
+
+        // Show Amazon search section
+        this.renderAmazonSearchSection();
     }
 
-    static searchOnAmazon(query) {
-        const affiliateId = this.config.affiliateId;
-        const encodedQuery = encodeURIComponent(query);
-        const amazonUrl = `https://www.amazon.com/s?k=${encodedQuery}&tag=${affiliateId}`;
+    renderSearchResult(result) {
+        const { type, data } = result;
         
-        // Track affiliate click in GA4
-        this.trackAffiliateClick('amazon', query);
-        
-        // Small delay to ensure tracking fires
-        setTimeout(() => {
-            window.open(amazonUrl, '_blank');
-        }, 100);
-    }
-
-    static searchOnGoogleBooks(query) {
-        const encodedQuery = encodeURIComponent(query);
-        const googleBooksUrl = `https://www.google.com/search?tbm=bks&q=${encodedQuery}`;
-        
-        // Track Google Books searches too
-        this.trackAffiliateClick('google_books', query);
-        
-        setTimeout(() => {
-            window.open(googleBooksUrl, '_blank');
-        }, 100);
-    }
-
-    static searchOnGoodreads(query) {
-        const encodedQuery = encodeURIComponent(query);
-        const goodreadsUrl = `https://www.goodreads.com/search?q=${encodedQuery}`;
-        
-        this.trackAffiliateClick('goodreads', query);
-        
-        setTimeout(() => {
-            window.open(goodreadsUrl, '_blank');
-        }, 100);
-    }
-
-    static trackAffiliateClick(platform, query) {
-        try {
-            // Google Analytics 4 tracking
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'affiliate_click', {
-                    event_category: 'Affiliate',
-                    event_label: `${platform} - ${query}`,
-                    platform: platform,
-                    search_query: query,
-                    affiliate_id: this.config.affiliateId,
-                    value: 1,
-                    currency: 'USD',
-                    page_location: window.location.href,
-                    page_title: document.title
-                });
-            }
-
-            // Enhanced tracking with custom parameters
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'affiliate_click_detailed', {
-                    event_category: 'Affiliate_Detailed',
-                    event_label: `${platform}_search`,
-                    platform: platform,
-                    query: query,
-                    timestamp: new Date().toISOString(),
-                    user_agent: navigator.userAgent,
-                    language: navigator.language,
-                    screen_resolution: `${screen.width}x${screen.height}`,
-                    referrer: document.referrer || 'direct'
-                });
-            }
-
-            console.log(`🔗 Affiliate click tracked: ${platform} - ${query}`);
-
-        } catch (error) {
-            console.error('GA4 tracking failed:', error);
-        }
-    }
-
-    static clearSearchResults() {
-        const resultsContainer = document.getElementById('search-results');
-        if (resultsContainer) {
-            resultsContainer.remove();
-        }
-        this.hideSearchSuggestions();
-    }
-
-    static renderSearchSection(title, items, type) {
-        if (items.length === 0) return '';
-        
-        return `
-            <div class="search-section">
-                <h4>${title} (${items.length})</h4>
-                <div class="search-items">
-                    ${items.slice(0, 3).map(item => this.renderSearchItem(item, type)).join('')}
-                    ${items.length > 3 ? `
-                        <div class="search-more">
-                            <a href="${type}.html?search=${encodeURIComponent(query)}">View all ${items.length} ${title.toLowerCase()}</a>
-                        </div>
-                    ` : ''}
-                </div>
-            </div>
-        `;
-    }
-
-    static renderSearchItem(item, type) {
-        // Use the existing render methods from Components class
-        switch(type) {
-            case 'articles':
-                return Components.renderArticleCard(item);
-            case 'books':
-                return Components.renderBookCard(item);
-            case 'reviews':
-                return `
-                    <div class="search-item">
-                        <a href="reviews.html">
-                            <h5>${Security.sanitizeHTML(item.title)}</h5>
-                            <p>${Security.sanitizeHTML(item.content.substring(0, 100))}...</p>
-                            <small>By ${Security.sanitizeHTML(item.author)} • ${new Date(item.date).toLocaleDateString()}</small>
-                        </a>
-                    </div>
-                `;
+        switch (type) {
+            case 'article':
+                return this.renderArticleResult(data);
+            case 'book':
+                return this.renderBookResult(data);
+            case 'review':
+                return this.renderReviewResult(data);
             default:
                 return '';
         }
     }
+
+    renderArticleResult(article) {
+        return `
+            <div class="search-result-card article-result">
+                <div class="result-type">Article</div>
+                <h3><a href="article.html?id=${article.id}">${this.escapeHtml(article.title)}</a></h3>
+                <div class="result-meta">
+                    <span>By ${this.escapeHtml(article.author)}</span>
+                    <span>•</span>
+                    <time datetime="${article.date}">${this.formatDate(article.date)}</time>
+                </div>
+                <p class="result-excerpt">${this.escapeHtml(article.excerpt)}</p>
+                <a href="article.html?id=${article.id}" class="btn btn-secondary">Read Article</a>
+            </div>
+        `;
+    }
+
+    renderBookResult(book) {
+        return `
+            <div class="search-result-card book-result">
+                <div class="result-type">Book</div>
+                <h3><a href="book.html?id=${book.id}">${this.escapeHtml(book.title)}</a></h3>
+                <div class="result-meta">
+                    <span>By ${this.escapeHtml(book.author)}</span>
+                    ${book.year ? `<span>•</span><span>${book.year}</span>` : ''}
+                    ${book.genre ? `<span>•</span><span>${book.genre}</span>` : ''}
+                </div>
+                <p class="result-excerpt">${this.truncateText(book.description, 150)}</p>
+                <a href="book.html?id=${book.id}" class="btn btn-secondary">View Book</a>
+            </div>
+        `;
+    }
+
+    renderReviewResult(review) {
+        return `
+            <div class="search-result-card review-result">
+                <div class="result-type">Review</div>
+                <div class="rating">${this.renderStars(review.rating)}</div>
+                <h3><a href="review.html?id=${review.id}">${this.escapeHtml(review.title)}</a></h3>
+                <div class="result-meta">
+                    <span>By ${this.escapeHtml(review.author)}</span>
+                    <span>•</span>
+                    <time datetime="${review.date}">${this.formatDate(review.date)}</time>
+                </div>
+                <p class="result-excerpt">${this.truncateText(review.content, 150)}</p>
+                <a href="review.html?id=${review.id}" class="btn btn-secondary">Read Review</a>
+            </div>
+        `;
+    }
+
+    showNoResults(message) {
+        const container = document.getElementById('search-results');
+        if (container) {
+            const amazonSearchUrl = this.generateAmazonSearchUrl(this.searchQuery);
+            
+            container.innerHTML = `
+                <div class="no-results">
+                    <h2>${message}</h2>
+                    <p>We couldn't find any matches in our library for "${this.escapeHtml(this.searchQuery)}"</p>
+                    
+                    <div class="amazon-search-card">
+                        <div class="amazon-icon">🔍</div>
+                        <div class="amazon-content">
+                            <h3>Search on Amazon</h3>
+                            <p>Find thousands of books related to "${this.escapeHtml(this.searchQuery)}" on Amazon</p>
+                            <div class="amazon-actions">
+                                <a href="${amazonSearchUrl}" 
+                                   target="_blank" 
+                                   rel="noopener" 
+                                   class="btn btn-amazon">
+                                    <span class="amazon-logo">amazon</span>
+                                    Search Amazon
+                                </a>
+                                <a href="https://www.amazon.com/best-sellers-books-Amazon/zgbs/books/?tag=readmediaapp-20"
+                                   target="_blank"
+                                   rel="noopener"
+                                   class="btn btn-secondary">
+                                    Amazon Best Sellers
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="affiliate-disclaimer">
+                        <p>📚 <strong>Disclosure:</strong> As an Amazon Associate, we earn from qualifying purchases. Your support helps us maintain this website.</p>
+                    </div>
+
+                    <div class="search-suggestions">
+                        <h3>Or try these:</h3>
+                        <div class="suggestion-buttons">
+                            <a href="books.html" class="btn btn-primary">Browse All Books</a>
+                            <a href="articles.html" class="btn btn-primary">Browse Articles</a>
+                            <a href="reviews.html" class="btn btn-primary">Browse Reviews</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    renderStars(rating) {
+        if (!rating) return '';
+        
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+        return '★'.repeat(fullStars) + 
+               (hasHalfStar ? '½' : '') + 
+               '☆'.repeat(emptyStars);
+    }
+
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    truncateText(text, maxLength) {
+        if (!text) return '';
+        if (text.length <= maxLength) return text;
+        return text.substring(0, maxLength).trim() + '...';
+    }
+
+    formatDate(dateString) {
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        } catch (error) {
+            return 'Unknown date';
+        }
+    }
 }
 
-// Initialize enhanced search
+// Initialize search page when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    EnhancedSearch.init();
+    new SearchPage();
 });
 
-// Export for global access
-window.EnhancedSearch = EnhancedSearch;
+// Optional: Add global error handling for search functionality
+window.addEventListener('error', (event) => {
+    console.error('Search page error:', event.error);
+    
+    // If there's a critical error, show a user-friendly message
+    const container = document.getElementById('search-results');
+    if (container && container.innerHTML.includes('loading')) {
+        container.innerHTML = `
+            <div class="error-state">
+                <h2>Something went wrong</h2>
+                <p>We're having trouble loading search results. Please try again.</p>
+                <button onclick="window.location.reload()" class="btn btn-primary">Reload Page</button>
+            </div>
+        `;
+    }
+});

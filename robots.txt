@@ -2,3 +2,10 @@ User-agent: *
 Allow: /
 
 Sitemap: https://readmediaapp.github.io/sitemap.xml
+
+# Crawl delays
+Crawl-delay: 1
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /private/

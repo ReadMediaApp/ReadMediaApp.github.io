@@ -3,196 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - ReadMedia</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="js/security.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-5JKFKBFFST');
+    <title>Terms of Service - ReadMedia | User Agreement & Guidelines</title>
+    <meta name="description" content="ReadMedia's Terms of Service outline the rules and guidelines for using our website and services. Understand your rights and responsibilities as a user.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/legal.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a237e">
+    
+    <!-- SEO Meta -->
+    <link rel="canonical" href="https://readmediaapp.github.io/terms.html">
+    <meta property="og:title" content="Terms of Service - ReadMedia | User Agreement & Guidelines">
+    <meta property="og:description" content="Understand the rules and guidelines for using ReadMedia's services and website.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://readmediaapp.github.io/terms.html">
+    <meta name="twitter:card" content="summary">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Terms of Service - ReadMedia",
+        "description": "Terms and conditions for using ReadMedia services",
+        "url": "https://readmediaapp.github.io/terms.html",
+        "lastReviewed": "2024-01-15",
+        "publisher": {
+            "@type": "Organization",
+            "name": "ReadMedia",
+            "url": "https://readmediaapp.github.io"
+        }
+    }
     </script>
-    <style>
-        .main-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: calc(100vh - 200px);
-        }
-
-        .content-full {
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
-
-        .legal-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 3rem 2rem;
-        }
-
-        .legal-header h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .last-updated {
-            color: var(--on-surface-muted);
-            font-size: 1.1rem;
-        }
-
-        .legal-content {
-            text-align: left;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .legal-section {
-            margin-bottom: 2.5rem;
-            padding: 2rem;
-            background: var(--surface-color);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--primary-color);
-            text-align: left;
-        }
-
-        .legal-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        .legal-section p {
-            line-height: 1.7;
-            color: var(--on-surface-muted);
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-
-        .legal-section ul {
-            list-style: none;
-            padding-left: 0;
-            text-align: left;
-        }
-
-        .legal-section li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            line-height: 1.6;
-            color: var(--on-surface-muted);
-            text-align: left;
-        }
-
-        .legal-section li:before {
-            content: "•";
-            color: var(--primary-color);
-            font-weight: bold;
-            position: absolute;
-            left: 0.5rem;
-        }
-
-        .legal-section strong {
-            color: var(--on-surface);
-        }
-
-        @media (max-width: 768px) {
-            .legal-header {
-                padding: 2rem 1rem;
-            }
-            
-            .legal-header h2 {
-                font-size: 2rem;
-            }
-            
-            .legal-section {
-                padding: 1.5rem;
-                margin-bottom: 2rem;
-            }
-        }
-    </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
             <div class="nav-brand">
-                <h1>ReadMedia</h1>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="books.html">Books</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="donate.html" class="donate-btn">Donate</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span class="material-icons">menu</span>
-            </div>
-        </nav>
+            
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="hamburger"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link">Recommendations</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="main-container">
-        <div class="content-full">
-            <div class="legal-header">
-                <h2>Terms of Service</h2>
-                <p class="last-updated">Last updated: January 1, 2024</p>
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Page Header -->
+        <section class="page-header legal-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="index.html">Home</a></li>
+                            <li aria-current="page">Terms of Service</li>
+                        </ol>
+                    </nav>
+                    <h1>Terms of Service</h1>
+                    <p class="page-subtitle">Last updated: January 15, 2024</p>
+                    
+                    <!-- Quick Navigation -->
+                    <div class="legal-quick-nav">
+                        <h2 class="sr-only">Quick Navigation</h2>
+                        <div class="quick-nav-grid">
+                            <a href="#acceptance" class="quick-nav-card">
+                                <div class="quick-nav-icon">✅</div>
+                                <span>Acceptance of Terms</span>
+                            </a>
+                            <a href="#user-responsibilities" class="quick-nav-card">
+                                <div class="quick-nav-icon">👤</div>
+                                <span>User Responsibilities</span>
+                            </a>
+                            <a href="#intellectual-property" class="quick-nav-card">
+                                <div class="quick-nav-icon">💡</div>
+                                <span>Intellectual Property</span>
+                            </a>
+                            <a href="#limitations" class="quick-nav-card">
+                                <div class="quick-nav-icon">⚖️</div>
+                                <span>Limitations</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="legal-content">
-                <section class="legal-section">
-                    <h3>1. Acceptance of Terms</h3>
-                    <p>By accessing and using ReadMedia, you accept and agree to be bound by the terms and provision of this agreement.</p>
-                </section>
+        <!-- Legal Content -->
+        <section class="section legal-content">
+            <div class="container">
+                <div class="legal-layout">
+                    <!-- Table of Contents -->
+                    <nav class="legal-toc" aria-label="Table of contents">
+                        <h2>Contents</h2>
+                        <ul>
+                            <li><a href="#acceptance">Acceptance of Terms</a></li>
+                            <li><a href="#services">Services Description</a></li>
+                            <li><a href="#user-accounts">User Accounts</a></li>
+                            <li><a href="#user-responsibilities">User Responsibilities</a></li>
+                            <li><a href="#intellectual-property">Intellectual Property</a></li>
+                            <li><a href="#third-party">Third-Party Links</a></li>
+                            <li><a href="#disclaimer">Disclaimer</a></li>
+                            <li><a href="#limitations">Limitations of Liability</a></li>
+                            <li><a href="#termination">Termination</a></li>
+                            <li><a href="#governing-law">Governing Law</a></li>
+                            <li><a href="#changes">Changes to Terms</a></li>
+                            <li><a href="#contact">Contact Information</a></li>
+                        </ul>
+                    </nav>
 
-                <section class="legal-section">
-                    <h3>2. Use License</h3>
-                    <p>Permission is granted to temporarily download one copy of the materials (information or software) on ReadMedia's website for personal, non-commercial transitory viewing only.</p>
-                </section>
+                    <!-- Main Content -->
+                    <div class="legal-main-content">
+                        <!-- Acceptance -->
+                        <section id="acceptance" class="legal-section">
+                            <h2>1. Acceptance of Terms</h2>
+                            <p>By accessing and using ReadMedia ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use this Service.</p>
+                            
+                            <div class="notice-box important">
+                                <h4>Important Notice</h4>
+                                <p>These Terms of Service constitute a legally binding agreement between you and ReadMedia. Please read them carefully.</p>
+                            </div>
+                        </section>
 
-                <section class="legal-section">
-                    <h3>3. User Content</h3>
-                    <p>Users may have the opportunity to post content. You retain ownership of any intellectual property rights that you hold in that content.</p>
-                </section>
+                        <!-- Services -->
+                        <section id="services" class="legal-section">
+                            <h2>2. Services Description</h2>
+                            <p>ReadMedia provides a platform for book enthusiasts to discover, read reviews, and access literary content. Our services include:</p>
+                            
+                            <div class="services-grid">
+                                <div class="service-card">
+                                    <div class="service-icon">📖</div>
+                                    <h4>Book Reviews</h4>
+                                    <p>Professional and user-generated book reviews</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="service-icon">📚</div>
+                                    <h4>Book Library</h4>
+                                    <p>Access to free eBooks and reading materials</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="service-icon">🎯</div>
+                                    <h4>Recommendations</h4>
+                                    <p>Personalized book suggestions</p>
+                                </div>
+                                <div class="service-card">
+                                    <div class="service-icon">📰</div>
+                                    <h4>Articles</h4>
+                                    <p>Literary articles and reading guides</p>
+                                </div>
+                            </div>
 
-                <section class="legal-section">
-                    <h3>4. Disclaimer</h3>
-                    <p>The materials on ReadMedia's website are provided on an 'as is' basis. ReadMedia makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
-                </section>
+                            <h3>Service Modifications</h3>
+                            <p>We reserve the right to modify or discontinue, temporarily or permanently, the Service with or without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuance of the Service.</p>
+                        </section>
 
-                <section class="legal-section">
-                    <h3>5. Limitations</h3>
-                    <p>In no event shall ReadMedia or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on ReadMedia's website.</p>
-                </section>
+                        <!-- User Accounts -->
+                        <section id="user-accounts" class="legal-section">
+                            <h2>3. User Accounts</h2>
+                            
+                            <h3>Account Creation</h3>
+                            <p>To access certain features of the Service, you may be required to create an account. You agree to:</p>
+                            <ul>
+                                <li>Provide accurate, current, and complete information during registration</li>
+                                <li>Maintain and promptly update your account information</li>
+                                <li>Maintain the security of your password and accept all risks of unauthorized access</li>
+                                <li>Notify us immediately of any unauthorized use of your account</li>
+                                <li>Take responsibility for all activities that occur under your account</li>
+                            </ul>
 
-                <section class="legal-section">
-                    <h3>6. Affiliate Links</h3>
-                    <p>ReadMedia may use affiliate links for some books. These links don't affect the price you pay but help support our platform.</p>
-                </section>
+                            <h3>Account Termination</h3>
+                            <p>We reserve the right to disable any user account at our sole discretion, including if in our opinion you have failed to comply with any of the provisions of these terms.</p>
+                        </section>
 
-                <section class="legal-section">
-                    <h3>7. Governing Law</h3>
-                    <p>These terms and conditions are governed by and construed in accordance with the laws of the United States and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
-                </section>
+                        <!-- User Responsibilities -->
+                        <section id="user-responsibilities" class="legal-section">
+                            <h2>4. User Responsibilities</h2>
+                            
+                            <h3>Acceptable Use</h3>
+                            <p>You agree to use the Service only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the Service.</p>
+
+                            <h3>Prohibited Activities</h3>
+                            <p>You may not use the Service:</p>
+                            <ul>
+                                <li>In any way that breaches any applicable local, national, or international law or regulation</li>
+                                <li>In any way that is unlawful or fraudulent, or has any unlawful or fraudulent purpose or effect</li>
+                                <li>To send, knowingly receive, upload, download, use, or re-use any material which does not comply with our content standards</li>
+                                <li>To transmit, or procure the sending of, any unsolicited or unauthorized advertising or promotional material</li>
+                                <li>To knowingly transmit any data, send or upload any material that contains viruses, Trojan horses, worms, or any other harmful programs</li>
+                            </ul>
+
+                            <div class="notice-box warning">
+                                <h4>Content Guidelines</h4>
+                                <p>Users must ensure that any content they submit (reviews, comments, etc.) is appropriate, respectful, and complies with our community guidelines.</p>
+                            </div>
+                        </section>
+
+                        <!-- Intellectual Property -->
+                        <section id="intellectual-property" class="legal-section">
+                            <h2>5. Intellectual Property Rights</h2>
+                            
+                            <h3>Our Content</h3>
+                            <p>The Service and its original content, features, and functionality are owned by ReadMedia and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
+
+                            <h3>User Content</h3>
+                            <p>By submitting content to the Service, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, adapt, publish, translate, and distribute your content in any existing or future media.</p>
+
+                            <h3>Copyright Complaints</h3>
+                            <p>We respect the intellectual property rights of others. If you believe that your work has been copied in a way that constitutes copyright infringement, please contact us at copyright@readmediaapp.github.io.</p>
+
+                            <div class="ip-notice">
+                                <h4>Attribution & Fair Use</h4>
+                                <p>Book covers, descriptions, and author information are used under fair use principles for review and educational purposes. All trademarks and copyrights belong to their respective owners.</p>
+                            </div>
+                        </section>
+
+                        <!-- Third Party -->
+                        <section id="third-party" class="legal-section">
+                            <h2>6. Third-Party Links and Services</h2>
+                            <p>The Service may contain links to third-party websites or services that are not owned or controlled by ReadMedia.</p>
+                            
+                            <h3>Affiliate Links</h3>
+                            <p>Some links on our website may be affiliate links. This means we may earn a commission if you make a purchase through these links, at no additional cost to you.</p>
+
+                            <h3>Third-Party Services</h3>
+                            <p>We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services. You acknowledge and agree that ReadMedia shall not be responsible or liable, directly or indirectly, for any damage or loss caused by or in connection with use of any such content, goods, or services available on or through any such websites or services.</p>
+                        </section>
+
+                        <!-- Disclaimer -->
+                        <section id="disclaimer" class="legal-section">
+                            <h2>7. Disclaimer of Warranties</h2>
+                            <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis. ReadMedia makes no representations or warranties of any kind, express or implied, as to the operation of the Service or the information, content, materials, or products included therein.</p>
+                            
+                            <p>To the full extent permissible by applicable law, ReadMedia disclaims all warranties, express or implied, including, but not limited to, implied warranties of merchantability and fitness for a particular purpose.</p>
+
+                            <div class="disclaimer-grid">
+                                <div class="disclaimer-item">
+                                    <h4>Content Accuracy</h4>
+                                    <p>We do not warrant that the content is accurate, complete, reliable, current, or error-free.</p>
+                                </div>
+                                <div class="disclaimer-item">
+                                    <h4>Service Availability</h4>
+                                    <p>We do not guarantee that the Service will be uninterrupted, timely, secure, or error-free.</p>
+                                </div>
+                                <div class="disclaimer-item">
+                                    <h4>Recommendations</h4>
+                                    <p>Book recommendations are suggestions only and we do not guarantee they will meet your expectations.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Limitations -->
+                        <section id="limitations" class="legal-section">
+                            <h2>8. Limitations of Liability</h2>
+                            <p>In no event shall ReadMedia, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+                            
+                            <ul>
+                                <li>Your access to or use of or inability to access or use the Service</li>
+                                <li>Any conduct or content of any third party on the Service</li>
+                                <li>Any content obtained from the Service</li>
+                                <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+                            </ul>
+
+                            <h3>Maximum Liability</h3>
+                            <p>To the maximum extent permitted by applicable law, our total cumulative liability to you for all claims relating to the Service shall not exceed the amount you have paid us, if any, for access to and use of the Service in the 12 months prior to the claim.</p>
+                        </section>
+
+                        <!-- Termination -->
+                        <section id="termination" class="legal-section">
+                            <h2>9. Termination</h2>
+                            <p>We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms.</p>
+                            
+                            <p>Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may simply discontinue using the Service.</p>
+
+                            <h3>Survival</h3>
+                            <p>All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+                        </section>
+
+                        <!-- Governing Law -->
+                        <section id="governing-law" class="legal-section">
+                            <h2>10. Governing Law</h2>
+                            <p>These Terms shall be governed and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.</p>
+                            
+                            <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.</p>
+                        </section>
+
+                        <!-- Changes -->
+                        <section id="changes" class="legal-section">
+                            <h2>11. Changes to Terms</h2>
+                            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least 30 days' notice prior to any new terms taking effect.</p>
+                            
+                            <p>What constitutes a material change will be determined at our sole discretion. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.</p>
+                        </section>
+
+                        <!-- Contact -->
+                        <section id="contact" class="legal-section">
+                            <h2>12. Contact Information</h2>
+                            <p>If you have any questions about these Terms, please contact us:</p>
+                            
+                            <div class="contact-info">
+                                <div class="contact-method">
+                                    <strong>Email:</strong> legal@readmediaapp.github.io
+                                </div>
+                                <div class="contact-method">
+                                    <strong>Contact Form:</strong> <a href="contact.html">Visit our Contact Page</a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Summary -->
+                        <div class="policy-summary">
+                            <h3>Key Points Summary</h3>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="summary-label">Agreement:</span>
+                                    <span class="summary-value">By using our service, you agree to these terms</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Content:</span>
+                                    <span class="summary-value">We provide book reviews, recommendations, and articles</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Responsibilities:</span>
+                                    <span class="summary-value">Use service lawfully and respect intellectual property</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Liability:</span>
+                                    <span class="summary-value">Service provided "as is" with limited liability</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Changes:</span>
+                                    <span class="summary-value">We may update these terms with notice</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Contact:</span>
+                                    <span class="summary-value">legal@readmediaapp.github.io</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Related Legal Documents -->
+        <section class="section related-legal">
+            <div class="container">
+                <h2>Related Legal Documents</h2>
+                <div class="legal-docs-grid">
+                    <a href="privacy.html" class="legal-doc-card">
+                        <div class="doc-icon">🛡️</div>
+                        <h3>Privacy Policy</h3>
+                        <p>Learn how we protect and handle your personal information</p>
+                        <span class="doc-link">Read Policy →</span>
+                    </a>
+                    <a href="cookies.html" class="legal-doc-card">
+                        <div class="doc-icon">🍪</div>
+                        <h3>Cookie Policy</h3>
+                        <p>Understand how we use cookies and tracking technologies</p>
+                        <span class="doc-link">Read Policy →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="footer" id="footer">
-        <!-- Footer loaded by JavaScript -->
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2024.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Support Our Work</a></li>
+                        <li><a href="about.html">About ReadMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ReadMedia. All rights reserved.</p>
+                <p>Some links may be affiliate links that support our work at no extra cost to you.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="js/components.js"></script>
-    <script src="js/app.js"></script>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20L12 4M12 4L5 11M12 4L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="js/legal.js" defer></script>
 </body>
 </html>

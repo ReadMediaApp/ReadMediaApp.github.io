@@ -3,146 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Recommendations - ReadMedia</title>
-    <meta name="description" content="Personalized book recommendations based on your reading preferences">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Personalized Book Recommendations | ReadMedia - AI-Powered Reading Suggestions</title>
+    <meta name="description" content="Get AI-powered book recommendations tailored to your reading preferences. Discover your next favorite book from Amazon bestsellers and our curated collection.">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="css/styles.css" as="style">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/recommendations.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="js/security.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5JKFKBFFST"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5JKFKBFFST');
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a237e">
+    
+    <!-- SEO Meta -->
+    <link rel="canonical" href="https://readmediaapp.github.io/recommendations.html">
+    <meta property="og:title" content="Personalized Book Recommendations | ReadMedia">
+    <meta property="og:description" content="AI-powered book recommendations tailored to your reading preferences.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://readmediaapp.github.io/recommendations.html">
+    <meta property="og:image" content="https://readmediaapp.github.io/images/recommendations-og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Personalized Book Recommendations | ReadMedia">
+    <meta name="twitter:description" content="AI-powered book recommendations tailored to your reading preferences.">
+    <meta name="twitter:image" content="https://readmediaapp.github.io/images/recommendations-og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RecommendationPage",
+        "name": "Personalized Book Recommendations | ReadMedia",
+        "description": "AI-powered book recommendations based on reading preferences, interests, and behavior patterns",
+        "url": "https://readmediaapp.github.io/recommendations.html",
+        "isBasedOn": {
+            "@type": "Book",
+            "name": "Amazon Bestsellers and Curated Collection"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "ReadMedia",
+            "url": "https://readmediaapp.github.io"
+        },
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": 50,
+            "itemListOrder": "Descending"
+        }
+    }
     </script>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
             <div class="nav-brand">
-                <h1><a href="index.html" style="text-decoration: none; color: inherit;">ReadMedia</a></h1>
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">📚</span>
+                    <span class="logo-text">ReadMedia</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="books.html">Books</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="recommendations.html" class="active">Recommendations</a></li>
-                <li><a href="donate.html" class="donate-btn">Donate</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span class="material-icons">menu</span>
-            </div>
-        </nav>
+            
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="hamburger"></span>
+                    <span class="sr-only">Menu</span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="articles.html" class="nav-link">Articles</a></li>
+                    <li><a href="books.html" class="nav-link">Books</a></li>
+                    <li><a href="reviews.html" class="nav-link">Reviews</a></li>
+                    <li><a href="recommendations.html" class="nav-link active" aria-current="page">Recommendations</a></li>
+                    <li><a href="donate.html" class="nav-link donate-btn">Support Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb">
-        <div class="breadcrumb-nav">
-            <div class="breadcrumb-item">
-                <a href="index.html" class="breadcrumb-link">Home</a>
-            </div>
-            <div class="breadcrumb-item">
-                <span class="breadcrumb-current">Book Recommendations</span>
-            </div>
-        </div>
-    </nav>
-
-    <main class="main-container">
-        <aside class="sidebar" id="sidebar">
-            <!-- Content loaded by JavaScript -->
-        </aside>
-
-        <div class="content">
-            <!-- Page Header -->
-            <section class="recommendations-header">
-                <div class="header-content">
-                    <h1>Book Recommendations</h1>
-                    <p class="subtitle">Personalized suggestions based on your reading preferences</p>
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Page Header -->
+        <section class="page-header recommendations-header" aria-labelledby="page-title">
+            <div class="container">
+                <div class="page-header-content">
+                    <h1 id="page-title">Personalized Book Recommendations</h1>
+                    <p class="page-subtitle">AI-powered suggestions based on your reading preferences, interests, and reading history</p>
                     
                     <!-- User Preferences Card -->
-                    <div class="preferences-card">
+                    <div class="preferences-card" itemscope itemtype="https://schema.org/Person">
                         <div class="preferences-header">
-                            <span class="material-icons">tune</span>
-                            <h3>Your Reading Profile</h3>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M10.3246 4.31731C10.751 2.5609 13.249 2.5609 13.6754 4.31731C13.9508 5.45193 15.2507 5.99038 16.2478 5.38285C17.7913 4.44239 19.5576 6.2087 18.6172 7.75218C18.0096 8.74925 18.5481 10.0492 19.6827 10.3246C21.4391 10.751 21.4391 13.249 19.6827 13.6754C18.5481 13.9508 18.0096 15.2507 18.6172 16.2478C19.5576 17.7913 17.7913 19.5576 16.2478 18.6172C15.2507 18.0096 13.9508 18.5481 13.6754 19.6827C13.249 21.4391 10.751 21.4391 10.3246 19.6827C10.0492 18.5481 8.74926 18.0096 7.75219 18.6172C6.2087 19.5576 4.44239 17.7913 5.38285 16.2478C5.99038 15.2507 5.45193 13.9508 4.31731 13.6754C2.5609 13.249 2.5609 10.751 4.31731 10.3246C5.45193 10.0492 5.99037 8.74926 5.38285 7.75218C4.44239 6.2087 6.2087 4.44239 7.75219 5.38285C8.74926 5.99037 10.0492 5.45193 10.3246 4.31731Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h2>Your Reading Profile</h2>
                         </div>
                         <div class="preferences-content">
                             <div class="preference-item">
                                 <span class="preference-label">Preferred Genres:</span>
-                                <span class="preference-value" id="preferred-genres">Loading...</span>
+                                <span class="preference-value" id="preferred-genres" itemprop="knowsAbout">Loading...</span>
                             </div>
                             <div class="preference-item">
                                 <span class="preference-label">Favorite Authors:</span>
-                                <span class="preference-value" id="favorite-authors">Loading...</span>
+                                <span class="preference-value" id="favorite-authors" itemprop="follows">Loading...</span>
                             </div>
                             <div class="preference-item">
                                 <span class="preference-label">Reading Level:</span>
-                                <span class="preference-value" id="reading-level">Intermediate</span>
+                                <span class="preference-value" id="reading-level" itemprop="knowsAbout">Intermediate</span>
+                            </div>
+                            <div class="preference-item">
+                                <span class="preference-label">Match Score:</span>
+                                <span class="preference-value" id="match-score">Calculating...</span>
                             </div>
                         </div>
-                        <button class="edit-preferences-btn" id="edit-preferences">
-                            <span class="material-icons">edit</span>
+                        <button class="btn btn-secondary" id="edit-preferences">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M11 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V20C2 20.5304 2.21071 21.0391 2.58579 21.4142C2.96086 21.7893 3.46957 22 4 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.5 2.50001C18.8978 2.10219 19.4374 1.87869 20 1.87869C20.5626 1.87869 21.1022 2.10219 21.5 2.50001C21.8978 2.89784 22.1213 3.4374 22.1213 4.00001C22.1213 4.56262 21.8978 5.10219 21.5 5.50001L12 15L8 16L9 12L18.5 2.50001Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                             Edit Preferences
                         </button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Recommendations Filter -->
-            <section class="recommendations-filter">
+        <!-- Recommendations Filter -->
+        <section class="section recommendations-filter" aria-labelledby="filter-title">
+            <div class="container">
+                <h2 id="filter-title" class="sr-only">Recommendation Filters</h2>
+                
                 <div class="filter-container">
                     <div class="filter-group">
-                        <label for="category-filter">Filter by Category:</label>
+                        <label for="category-filter" class="filter-label">Filter by Category:</label>
                         <select id="category-filter" class="filter-select">
                             <option value="all">All Categories</option>
-                            <option value="programming">Programming</option>
                             <option value="fiction">Fiction</option>
+                            <option value="non-fiction">Non-Fiction</option>
+                            <option value="self-help">Self Help</option>
                             <option value="business">Business</option>
-                            <option value="self_improvement">Self Improvement</option>
-                            <option value="science_tech">Science & Tech</option>
-                            <option value="mystery_thriller">Mystery & Thriller</option>
+                            <option value="science-tech">Science & Tech</option>
+                            <option value="mystery-thriller">Mystery & Thriller</option>
                             <option value="biography">Biography</option>
-                            <option value="design">Design</option>
                         </select>
                     </div>
                     
                     <div class="filter-group">
-                        <label for="sort-filter">Sort by:</label>
+                        <label for="sort-filter" class="filter-label">Sort by:</label>
                         <select id="sort-filter" class="filter-select">
                             <option value="relevance">Relevance</option>
                             <option value="rating">Highest Rated</option>
-                            <option value="price_low">Price: Low to High</option>
-                            <option value="price_high">Price: High to Low</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
                             <option value="title">Title A-Z</option>
                         </select>
                     </div>
 
                     <div class="filter-actions">
-                        <button class="refresh-btn" id="refresh-recommendations">
-                            <span class="material-icons">refresh</span>
+                        <button class="btn btn-secondary" id="refresh-recommendations">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M23 4V10H17M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3.51 9.00001C4.15839 7.54331 5.18134 6.28802 6.47647 5.36085C7.7716 4.43368 9.29069 3.86826 10.88 3.72444C12.4693 3.58062 14.0699 3.86435 15.5162 4.54632C16.9625 5.22829 18.2007 6.28516 19.11 7.61001L23 14M1 14L4.89 7.61001C5.79935 6.28516 7.0375 5.22829 8.48381 4.54632C9.93011 3.86435 11.5307 3.58062 13.12 3.72444C14.7093 3.86826 16.2284 4.43368 17.5235 5.36085C18.8187 6.28802 19.8416 7.54331 20.49 9.00001" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                             Refresh
                         </button>
-                        <button class="shuffle-btn" id="shuffle-recommendations">
-                            <span class="material-icons">shuffle</span>
+                        <button class="btn btn-secondary" id="shuffle-recommendations">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <path d="M16 3H21V8M20 12L21 8M21 8L16 8M8 3H3V8M4 12L3 8M3 8L8 8M16 21H21V16M20 12L21 16M21 16L16 16M8 21H3V16M4 12L3 16M3 16L8 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                             Shuffle
                         </button>
                     </div>
                 </div>
-            </section>
-
-            <!-- Loading State -->
-            <div class="loading-state" id="loading-state">
-                <div class="loading-spinner"></div>
-                <p>Finding your perfect book recommendations...</p>
             </div>
+        </section>
 
-            <!-- Recommendations Grid -->
-            <section class="recommendations-grid-section">
+        <!-- Loading State -->
+        <div class="loading-state" id="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Analyzing your preferences to find perfect book recommendations...</p>
+        </div>
+
+        <!-- Recommendations Grid -->
+        <section class="section recommendations-grid-section" aria-labelledby="recommendations-title">
+            <div class="container">
                 <div class="section-header">
-                    <h2>Recommended For You</h2>
+                    <h2 id="recommendations-title">Recommended For You</h2>
                     <div class="results-info">
                         <span id="results-count">0 books found</span>
                         <span class="last-updated" id="last-updated"></span>
@@ -150,62 +206,80 @@
                 </div>
 
                 <div class="recommendations-grid" id="recommendations-grid">
-                    <!-- Recommendations loaded by JavaScript -->
+                    <!-- Dynamic recommendations loaded from JSON -->
                 </div>
 
                 <!-- Empty State -->
                 <div class="empty-state" id="empty-state" style="display: none;">
                     <div class="empty-icon">
-                        <span class="material-icons">search_off</span>
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <h3>No recommendations found</h3>
                     <p>Try adjusting your preferences or refresh the page.</p>
-                    <button class="cta-btn" id="reset-preferences">
-                        <span class="material-icons">autorenew</span>
+                    <button class="btn btn-primary" id="reset-preferences">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M23 4V10H17M1 20V14H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M3.51 9.00001C4.15839 7.54331 5.18134 6.28802 6.47647 5.36085C7.7716 4.43368 9.29069 3.86826 10.88 3.72444C12.4693 3.58062 14.0699 3.86435 15.5162 4.54632C16.9625 5.22829 18.2007 6.28516 19.11 7.61001L23 14M1 14L4.89 7.61001C5.79935 6.28516 7.0375 5.22829 8.48381 4.54632C9.93011 3.86435 11.5307 3.58062 13.12 3.72444C14.7093 3.86826 16.2284 4.43368 17.5235 5.36085C18.8187 6.28802 19.8416 7.54331 20.49 9.00001" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                         Reset Preferences
                     </button>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Categories Section -->
-            <section class="categories-section">
+        <!-- Categories Section -->
+        <section class="section categories-section" aria-labelledby="categories-title">
+            <div class="container">
                 <div class="section-header">
-                    <h2>Browse by Category</h2>
-                    <p>Explore books from different genres</p>
+                    <h2 id="categories-title">Browse by Category</h2>
+                    <p class="section-subtitle">Explore books from different genres and categories</p>
                 </div>
                 
                 <div class="categories-grid" id="categories-grid">
-                    <!-- Categories loaded by JavaScript -->
+                    <!-- Dynamic categories loaded from JSON -->
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Why These Recommendations -->
-            <section class="explanation-section">
+        <!-- Explanation Section -->
+        <section class="section explanation-section" aria-labelledby="explanation-title">
+            <div class="container">
                 <div class="explanation-card">
                     <div class="explanation-header">
-                        <span class="material-icons">psychology</span>
-                        <h3>How These Recommendations Work</h3>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2C13.3132 2 14.6136 2.25866 15.8268 2.7612C17.0401 3.26375 18.1425 4.00035 19.0711 4.92893C19.9997 5.85752 20.7362 6.95991 21.2388 8.17317C21.7413 9.38642 22 10.6868 22 12C22 14.6522 20.9464 17.1957 19.0711 19.0711C17.1957 20.9464 14.6522 22 12 22C9.34784 22 6.8043 20.9464 4.92893 19.0711C3.05357 17.1957 2 14.6522 2 12C2 9.34784 3.05357 6.8043 4.92893 4.92893C6.8043 3.05357 9.34784 2 12 2V2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <h3 id="explanation-title">How These Recommendations Work</h3>
                     </div>
                     <div class="explanation-content">
-                        <p>Our AI-powered recommendation engine analyzes your reading behavior, preferences, and interests to suggest books you'll love. Recommendations are updated daily from Amazon's bestsellers.</p>
+                        <p>Our AI-powered recommendation engine analyzes your reading behavior, preferences, and interests to suggest books you'll love. Recommendations are updated daily from Amazon's bestsellers and our curated collection.</p>
                         <ul class="explanation-list">
                             <li>
-                                <span class="material-icons">trending_up</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 13L10 16L17 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <span>Based on your reading history and preferences</span>
                             </li>
                             <li>
-                                <span class="material-icons">update</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 13L10 16L17 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <span>Updated every 6 hours with latest books</span>
                             </li>
                             <li>
-                                <span class="material-icons">local_offer</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 13L10 16L17 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                                 <span>Support us through affiliate links at no extra cost to you</span>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 
     <!-- Preferences Modal -->
@@ -213,8 +287,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Edit Reading Preferences</h3>
-                <button class="modal-close" id="modal-close">
-                    <span class="material-icons">close</span>
+                <button class="modal-close" id="modal-close" aria-label="Close modal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </button>
             </div>
             <div class="modal-body">
@@ -230,8 +306,10 @@
                         <label>Favorite Authors</label>
                         <div class="authors-input">
                             <input type="text" id="author-input" placeholder="Add favorite authors...">
-                            <button type="button" id="add-author">
-                                <span class="material-icons">add</span>
+                            <button type="button" id="add-author" aria-label="Add author">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                             </button>
                         </div>
                         <div class="chips-container" id="authors-chips">
@@ -251,19 +329,66 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-secondary" id="cancel-preferences">Cancel</button>
-                <button class="btn-primary" id="save-preferences">Save Preferences</button>
+                <button class="btn btn-secondary" id="cancel-preferences">Cancel</button>
+                <button class="btn btn-primary" id="save-preferences">Save Preferences</button>
             </div>
         </div>
     </div>
 
-    <footer class="footer" id="footer">
-        <!-- Footer loaded by JavaScript -->
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ReadMedia</h3>
+                    <p>Your trusted source for book reviews, articles, and literary content since 2024.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="articles.html">Articles</a></li>
+                        <li><a href="books.html">Books</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="donate.html">Support Our Work</a></li>
+                        <li><a href="about.html">About ReadMedia</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ReadMedia. All rights reserved.</p>
+                <p>Some links may be affiliate links that support our work at no extra cost to you.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="js/components.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/recommendation-engine.js"></script>
-    <script src="js/recommendations-page.js"></script>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20L12 4M12 4L5 11M12 4L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/script.js" defer></script>
+    <script src="js/recommendations.js" defer></script>
 </body>
 </html>
